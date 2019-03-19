@@ -14,6 +14,7 @@ namespace DataDepersonalizer
 {
 	public partial class MainForm : Form
 	{
+		public enum DataTypes { Text, XmlDocument, NameValuePairs, CustomPatterns }
 
 		bool isInProgress;
 		int startFrom;
@@ -39,9 +40,9 @@ namespace DataDepersonalizer
 			txtLog.ScrollToCaret();
 		}
 
-		private string[] ExtractData(string text, string matchPattern)
+		private string[] ExtractData(string text, string matchPattern, RegexOptions regexOptions)
 		{
-			var regex = new Regex(matchPattern, RegexOptions.IgnoreCase);
+			var regex = new Regex(matchPattern, regexOptions);
 
 			var matches = regex.Matches(text);
 
@@ -68,14 +69,14 @@ namespace DataDepersonalizer
 				@"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|" +
 				@"([a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,4})";
 
-			return ExtractData(text, matchPattern);
+			return ExtractData(text, matchPattern, RegexOptions.IgnoreCase);
 		}
 
 		private string[] ExtractIpAddresses(string text)
 		{
 			const string matchPattern = @"([0-9]{1,3}[\.]){3}[0-9]{1,3}";
 
-			return ExtractData(text, matchPattern);
+			return ExtractData(text, matchPattern, RegexOptions.IgnoreCase);
 		}
 
 		private string GetEncodedEmail(string email)
@@ -126,7 +127,7 @@ namespace DataDepersonalizer
 		{
 			string matchPattern = @"<" + nodeName + ">(.*?)</" + nodeName + ">";
 
-			return ExtractData(text, matchPattern);
+			return ExtractData(text, matchPattern, RegexOptions.IgnoreCase);
 		}
 
 		private string ReplaceXmlNode(string nodeName, string replaceWithMask, string msgSource)
@@ -144,19 +145,87 @@ namespace DataDepersonalizer
 
 		private string ReplaceXmlNodes(string msgSource)
 		{
-			if (txtXmlNodes.Lines == null || txtReplaceWith.Lines == null)
+			if (txtXmlNodes.Lines == null || txtXmlReplaceWith.Lines == null)
 			{
 				return msgSource;
 			}
 
-			if (txtXmlNodes.Lines.Length != txtReplaceWith.Lines.Length)
+			if (txtXmlNodes.Lines.Length != txtXmlReplaceWith.Lines.Length)
 			{
 				throw new Exception("The number of XML nodes must be the same as Replace With values");
 			}
 
 			for (int i = 0; i < txtXmlNodes.Lines.Length; i++)
 			{
-				msgSource = ReplaceXmlNode(txtXmlNodes.Lines[i], txtReplaceWith.Lines[i], msgSource);
+				msgSource = ReplaceXmlNode(txtXmlNodes.Lines[i], txtXmlReplaceWith.Lines[i], msgSource);
+			}
+
+			return msgSource;
+		}
+
+		private string[] ExtractNameValuePairs(string name, string text)
+		{
+			string matchPattern = @"^" + name + @"\s*:(\s*|.*)(?=\r$)";
+
+			return ExtractData(text, matchPattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
+		}
+
+		private string ReplaceNameValuePair(string name, string replaceWithMask, string msgSource)
+		{
+			var pairs = ExtractNameValuePairs(name, msgSource);
+
+			foreach (var pair in pairs)
+			{
+				var replaceWith = String.Format(replaceWithMask, startFrom++);
+				msgSource = msgSource.Replace(pair, String.Format("{0} : {1}", name, replaceWith));
+			}
+
+			return msgSource;
+		}
+
+		private string ReplaceNameValuePairs(string msgSource)
+		{
+			if (txtPairNames.Lines == null || txtPairReplaceWith.Lines == null)
+			{
+				return msgSource;
+			}
+
+			if (txtPairNames.Lines.Length != txtPairReplaceWith.Lines.Length)
+			{
+				throw new Exception("The number of names must be the same as Replace With values");
+			}
+
+			for (int i = 0; i < txtPairNames.Lines.Length; i++)
+			{
+				msgSource = ReplaceNameValuePair(txtPairNames.Lines[i], txtPairReplaceWith.Lines[i], msgSource);
+			}
+
+			return msgSource;
+		}
+
+		private string ReplaceCustomPattern(string matchPattern, string replaceWithMask, string msgSource)
+		{
+			var replaceWith = String.Format(replaceWithMask, startFrom++);
+
+			var regex = new Regex(matchPattern, RegexOptions.IgnoreCase);
+			return regex.Replace(msgSource, replaceWith);
+		}
+
+		private string ReplaceCustomPatterns(string msgSource)
+		{
+			if (txtRegexPatterns.Lines == null || txtRegexReplaceWith.Lines == null)
+			{
+				return msgSource;
+			}
+
+			if (txtRegexPatterns.Lines.Length != txtRegexReplaceWith.Lines.Length)
+			{
+				throw new Exception("The number of Regex patterns must be the same as Replace With values");
+			}
+
+			for (int i = 0; i < txtRegexPatterns.Lines.Length; i++)
+			{
+				msgSource = ReplaceCustomPattern(txtRegexPatterns.Lines[i], txtRegexReplaceWith.Lines[i], msgSource);
 			}
 
 			return msgSource;
@@ -201,11 +270,24 @@ namespace DataDepersonalizer
 
 					msgSource = ReplaceIpAddresses(msgSource);
 
-					msgSource = ReplaceXmlNodes(msgSource);
+					DataTypes dataType = ((KeyValuePair<DataTypes, string>)cbDataType.SelectedItem).Key;
+
+					switch (dataType)
+					{
+						case DataTypes.XmlDocument:
+							msgSource = ReplaceXmlNodes(msgSource);
+							break;
+						case DataTypes.NameValuePairs:
+							msgSource = ReplaceNameValuePairs(msgSource);
+							break;
+						case DataTypes.CustomPatterns:
+							msgSource = ReplaceCustomPatterns(msgSource);
+							break;
+					}
 
 					File.WriteAllText(fileEntry, msgSource, encoding);
 
-					PutLogMessage(String.Format("Msg \"{0}\" depersonalized.", Path.GetFileName(fileEntry)));
+					PutLogMessage(String.Format("File \"{0}\" depersonalized.", Path.GetFileName(fileEntry)));
 				}
 
 				PutLogMessage("E-mails replaced, IP addresses replaced, sensitive data removed.\r\nDone.");
@@ -215,6 +297,19 @@ namespace DataDepersonalizer
 				isInProgress = false;
 				txtStartFrom.Text = startFrom.ToString();
 			}
+		}
+
+		private void MainForm_Load(object sender, EventArgs e)
+		{
+			Dictionary<DataTypes, string> dataTypes = new Dictionary<DataTypes, string>();
+			dataTypes.Add(DataTypes.Text, "Text");
+			dataTypes.Add(DataTypes.XmlDocument, "Xml Document");
+			dataTypes.Add(DataTypes.NameValuePairs, "Name:Value Pairs");
+			dataTypes.Add(DataTypes.CustomPatterns, "Custom Regex Patterns");
+
+			cbDataType.DataSource = new BindingSource(dataTypes, null);
+			cbDataType.DisplayMember = "Value";
+			cbDataType.ValueMember = "Key";
 		}
 	}
 }
