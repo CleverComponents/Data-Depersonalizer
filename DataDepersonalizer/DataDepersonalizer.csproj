@@ -45,16 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -78,6 +78,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Depersonalizer.Common\src\Depersonalizer.Common.csproj">
+      <Project>{a09a8bf8-d3ca-4be2-a12b-e185b5ff1aca}</Project>
+      <Name>Depersonalizer.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Depersonalizer.Mime\src\Depersonalizer.Mime.csproj">
+      <Project>{f07278c7-205a-4106-8890-2c43d81e82e9}</Project>
+      <Name>Depersonalizer.Mime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Depersonalizer.Text\src\Depersonalizer.Text.csproj">
+      <Project>{8d63e32c-a24f-4871-b819-8cc219339a5e}</Project>
+      <Name>Depersonalizer.Text</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

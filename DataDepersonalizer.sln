@@ -5,6 +5,18 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDepersonalizer", "DataDepersonalizer\DataDepersonalizer.csproj", "{D72303A5-505B-4753-B041-825D7CA6C65C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{27814015-FE02-4B15-BFFF-C4CD1C325D77}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A9EBE116-DB4B-468C-831A-05A501E99BE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Depersonalizer.Common", "Depersonalizer.Common\src\Depersonalizer.Common.csproj", "{A09A8BF8-D3CA-4BE2-A12B-E185B5FF1ACA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Depersonalizer.Mime", "Depersonalizer.Mime\src\Depersonalizer.Mime.csproj", "{F07278C7-205A-4106-8890-2C43D81E82E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Depersonalizer.Text", "Depersonalizer.Text\src\Depersonalizer.Text.csproj", "{8D63E32C-A24F-4871-B819-8CC219339A5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Depersonalizer.Text.Tests", "Depersonalizer.Text\test\Depersonalizer.Text.Tests\Depersonalizer.Text.Tests.csproj", "{8B8D170E-03A9-4397-A084-B2E348BF9C7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +27,32 @@ Global
 		{D72303A5-505B-4753-B041-825D7CA6C65C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D72303A5-505B-4753-B041-825D7CA6C65C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D72303A5-505B-4753-B041-825D7CA6C65C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A09A8BF8-D3CA-4BE2-A12B-E185B5FF1ACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A09A8BF8-D3CA-4BE2-A12B-E185B5FF1ACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A09A8BF8-D3CA-4BE2-A12B-E185B5FF1ACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A09A8BF8-D3CA-4BE2-A12B-E185B5FF1ACA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F07278C7-205A-4106-8890-2C43D81E82E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F07278C7-205A-4106-8890-2C43D81E82E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F07278C7-205A-4106-8890-2C43D81E82E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F07278C7-205A-4106-8890-2C43D81E82E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D63E32C-A24F-4871-B819-8CC219339A5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D63E32C-A24F-4871-B819-8CC219339A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D63E32C-A24F-4871-B819-8CC219339A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D63E32C-A24F-4871-B819-8CC219339A5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B8D170E-03A9-4397-A084-B2E348BF9C7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B8D170E-03A9-4397-A084-B2E348BF9C7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B8D170E-03A9-4397-A084-B2E348BF9C7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B8D170E-03A9-4397-A084-B2E348BF9C7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D72303A5-505B-4753-B041-825D7CA6C65C} = {27814015-FE02-4B15-BFFF-C4CD1C325D77}
+		{A09A8BF8-D3CA-4BE2-A12B-E185B5FF1ACA} = {27814015-FE02-4B15-BFFF-C4CD1C325D77}
+		{F07278C7-205A-4106-8890-2C43D81E82E9} = {27814015-FE02-4B15-BFFF-C4CD1C325D77}
+		{8D63E32C-A24F-4871-B819-8CC219339A5E} = {27814015-FE02-4B15-BFFF-C4CD1C325D77}
+		{8B8D170E-03A9-4397-A084-B2E348BF9C7B} = {A9EBE116-DB4B-468C-831A-05A501E99BE3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {17014E9B-1F9B-4510-8440-8D793A157A83}
