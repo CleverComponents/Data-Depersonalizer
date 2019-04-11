@@ -7,23 +7,23 @@ using Xunit;
 
 namespace Depersonalizer.Text.Tests
 {
-    public class EmailAddressReplacerTests
-    {
+	public class IpAddressReplacerTests
+	{
 		[Fact]
 		public void TestReplace()
 		{
-			var replacer = new EmailAddressReplacer();
+			var replacer = new IpAddressReplacer();
 			var context = new DataContext();
 
-			replacer.ReplaceMask = "zxc{0}@domain.com";
+			replacer.ReplaceIpAddr = "127.0.0.{0}";
 			context.StartFrom = 10;
 
-			var source = "text qwe@example.com text \r\n next line qwe@example.com asd@example.com next line\r\n";
+			var source = "text 11.22.333.444 text \r\n next line 11.22.333.444 123.456.789.10 next line\r\n";
 
 			source = replacer.Replace(source, context);
 
-			Assert.Equal("text zxc10@domain.com text \r\n next line zxc10@domain.com zxc11@domain.com next line\r\n", source);
+			Assert.Equal("text 127.0.0.10 text \r\n next line 127.0.0.10 127.0.0.11 next line\r\n", source);
 			Assert.Equal(12, context.StartFrom);
 		}
-    }
+	}
 }

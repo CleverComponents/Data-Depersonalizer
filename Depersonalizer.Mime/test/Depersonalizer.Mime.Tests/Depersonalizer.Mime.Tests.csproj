@@ -6,11 +6,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8B8D170E-03A9-4397-A084-B2E348BF9C7B}</ProjectGuid>
+    <ProjectGuid>{CC807045-FF40-4E3C-9665-AFD4DD6C4EAF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Depersonalizer.Text.Tests</RootNamespace>
-    <AssemblyName>Depersonalizer.Text.Tests</AssemblyName>
+    <RootNamespace>Depersonalizer.Mime.Tests</RootNamespace>
+    <AssemblyName>Depersonalizer.Mime.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -69,12 +69,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmailAddressReplacerTests.cs" />
-    <Compile Include="IpAddressReplacerTests.cs" />
-    <Compile Include="NameValuePairReplacerTests.cs" />
+    <Compile Include="MimeReplacerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegexReplacerTests.cs" />
-    <Compile Include="XmlDocumentReplacerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -87,9 +83,9 @@
       <Project>{a09a8bf8-d3ca-4be2-a12b-e185b5ff1aca}</Project>
       <Name>Depersonalizer.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Depersonalizer.Text.csproj">
-      <Project>{8d63e32c-a24f-4871-b819-8cc219339a5e}</Project>
-      <Name>Depersonalizer.Text</Name>
+    <ProjectReference Include="..\..\src\Depersonalizer.Mime.csproj">
+      <Project>{f07278c7-205a-4106-8890-2c43d81e82e9}</Project>
+      <Name>Depersonalizer.Mime</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -16,7 +16,11 @@ namespace Depersonalizer.Text
 
 		public string GetValue(string key, Func<string> getNewValue)
 		{
+			System.Diagnostics.Debug.Assert(key != null);
+
 			string result;
+
+			key = key.Trim();
 
 			if (TryGetValue(key, out result))
 			{

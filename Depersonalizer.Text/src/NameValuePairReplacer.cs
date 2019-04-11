@@ -12,7 +12,7 @@ namespace Depersonalizer.Text
 	{
 		private string[] ExtractNameValuePairs(string name, string text)
 		{
-			string matchPattern = @"^" + name + @"\s*:(\s*|.*)(?=\r$)";
+			string matchPattern = @"^\s*" + name + @"\s*:(\s*|.*)(?=\r$)";
 
 			return ExtractData(text, matchPattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
 		}
