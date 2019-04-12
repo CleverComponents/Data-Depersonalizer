@@ -92,7 +92,7 @@ namespace DataDepersonalizer
 			var fileType = GetSelectedFileType();
 			if (fileType == FileType.MultipartEmail)
 			{
-				dataReplacer = new MimeReplacer(dataReplacer);
+				dataReplacer = new MimeReplacer(dataReplacer, dataReplacer, dataReplacer, dataReplacer);
 			}
 
 			var dataContext = new DataContext() { StartFrom = Convert.ToInt32(txtStartFrom.Text) };

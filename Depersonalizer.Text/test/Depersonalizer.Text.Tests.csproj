@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmailAddressReplacerTests.cs" />
+    <Compile Include="HtmlReplacerTests.cs" />
     <Compile Include="IpAddressReplacerTests.cs" />
     <Compile Include="NameValuePairReplacerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

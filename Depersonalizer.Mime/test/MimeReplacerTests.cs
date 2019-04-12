@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 using Moq;
 using Depersonalizer.Common;
@@ -60,7 +57,7 @@ Convert.ToBase64String(Encoding.ASCII.GetBytes("html original-value")) + "\r\n" 
 "\r\n" +
 "------123--\r\n";
 
-			var replacer = new MimeReplacer(mockDataReplacer.Object);
+			var replacer = new MimeReplacer(mockDataReplacer.Object, mockDataReplacer.Object, mockDataReplacer.Object, mockDataReplacer.Object);
 
 			source = replacer.Replace(source, mockDataContext.Object);
 
@@ -95,7 +92,7 @@ Convert.ToBase64String(new byte[] { 1, 2, 3, 4, 5 }) + "\r\n" +
 "\r\n" +
 "------123--\r\n";
 
-			var replacer = new MimeReplacer(mockDataReplacer.Object);
+			var replacer = new MimeReplacer(mockDataReplacer.Object, mockDataReplacer.Object, mockDataReplacer.Object, mockDataReplacer.Object);
 
 			source = replacer.Replace(source, mockDataContext.Object);
 
@@ -126,7 +123,7 @@ Convert.ToBase64String(Encoding.UTF8.GetBytes("attach original-value")) + "\r\n"
 "\r\n" +
 "------123--\r\n";
 
-			var replacer = new MimeReplacer(mockDataReplacer.Object);
+			var replacer = new MimeReplacer(mockDataReplacer.Object, mockDataReplacer.Object, mockDataReplacer.Object, mockDataReplacer.Object);
 
 			source = replacer.Replace(source, mockDataContext.Object);
 

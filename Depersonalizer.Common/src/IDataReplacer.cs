@@ -25,6 +25,5 @@ namespace Depersonalizer.Common
 	public interface IDataReplacer
 	{
 		string Replace(string source, IDataContext context);
-		IDataReplacer NextReplacer { get; }
 	}
 }

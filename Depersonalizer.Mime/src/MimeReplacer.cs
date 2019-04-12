@@ -36,22 +36,47 @@ namespace Depersonalizer.Mime
 {
 	public class MimeReplacer : IDataReplacer
 	{
-		private string ReplaceData(string source, IDataContext context)
+		private string ReplaceHeader(string source, IDataContext context)
 		{
-			return NextReplacer?.Replace(source, context) ?? source;
+			return HeaderReplacer?.Replace(source, context) ?? source;
 		}
 
-		private void ReplaceContent(TextBody textBody, IDataContext context)
+		private string ReplaceText(string source, IDataContext context)
 		{
-			if (textBody != null)
+			return TextBodyReplacer?.Replace(source, context) ?? source;
+		}
+
+		private string ReplaceHtml(string source, IDataContext context)
+		{
+			return HtmlBodyReplacer?.Replace(source, context) ?? source;
+		}
+
+		private string ReplaceTextAttachment(string source, IDataContext context)
+		{
+			return TextAttachmentReplacer?.Replace(source, context) ?? source;
+		}
+
+		private void ReplaceTextBody(TextBody body, IDataContext context)
+		{
+			if (body != null)
 			{
-				var source = string.Join("\r\n", textBody.Strings);
-				source = ReplaceData(source, context);
-				textBody.Strings = source.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+				var source = string.Join("\r\n", body.Strings);
+				source = ReplaceText(source, context);
+				body.Strings = source.Split(new string[] { "\r\n" }, StringSplitOptions.None);
 			}
 		}
 
-		private Stream ReplaceAttachment(Stream source, AttachmentBody attachment, IDataContext context)
+		private void ReplaceHtmlBody(TextBody body, IDataContext context)
+		{
+			if (body != null)
+			{
+				var source = string.Join("\r\n", body.Strings);
+				source = ReplaceHtml(source, context);
+				body.Strings = source.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+			}
+		}
+
+		private Stream ReplaceAttachmentBody(Stream source, AttachmentBody attachment, IDataContext context)
 		{
 			var destination = new MemoryStream();
 
@@ -68,7 +93,7 @@ namespace Depersonalizer.Mime
 					content = reader.ReadToEnd();
 				}
 
-				content = ReplaceData(content, context);
+				content = ReplaceTextAttachment(content, context);
 
 				using (var writer = new StreamWriter(destination, encoding, 8192, true))
 				{
@@ -98,9 +123,12 @@ namespace Depersonalizer.Mime
 			return result;
 		}
 
-		public MimeReplacer(IDataReplacer nextReplacer)
+		public MimeReplacer(IDataReplacer headerReplacer, IDataReplacer textBodyReplacer, IDataReplacer htmlBodyReplacer, IDataReplacer textAttachmentReplacer)
 		{
-			NextReplacer = nextReplacer;
+			HeaderReplacer = headerReplacer;
+			TextBodyReplacer = textBodyReplacer;
+			HtmlBodyReplacer = htmlBodyReplacer;
+			TextAttachmentReplacer = textAttachmentReplacer;
 		}
 
 		public string Replace(string source, IDataContext context)
@@ -117,7 +145,7 @@ namespace Depersonalizer.Mime
 
 				mailMessage.AttachmentSaved += (object sender, AttachmentSavedEventArgs e) =>
 				{
-					attachments.Add(e.Body, ReplaceAttachment(e.Data, e.Body, context));
+					attachments.Add(e.Body, ReplaceAttachmentBody(e.Data, e.Body, context));
 				};
 
 				mailMessage.LoadAttachment += (object sender, GetBodyStreamEventArgs e) =>
@@ -126,17 +154,20 @@ namespace Depersonalizer.Mime
 					e.Handled = true;
 				};
 
-				source = ReplaceData(source, context);
+				source = ReplaceHeader(source, context);
 
 				mailMessage.MessageSource = source.Split(new string[] { "\r\n" }, StringSplitOptions.None);
 
-				ReplaceContent(mailMessage.Text, context);
-				ReplaceContent(mailMessage.Html, context);
+				ReplaceTextBody(mailMessage.Text, context);
+				ReplaceHtmlBody(mailMessage.Html, context);
 
 				return string.Join("\r\n", mailMessage.MessageSource);
 			}
 		}
 
-		public IDataReplacer NextReplacer { get; }
+		public IDataReplacer HeaderReplacer { get; set; }
+		public IDataReplacer TextBodyReplacer { get; set; }
+		public IDataReplacer HtmlBodyReplacer { get; set; }
+		public IDataReplacer TextAttachmentReplacer { get; set; }
 	}
 }
