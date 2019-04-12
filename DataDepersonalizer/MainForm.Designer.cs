@@ -23,6 +23,7 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.label1 = new System.Windows.Forms.Label();
 			this.txtEmailFolder = new System.Windows.Forms.TextBox();
 			this.btnOpenEmailFolder = new System.Windows.Forms.Button();
@@ -38,6 +39,8 @@
 			this.txtEncoding = new System.Windows.Forms.TextBox();
 			this.cbWriteBom = new System.Windows.Forms.CheckBox();
 			this.tabDataTypes = new System.Windows.Forms.TabControl();
+			this.tabSimpleText = new System.Windows.Forms.TabPage();
+			this.btnDepersonalizeText = new System.Windows.Forms.Button();
 			this.tabXmlDocument = new System.Windows.Forms.TabPage();
 			this.btnDepersonalizeXml = new System.Windows.Forms.Button();
 			this.txtXmlReplaceWith = new System.Windows.Forms.TextBox();
@@ -59,14 +62,12 @@
 			this.label8 = new System.Windows.Forms.Label();
 			this.cbFileType = new System.Windows.Forms.ComboBox();
 			this.label13 = new System.Windows.Forms.Label();
-			this.tabSimpleText = new System.Windows.Forms.TabPage();
-			this.btnDepersonalizeText = new System.Windows.Forms.Button();
 			this.cbLinkedData = new System.Windows.Forms.CheckBox();
 			this.tabDataTypes.SuspendLayout();
+			this.tabSimpleText.SuspendLayout();
 			this.tabXmlDocument.SuspendLayout();
 			this.tabNameValuePairs.SuspendLayout();
 			this.tabRegexPatterns.SuspendLayout();
-			this.tabSimpleText.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -198,6 +199,27 @@
 			this.tabDataTypes.Size = new System.Drawing.Size(516, 208);
 			this.tabDataTypes.TabIndex = 35;
 			// 
+			// tabSimpleText
+			// 
+			this.tabSimpleText.Controls.Add(this.btnDepersonalizeText);
+			this.tabSimpleText.Location = new System.Drawing.Point(4, 22);
+			this.tabSimpleText.Name = "tabSimpleText";
+			this.tabSimpleText.Padding = new System.Windows.Forms.Padding(3);
+			this.tabSimpleText.Size = new System.Drawing.Size(508, 182);
+			this.tabSimpleText.TabIndex = 3;
+			this.tabSimpleText.Text = "Simple Text";
+			this.tabSimpleText.UseVisualStyleBackColor = true;
+			// 
+			// btnDepersonalizeText
+			// 
+			this.btnDepersonalizeText.Location = new System.Drawing.Point(15, 140);
+			this.btnDepersonalizeText.Name = "btnDepersonalizeText";
+			this.btnDepersonalizeText.Size = new System.Drawing.Size(127, 23);
+			this.btnDepersonalizeText.TabIndex = 33;
+			this.btnDepersonalizeText.Text = "Depersonalize Text";
+			this.btnDepersonalizeText.UseVisualStyleBackColor = true;
+			this.btnDepersonalizeText.Click += new System.EventHandler(this.btnDepersonalizeText_Click);
+			// 
 			// tabXmlDocument
 			// 
 			this.tabXmlDocument.Controls.Add(this.btnDepersonalizeXml);
@@ -297,8 +319,7 @@
 			this.txtPairReplaceWith.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.txtPairReplaceWith.Size = new System.Drawing.Size(248, 84);
 			this.txtPairReplaceWith.TabIndex = 27;
-			this.txtPairReplaceWith.Text = "1{0:D6}\r\nName {0}\r\nName {0}\r\nCompany Name {0} Inc.\r\nLakeside {0}\r\nStreet {0}\r\nDis" +
-    "trict {0}\r\n123-456\r\n+12345678901";
+			this.txtPairReplaceWith.Text = resources.GetString("txtPairReplaceWith.Text");
 			// 
 			// label9
 			// 
@@ -317,7 +338,9 @@
 			this.txtPairNames.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.txtPairNames.Size = new System.Drawing.Size(207, 84);
 			this.txtPairNames.TabIndex = 25;
-			this.txtPairNames.Text = "Tracking ID\r\nName\r\nOrder Name\r\nCompany\r\nAddress1\r\nAddress2\r\nAddress3\r\nZip\r\nPhone";
+			this.txtPairNames.Text = "Tracking ID\r\nName\r\nOrder Name\r\nCompany\r\nAddress1\r\nAddress2\r\nAddress3\r\nZip\r\nPhone\r" +
+    "\nCustomer Name\r\nOrganization\r\nAddress\r\nPostCode\r\nOrder ID\r\nContact Person\r\nCompa" +
+    "ny Name\r\nTel Number\r\nTel";
 			// 
 			// label10
 			// 
@@ -423,27 +446,6 @@
 			this.label13.TabIndex = 35;
 			this.label13.Text = "- is used as {0} replacement pattern.";
 			// 
-			// tabSimpleText
-			// 
-			this.tabSimpleText.Controls.Add(this.btnDepersonalizeText);
-			this.tabSimpleText.Location = new System.Drawing.Point(4, 22);
-			this.tabSimpleText.Name = "tabSimpleText";
-			this.tabSimpleText.Padding = new System.Windows.Forms.Padding(3);
-			this.tabSimpleText.Size = new System.Drawing.Size(508, 182);
-			this.tabSimpleText.TabIndex = 3;
-			this.tabSimpleText.Text = "Simple Text";
-			this.tabSimpleText.UseVisualStyleBackColor = true;
-			// 
-			// btnDepersonalizeText
-			// 
-			this.btnDepersonalizeText.Location = new System.Drawing.Point(15, 140);
-			this.btnDepersonalizeText.Name = "btnDepersonalizeText";
-			this.btnDepersonalizeText.Size = new System.Drawing.Size(127, 23);
-			this.btnDepersonalizeText.TabIndex = 33;
-			this.btnDepersonalizeText.Text = "Depersonalize Text";
-			this.btnDepersonalizeText.UseVisualStyleBackColor = true;
-			this.btnDepersonalizeText.Click += new System.EventHandler(this.btnDepersonalizeText_Click);
-			// 
 			// cbLinkedData
 			// 
 			this.cbLinkedData.AutoSize = true;
@@ -481,13 +483,13 @@
 			this.Text = "Data Depersonalizer";
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.tabDataTypes.ResumeLayout(false);
+			this.tabSimpleText.ResumeLayout(false);
 			this.tabXmlDocument.ResumeLayout(false);
 			this.tabXmlDocument.PerformLayout();
 			this.tabNameValuePairs.ResumeLayout(false);
 			this.tabNameValuePairs.PerformLayout();
 			this.tabRegexPatterns.ResumeLayout(false);
 			this.tabRegexPatterns.PerformLayout();
-			this.tabSimpleText.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

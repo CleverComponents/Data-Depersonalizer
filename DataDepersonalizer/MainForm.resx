@@ -120,4 +120,24 @@
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>33, 17</value>
   </metadata>
+  <data name="txtPairReplaceWith.Text" xml:space="preserve">
+    <value>1{0:D6}
+Name {0}
+Name {0}
+Company Name {0} Inc.
+Lakeside {0}
+Street {0}
+District {0}
+123-456
++12345678901
+Name {0}
+Company Name {0} Inc.
+Lakeside {0} Street {0}
+123-456
+1{0:D5}
+Contact {0}
+Contact Company {0} Inc.
++12345678901
++12345678902</value>
+  </data>
 </root>
