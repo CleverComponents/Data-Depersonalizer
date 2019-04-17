@@ -21,27 +21,64 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Depersonalizer.Common;
 
 namespace Depersonalizer.Text
 {
 	public class HtmlReplacer : DataReplacer
 	{
+		private string ReplaceTag(string id, string replaceWithMask, string source, IDataContext context)
+		{
+			string matchPattern = "<(\\w+)([^>]*id[\\s]?=[\\s]?['\"]" + id + "['\"][\\s\\S]*?)>([\\s\\S]*?)<\\/\\1>";
+
+			var tags = ExtractGroupData(source, matchPattern, 3, RegexOptions.IgnoreCase);
+
+			foreach (var tag in tags)
+			{
+				var depersonalized = context.DataDictionary.GetValue(tag.GroupValue, () =>	{ return String.Format(replaceWithMask, context.StartFrom++); });
+				var depersonalizedTag = tag.DataValue.Replace(tag.GroupValue.Trim(), depersonalized);
+				source = source.Replace(tag.DataValue, depersonalizedTag);
+			}
+
+			return source;
+		}
+
+		private string ReplaceTags(string source, IDataContext context)
+		{
+			if (TagIds == null || TagReplaceWith == null)
+			{
+				return source;
+			}
+
+			if (TagIds.Length != TagReplaceWith.Length)
+			{
+				throw new Exception("The number of HTML tags must be the same as Replace With values");
+			}
+
+			for (int i = 0; i < TagIds.Length; i++)
+			{
+				source = ReplaceTag(TagIds[i], TagReplaceWith[i], source, context);
+			}
+
+			return source;
+		}
+
 		public HtmlReplacer(IDataReplacer nextReplacer) : base(nextReplacer) { }
 
 		public HtmlReplacer() : base() { }
 
 		public override string Replace(string source, IDataContext context)
 		{
-			//TODO replace tags by name
-			//TODO replace tags by id
+			source = ReplaceTags(source, context);
 			//TODO replace text by dictionary
 
 			return base.Replace(source, context);
 		}
+
+		public string[] TagIds { get; set; }
+		public string[] TagReplaceWith { get; set; }
 	}
 }

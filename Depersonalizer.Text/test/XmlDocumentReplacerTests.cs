@@ -5,7 +5,7 @@ namespace Depersonalizer.Text.Tests
 	public class XmlDocumentReplacerTests
 	{
 		[Fact]
-		public void TestReplace()
+		public void TestReplace_NodeByName()
 		{
 			var replacer = new XmlDocumentReplacer();
 			var context = new DataContext();
@@ -20,6 +20,24 @@ namespace Depersonalizer.Text.Tests
 
 			Assert.Equal("<qwe>asd</qwe>\r\n<tracking id>1000010</tracking id>\r\n<order name>name 11</order name>\r\n <tracking id>1000010</tracking id> \r\n", source);
 			Assert.Equal(12, context.StartFrom);
+		}
+
+		[Fact]
+		public void TestReplace_NodeByDictionary()
+		{
+			var replacer = new XmlDocumentReplacer();
+			var context = new DataContext();
+
+			context.DataDictionary.AddValue("qwe", "dictionary");
+
+			replacer.XmlNodes = new string[] { "node" };
+			replacer.XmlReplaceWith = new string[] { "ignore" };
+
+			var source = "<node>qwe</node>";
+			var expected = "<node>dictionary</node>";
+
+			source = replacer.Replace(source, context);
+			Assert.Equal(expected, source);
 		}
 	}
 }

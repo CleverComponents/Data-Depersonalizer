@@ -20,6 +20,8 @@
 //along with the Data Depersonalizer application. If not, see<http://www.gnu.org/licenses/>.
 #endregion
 
+using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Depersonalizer.Common;
@@ -28,6 +30,12 @@ namespace Depersonalizer.Text
 {
 	public abstract class DataReplacer : IDataReplacer
 	{
+		public class GroupDataInfo
+		{
+			public string DataValue { get; set; }
+			public string GroupValue { get; set; }
+		}
+
 		public DataReplacer(IDataReplacer nextReplacer)
 		{
 			NextReplacer = nextReplacer;
@@ -43,11 +51,11 @@ namespace Depersonalizer.Text
 			return NextReplacer?.Replace(source, context) ?? source;
 		}
 
-		public string[] ExtractData(string text, string matchPattern, RegexOptions regexOptions)
+		public string[] ExtractSimpleData(string source, string matchPattern, RegexOptions regexOptions)
 		{
 			var regex = new Regex(matchPattern, regexOptions);
 
-			var matches = regex.Matches(text);
+			var matches = regex.Matches(source);
 
 			var list = new List<string>();
 
@@ -62,6 +70,28 @@ namespace Depersonalizer.Text
 			}
 
 			return list.ToArray();
+		}
+
+		public List<GroupDataInfo> ExtractGroupData(string source, string matchPattern, int groupIndex, RegexOptions regexOptions)
+		{
+			var regex = new Regex(matchPattern, regexOptions);
+
+			var matches = regex.Matches(source);
+
+			var list = new List<GroupDataInfo>();
+
+			foreach (Match match in matches)
+			{
+				var data = match.Value;
+
+				if (!list.Any(x => x.DataValue.Equals(match.Value, StringComparison.OrdinalIgnoreCase)))
+				{
+					var group = match.Groups[groupIndex];
+					list.Add(new GroupDataInfo() { DataValue = match.Value, GroupValue = group.Value });
+				}
+			}
+
+			return list;
 		}
 
 		public IDataReplacer NextReplacer { get; set; }

@@ -28,5 +28,6 @@ namespace Depersonalizer.Common
 	{
 		void Reset();
 		string GetValue(string key, Func<string> getNewValue);
+		void AddValue(string key, string value);
 	}
 }

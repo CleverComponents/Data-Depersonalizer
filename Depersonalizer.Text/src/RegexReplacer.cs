@@ -30,7 +30,7 @@ namespace Depersonalizer.Text
 	{
 		private string ReplaceCustomPattern(string matchPattern, string replaceWithMask, string source, IDataContext context)
 		{
-			var dataArray = ExtractData(source, matchPattern, RegexOptions.IgnoreCase);
+			var dataArray = ExtractSimpleData(source, matchPattern, RegexOptions.IgnoreCase);
 
 			foreach (var data in dataArray)
 			{

@@ -28,25 +28,17 @@ namespace Depersonalizer.Text
 {
 	public class XmlDocumentReplacer : DataReplacer
 	{
-		private string[] ExtractXmlNodes(string nodeName, string text)
+		private string ReplaceXmlNode(string nodeName, string replaceWithMask, string source, IDataContext context)
 		{
 			string matchPattern = @"<" + nodeName + ">(.*?)</" + nodeName + ">";
 
-			return ExtractData(text, matchPattern, RegexOptions.IgnoreCase);
-		}
-
-		private string ReplaceXmlNode(string nodeName, string replaceWithMask, string source, IDataContext context)
-		{
-			var xmlNodes = ExtractXmlNodes(nodeName, source);
+			var xmlNodes = ExtractGroupData(source, matchPattern, 1, RegexOptions.IgnoreCase);
 
 			foreach (var node in xmlNodes)
 			{
-				var depersonalizedNode = context.DataDictionary.GetValue(node, () =>
-				{
-					var replaceWith = String.Format(replaceWithMask, context.StartFrom++);
-					return String.Format("<{0}>{1}</{0}>", nodeName, replaceWith);
-				});
-				source = source.Replace(node, depersonalizedNode);
+				var depersonalized = context.DataDictionary.GetValue(node.GroupValue, () => { return String.Format(replaceWithMask, context.StartFrom++); });
+				var depersonalizedTag = node.DataValue.Replace(node.GroupValue.Trim(), depersonalized);
+				source = source.Replace(node.DataValue, depersonalizedTag);
 			}
 
 			return source;

@@ -47,8 +47,13 @@ namespace Depersonalizer.Text
 			}
 
 			var newValue = getNewValue();
-			Add(key, newValue);
+			AddValue(key, newValue);
 			return newValue;
+		}
+
+		public void AddValue(string key, string value)
+		{
+			Add(key, value);
 		}
 	}
 }

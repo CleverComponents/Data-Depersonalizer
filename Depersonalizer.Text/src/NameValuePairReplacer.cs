@@ -28,25 +28,17 @@ namespace Depersonalizer.Text
 {
 	public class NameValuePairReplacer : DataReplacer
 	{
-		private string[] ExtractNameValuePairs(string name, string text)
+		private string ReplaceNameValuePair(string name, string replaceWithMask, string source, IDataContext context)
 		{
 			string matchPattern = @"^\s*" + name + @"\s*:(\s*|.*)(?=\r$)";
 
-			return ExtractData(text, matchPattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
-		}
-
-		private string ReplaceNameValuePair(string name, string replaceWithMask, string source, IDataContext context)
-		{
-			var pairs = ExtractNameValuePairs(name, source);
+			var pairs = ExtractGroupData(source, matchPattern, 1, RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
 			foreach (var pair in pairs)
 			{
-				var depersonalizedPair = context.DataDictionary.GetValue(pair, () =>
-				{
-					var replaceWith = String.Format(replaceWithMask, context.StartFrom++);
-					return String.Format("{0} : {1}", name, replaceWith);
-				});
-				source = source.Replace(pair, depersonalizedPair);
+				var depersonalized = context.DataDictionary.GetValue(pair.GroupValue, () => { return String.Format(replaceWithMask, context.StartFrom++); });
+				var depersonalizedTag = pair.DataValue.Replace(pair.GroupValue.Trim(), depersonalized);
+				source = source.Replace(pair.DataValue, depersonalizedTag);
 			}
 
 			return source;
