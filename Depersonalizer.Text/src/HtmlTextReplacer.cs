@@ -20,15 +20,21 @@
 //along with the Data Depersonalizer application. If not, see<http://www.gnu.org/licenses/>.
 #endregion
 
-using System;
-using System.Collections.Generic;
-
-namespace Depersonalizer.Common
+namespace Depersonalizer.Text
 {
-	public interface IDataDictionary : IEnumerable<KeyValuePair<string, string>>
+	public class HtmlTextReplacer : TextReplacer
 	{
-		void Reset();
-		string GetValue(string key, Func<string> getNewValue);
-		void AddValue(string key, string value);
+		protected override string ReplaceValue(string source, string key, string value)
+		{
+			var encodedValue = HtmlEncoder.EncodeEntities(value);
+
+			var encodedKey = HtmlEncoder.EncodeEntities(key, false);
+			source = source.Replace(encodedKey, encodedValue);
+
+			encodedKey = HtmlEncoder.EncodeEntities(key, true);
+			source = source.Replace(encodedKey, encodedValue);
+
+			return base.ReplaceValue(source, key, value);
+		}
 	}
 }

@@ -72,10 +72,12 @@
     <Compile Include="EmailAddressReplacerTests.cs" />
     <Compile Include="HtmlEncoderTests.cs" />
     <Compile Include="HtmlDocumentReplacerTests.cs" />
+    <Compile Include="HtmlTextReplacerTests.cs" />
     <Compile Include="IpAddressReplacerTests.cs" />
     <Compile Include="NameValuePairReplacerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegexReplacerTests.cs" />
+    <Compile Include="TextReplacerTests.cs" />
     <Compile Include="XmlDocumentReplacerTests.cs" />
   </ItemGroup>
   <ItemGroup>
