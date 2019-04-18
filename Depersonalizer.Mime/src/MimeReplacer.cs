@@ -34,81 +34,12 @@ using Depersonalizer.Common;
 
 namespace Depersonalizer.Mime
 {
-	public class MimeReplacer : IDataReplacer
+	public class MimeReplacer : IMimeReplacer
 	{
-		private string ReplaceHeader(string source, IDataContext context)
-		{
-			return HeaderReplacer?.Replace(source, context) ?? source;
-		}
+		private class Attachments : Dictionary<AttachmentBody, Stream> { }
 
-		private string ReplaceText(string source, IDataContext context)
-		{
-			return TextBodyReplacer?.Replace(source, context) ?? source;
-		}
-
-		private string ReplaceHtml(string source, IDataContext context)
-		{
-			return HtmlBodyReplacer?.Replace(source, context) ?? source;
-		}
-
-		private string ReplaceTextAttachment(string source, IDataContext context)
-		{
-			return TextAttachmentReplacer?.Replace(source, context) ?? source;
-		}
-
-		private void ReplaceTextBody(TextBody body, IDataContext context)
-		{
-			if (body != null)
-			{
-				var source = string.Join("\r\n", body.Strings);
-				source = ReplaceText(source, context);
-				body.Strings = source.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-			}
-		}
-
-		private void ReplaceHtmlBody(TextBody body, IDataContext context)
-		{
-			if (body != null)
-			{
-				var source = string.Join("\r\n", body.Strings);
-				source = ReplaceHtml(source, context);
-				body.Strings = source.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-			}
-		}
-
-		private Stream ReplaceAttachmentBody(Stream source, AttachmentBody attachment, IDataContext context)
-		{
-			var destination = new MemoryStream();
-
-			source.Position = 0;
-
-			if (attachment.ContentType.IndexOf("text/") == 0)
-			{
-				var encoding = Translator.GetEncoding(GetAttachmentCharSet(attachment));
-
-				string content;
-
-				using (var reader = new StreamReader(source, encoding, false, 8192, true))
-				{
-					content = reader.ReadToEnd();
-				}
-
-				content = ReplaceTextAttachment(content, context);
-
-				using (var writer = new StreamWriter(destination, encoding, 8192, true))
-				{
-					writer.Write(content);
-				}
-			}
-			else
-			{
-				source.CopyTo(destination);
-			}
-
-			destination.Position = 0;
-
-			return destination;
-		}
+		private MailMessage mailMessage;
+		private Attachments attachments;
 
 		private string GetAttachmentCharSet(AttachmentBody attachment)
 		{
@@ -123,19 +54,85 @@ namespace Depersonalizer.Mime
 			return result;
 		}
 
-		public MimeReplacer(IDataReplacer headerReplacer, IDataReplacer textBodyReplacer, IDataReplacer htmlBodyReplacer, IDataReplacer textAttachmentReplacer)
+		private string[] ReplaceStrings(string[] source, IMimePartReplacer replacer, IDataContext context)
 		{
-			HeaderReplacer = headerReplacer;
-			TextBodyReplacer = textBodyReplacer;
-			HtmlBodyReplacer = htmlBodyReplacer;
-			TextAttachmentReplacer = textAttachmentReplacer;
+			if (source == null) return null;
+
+			var s = string.Join("\r\n", source);
+			s = replacer.Replace(s, context);
+			return s.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+		}
+
+		public MimeReplacer()
+		{
+			MimePartReplacers = new List<IMimePartReplacer>();
+		}
+
+		public void ReplaceHeader(IMimePartReplacer replacer, IDataContext context)
+		{
+			mailMessage.From.FullAddress = replacer.Replace(mailMessage.From.FullAddress, context);
+			mailMessage.ToList.EmailAddresses = replacer.Replace(mailMessage.ToList.EmailAddresses, context);
+			mailMessage.CcList.EmailAddresses = replacer.Replace(mailMessage.CcList.EmailAddresses, context);
+			mailMessage.BccList.EmailAddresses = replacer.Replace(mailMessage.BccList.EmailAddresses, context);
+			mailMessage.Subject = replacer.Replace(mailMessage.Subject, context);
+			mailMessage.ReplyTo = replacer.Replace(mailMessage.ReplyTo, context);
+			mailMessage.ReadReceiptTo = replacer.Replace(mailMessage.ReadReceiptTo, context);
+			mailMessage.NewsGroups = ReplaceStrings(mailMessage.NewsGroups, replacer, context);
+			mailMessage.References = ReplaceStrings(mailMessage.References, replacer, context);
+			mailMessage.ExtraFields = ReplaceStrings(mailMessage.ExtraFields, replacer, context);
+		}
+
+		public void ReplaceText(IMimePartReplacer replacer, IDataContext context)
+		{
+			if (mailMessage.Text != null)
+			{
+				mailMessage.Text.Strings = ReplaceStrings(mailMessage.Text.Strings, replacer, context);
+			}
+		}
+
+		public void ReplaceHtml(IMimePartReplacer replacer, IDataContext context)
+		{
+			if (mailMessage.Html != null)
+			{
+				mailMessage.Html.Strings = ReplaceStrings(mailMessage.Html.Strings, replacer, context);
+			}
+		}
+
+		public void ReplaceTextAttachment(IMimePartReplacer replacer, IDataContext context)
+		{
+			foreach (var attachment in attachments)
+			{
+				if (attachment.Key.ContentType.IndexOf("text/") == 0)
+				{
+					var encoding = Translator.GetEncoding(GetAttachmentCharSet(attachment.Key));
+
+					string content;
+
+					using (var reader = new StreamReader(attachment.Value, encoding, false, 8192, true))
+					{
+						content = reader.ReadToEnd();
+					}
+
+					content = replacer.Replace(content, context);
+
+					attachment.Value.SetLength(0);
+
+					using (var writer = new StreamWriter(attachment.Value, encoding, 8192, true))
+					{
+						writer.Write(content);
+					}
+
+					attachment.Value.Position = 0;
+				}
+			}
 		}
 
 		public string Replace(string source, IDataContext context)
 		{
-			using (var mailMessage = new MailMessage())
+			mailMessage = mailMessage = new MailMessage();
+			try
 			{
-				var attachments = new Dictionary<AttachmentBody, Stream>();
+				attachments = new Attachments();
 
 				mailMessage.SaveAttachment += (object sender, GetBodyStreamEventArgs e) =>
 				{
@@ -145,7 +142,12 @@ namespace Depersonalizer.Mime
 
 				mailMessage.AttachmentSaved += (object sender, AttachmentSavedEventArgs e) =>
 				{
-					attachments.Add(e.Body, ReplaceAttachmentBody(e.Data, e.Body, context));
+					var stream = new MemoryStream();
+					attachments.Add(e.Body, stream);
+
+					e.Data.Position = 0;
+					e.Data.CopyTo(stream, 8192);
+					stream.Position = 0;
 				};
 
 				mailMessage.LoadAttachment += (object sender, GetBodyStreamEventArgs e) =>
@@ -154,20 +156,30 @@ namespace Depersonalizer.Mime
 					e.Handled = true;
 				};
 
-				source = ReplaceHeader(source, context);
-
 				mailMessage.MessageSource = source.Split(new string[] { "\r\n" }, StringSplitOptions.None);
 
-				ReplaceTextBody(mailMessage.Text, context);
-				ReplaceHtmlBody(mailMessage.Html, context);
+				foreach (var replacer in MimePartReplacers)
+				{
+					replacer.ReplacePart(context);
+				}
 
 				return string.Join("\r\n", mailMessage.MessageSource);
 			}
+			finally
+			{
+				attachments = null;
+				mailMessage.Dispose();
+				mailMessage = null;
+			}
 		}
 
-		public IDataReplacer HeaderReplacer { get; set; }
-		public IDataReplacer TextBodyReplacer { get; set; }
-		public IDataReplacer HtmlBodyReplacer { get; set; }
-		public IDataReplacer TextAttachmentReplacer { get; set; }
+		public IMimePartReplacer AddMimePartReplacer(IMimePartReplacer replacer)
+		{
+			MimePartReplacers.Add(replacer);
+			replacer.MimeReplacer = this;
+			return replacer;
+		}
+
+		public List<IMimePartReplacer> MimePartReplacers { get; }
 	}
 }

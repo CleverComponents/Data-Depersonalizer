@@ -92,7 +92,13 @@ namespace DataDepersonalizer
 			var fileType = GetSelectedFileType();
 			if (fileType == FileType.MultipartEmail)
 			{
-				dataReplacer = new MimeReplacer(dataReplacer, dataReplacer, dataReplacer, dataReplacer);
+				var mimeReplacer = new MimeReplacer();
+				mimeReplacer.AddMimePartReplacer(new MimeHeaderReplacer(dataReplacer));
+				mimeReplacer.AddMimePartReplacer(new TextBodyReplacer(dataReplacer));
+				mimeReplacer.AddMimePartReplacer(new HtmlBodyReplacer(dataReplacer));
+				mimeReplacer.AddMimePartReplacer(new TextAttachmentReplacer(dataReplacer));
+
+				dataReplacer = mimeReplacer;
 			}
 
 			var dataContext = new DataContext() { StartFrom = Convert.ToInt32(txtStartFrom.Text) };
