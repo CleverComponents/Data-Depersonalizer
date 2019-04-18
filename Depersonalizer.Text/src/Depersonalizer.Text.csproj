@@ -46,7 +46,7 @@
     <Compile Include="DataReplacer.cs" />
     <Compile Include="EmailAddressReplacer.cs" />
     <Compile Include="HtmlEncoder.cs" />
-    <Compile Include="HtmlReplacer.cs" />
+    <Compile Include="HtmlDocumentReplacer.cs" />
     <Compile Include="IpAddressReplacer.cs" />
     <Compile Include="NameValuePairReplacer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -26,7 +26,7 @@ using Depersonalizer.Common;
 
 namespace Depersonalizer.Text
 {
-	public class HtmlReplacer : DataReplacer
+	public class HtmlDocumentReplacer : DataReplacer
 	{
 		private string ReplaceTag(string id, string replaceWithMask, string source, IDataContext context)
 		{
@@ -70,9 +70,9 @@ namespace Depersonalizer.Text
 			return source;
 		}
 
-		public HtmlReplacer(IDataReplacer nextReplacer) : base(nextReplacer) { }
+		public HtmlDocumentReplacer(IDataReplacer nextReplacer) : base(nextReplacer) { }
 
-		public HtmlReplacer() : base() { }
+		public HtmlDocumentReplacer() : base() { }
 
 		public override string Replace(string source, IDataContext context)
 		{

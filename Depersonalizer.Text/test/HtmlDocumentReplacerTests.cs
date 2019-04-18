@@ -2,7 +2,7 @@
 
 namespace Depersonalizer.Text.Tests
 {
-	public class HtmlReplacerTests
+	public class HtmlDocumentReplacerTests
 	{
 		[Theory]
 		[InlineData("<p>value</p>\r\n", "<p>value</p>\r\n")]
@@ -11,7 +11,7 @@ namespace Depersonalizer.Text.Tests
 		[InlineData("<p class='x' id=\"a1\"\r\n param=\"b\">value</p>\r\n", "<p class='x' id=\"a1\"\r\n param=\"b\">1000010</p>\r\n")]
 		public void TestReplace_TagById(string source, string expected)
 		{
-			var replacer = new HtmlReplacer();
+			var replacer = new HtmlDocumentReplacer();
 			var context = new DataContext();
 
 			replacer.TagIds = new string[] { "a1" };
@@ -25,7 +25,7 @@ namespace Depersonalizer.Text.Tests
 		[Fact]
 		public void TestReplace_TagByDictionary()
 		{
-			var replacer = new HtmlReplacer();
+			var replacer = new HtmlDocumentReplacer();
 			var context = new DataContext();
 
 			context.DataDictionary.AddValue("台北市", "dictionary");
