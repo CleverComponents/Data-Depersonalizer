@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
+﻿using Xunit;
 
 namespace Depersonalizer.Text.Tests
 {
@@ -33,24 +28,16 @@ namespace Depersonalizer.Text.Tests
 			var replacer = new HtmlReplacer();
 			var context = new DataContext();
 
-			//context.DataDictionary.AddValue("台北市", "dictionary");
-			context.DataDictionary.AddValue("qwe", "dictionary");
+			context.DataDictionary.AddValue("台北市", "dictionary");
 
 			replacer.TagIds = new string[] { "a1" };
 			replacer.TagReplaceWith = new string[] { "ignore" };
 
-			//var source = "<p id=\"a1\">&#21488;&#21271;&#24066;</p>";
-			var source = "<p id=\"a1\">qwe</p>";
+			var source = "<p id=\"a1\">&#21488;&#21271;&#24066;</p>";
 			var expected = "<p id=\"a1\">dictionary</p>";
 
 			source = replacer.Replace(source, context);
 			Assert.Equal(expected, source);
-		}
-
-		[Fact]
-		public void TestReplace_TextByDictionary()
-		{
-			Assert.False(true);
 		}
 	}
 }

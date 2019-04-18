@@ -21,8 +21,6 @@
 #endregion
 
 using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Depersonalizer.Common;
 
@@ -38,8 +36,14 @@ namespace Depersonalizer.Text
 
 			foreach (var tag in tags)
 			{
-				var depersonalized = context.DataDictionary.GetValue(tag.GroupValue, () =>	{ return String.Format(replaceWithMask, context.StartFrom++); });
+				var decodedTagValue = HtmlEncoder.DecodeEntities(tag.GroupValue);
+
+				var depersonalized = context.DataDictionary.GetValue(decodedTagValue, () =>	{ return String.Format(replaceWithMask, context.StartFrom++); });
+
+				depersonalized = HtmlEncoder.EncodeEntities(depersonalized);
+
 				var depersonalizedTag = tag.DataValue.Replace(tag.GroupValue.Trim(), depersonalized);
+
 				source = source.Replace(tag.DataValue, depersonalizedTag);
 			}
 
@@ -73,8 +77,6 @@ namespace Depersonalizer.Text
 		public override string Replace(string source, IDataContext context)
 		{
 			source = ReplaceTags(source, context);
-			//TODO replace text by dictionary
-
 			return base.Replace(source, context);
 		}
 

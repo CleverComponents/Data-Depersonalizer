@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +45,7 @@
     <Compile Include="DataDictionary.cs" />
     <Compile Include="DataReplacer.cs" />
     <Compile Include="EmailAddressReplacer.cs" />
+    <Compile Include="HtmlEncoder.cs" />
     <Compile Include="HtmlReplacer.cs" />
     <Compile Include="IpAddressReplacer.cs" />
     <Compile Include="NameValuePairReplacer.cs" />
