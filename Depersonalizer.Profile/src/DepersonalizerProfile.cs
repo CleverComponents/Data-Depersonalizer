@@ -26,16 +26,44 @@
 //first may free it from dependence on the non-free library.
 #endregion
 
-using System.Xml.Serialization;
+using System;
+using System.IO;
 using Depersonalizer.Common;
+using ExtendedXmlSerializer.Configuration;
+using ExtendedXmlSerializer.ExtensionModel.Xml;
 
-namespace Depersonalizer.Mime
+namespace Depersonalizer.Profile
 {
-	public interface IMimePartReplacer : IDataReplacer
-	{
-		void ReplacePart(IDataContext context);
+    public class DepersonalizerProfile
+    {
+		public void Clear()
+		{
+			ReplacerChain = null;
+		}
 
-		[XmlIgnore]
-		IMimeReplacer MimeReplacer { get; set; }
+		public void Load(string fileName)
+		{
+			using (var stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+			{
+				var serializer = new ConfigurationContainer().Create();
+				ReplacerChain = serializer.Deserialize<IDataReplacer>(stream);
+			}
+		}
+
+		public void Save(string fileName)
+		{
+			if (ReplacerChain == null)
+			{
+				throw new Exception("The replacers are not defined, there is nothing to save.");
+			}
+
+			using (var stream = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite))
+			{
+				var serializer = new ConfigurationContainer().Create();
+				serializer.Serialize(stream, ReplacerChain);
+			}
+		}
+
+		public IDataReplacer ReplacerChain { get; set; }
 	}
 }

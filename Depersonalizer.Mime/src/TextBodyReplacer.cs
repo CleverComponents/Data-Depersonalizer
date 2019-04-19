@@ -37,6 +37,6 @@ namespace Depersonalizer.Mime
 			MimeReplacer.ReplaceText(this, context);
 		}
 
-		public TextBodyReplacer(IDataReplacer nextReplacer) : base(nextReplacer) { }
+		public TextBodyReplacer() : base() { }
 	}
 }

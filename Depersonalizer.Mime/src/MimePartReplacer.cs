@@ -26,6 +26,7 @@
 //first may free it from dependence on the non-free library.
 #endregion
 
+using System.Xml.Serialization;
 using Depersonalizer.Common;
 
 namespace Depersonalizer.Mime
@@ -34,10 +35,7 @@ namespace Depersonalizer.Mime
 	{
 		public abstract void ReplacePart(IDataContext context);
 
-		protected MimePartReplacer(IDataReplacer nextReplacer)
-		{
-			NextReplacer = nextReplacer;
-		}
+		protected MimePartReplacer() { }
 
 		public string Replace(string source, IDataContext context)
 		{
@@ -45,6 +43,8 @@ namespace Depersonalizer.Mime
 		}
 
 		public IDataReplacer NextReplacer { get; set; }
+
+		[XmlIgnore]
 		public IMimeReplacer MimeReplacer { get; set; }
 	}
 }

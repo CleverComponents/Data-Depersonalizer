@@ -64,8 +64,6 @@ namespace Depersonalizer.Text
 			return source;
 		}
 
-		public XmlDocumentReplacer(IDataReplacer nextReplacer) : base(nextReplacer) { }
-
 		public XmlDocumentReplacer() : base() { }
 
 		public override string Replace(string source, IDataContext context)

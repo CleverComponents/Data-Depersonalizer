@@ -64,8 +64,6 @@ namespace Depersonalizer.Text
 			return source;
 		}
 
-		public EmailAddressReplacer(IDataReplacer nextReplacer) : base(nextReplacer) { }
-
 		public EmailAddressReplacer() : base() { }
 
 		public override string Replace(string source, IDataContext context)

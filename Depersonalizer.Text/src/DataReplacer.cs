@@ -36,15 +36,7 @@ namespace Depersonalizer.Text
 			public string GroupValue { get; set; }
 		}
 
-		public DataReplacer(IDataReplacer nextReplacer)
-		{
-			NextReplacer = nextReplacer;
-		}
-
-		public DataReplacer()
-		{
-			NextReplacer = null;
-		}
+		protected DataReplacer() { }
 
 		public virtual string Replace(string source, IDataContext context)
 		{

@@ -58,9 +58,9 @@ Convert.ToBase64String(Encoding.ASCII.GetBytes("html original-value")) + "\r\n" 
 "------123--\r\n";
 
 			var replacer = new MimeReplacer();
-			replacer.AddMimePartReplacer(new MimeHeaderReplacer(mockDataReplacer.Object));
-			replacer.AddMimePartReplacer(new TextBodyReplacer(mockDataReplacer.Object));
-			replacer.AddMimePartReplacer(new HtmlBodyReplacer(mockDataReplacer.Object));
+			replacer.MimePartReplacers.Add(new MimeHeaderReplacer() { NextReplacer = mockDataReplacer.Object });
+			replacer.MimePartReplacers.Add(new TextBodyReplacer() { NextReplacer = mockDataReplacer.Object });
+			replacer.MimePartReplacers.Add(new HtmlBodyReplacer() { NextReplacer = mockDataReplacer.Object });
 
 			source = replacer.Replace(source, mockDataContext.Object);
 
@@ -127,7 +127,7 @@ Convert.ToBase64String(Encoding.UTF8.GetBytes("attach original-value")) + "\r\n"
 "------123--\r\n";
 
 			var replacer = new MimeReplacer();
-			replacer.AddMimePartReplacer(new TextAttachmentReplacer(mockDataReplacer.Object));
+			replacer.MimePartReplacers.Add(new TextAttachmentReplacer() { NextReplacer = mockDataReplacer.Object });
 
 			source = replacer.Replace(source, mockDataContext.Object);
 

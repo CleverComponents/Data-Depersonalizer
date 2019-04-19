@@ -61,8 +61,6 @@ namespace Depersonalizer.Text
 			return source;
 		}
 
-		public RegexReplacer(IDataReplacer nextReplacer) : base(nextReplacer) { }
-
 		public RegexReplacer() : base() { }
 
 		public override string Replace(string source, IDataContext context)

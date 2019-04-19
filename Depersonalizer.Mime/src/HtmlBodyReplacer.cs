@@ -37,6 +37,6 @@ namespace Depersonalizer.Mime
 			MimeReplacer.ReplaceHtml(this, context);
 		}
 
-		public HtmlBodyReplacer(IDataReplacer nextReplacer) : base(nextReplacer) { }
+		public HtmlBodyReplacer() : base() { }
 	}
 }

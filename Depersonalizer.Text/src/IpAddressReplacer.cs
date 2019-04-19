@@ -57,8 +57,6 @@ namespace Depersonalizer.Text
 			return source;
 		}
 
-		public IpAddressReplacer(IDataReplacer nextReplacer) : base(nextReplacer) { }
-
 		public IpAddressReplacer() : base() { }
 
 		public override string Replace(string source, IDataContext context)

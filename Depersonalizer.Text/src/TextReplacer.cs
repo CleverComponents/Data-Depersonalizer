@@ -23,8 +23,6 @@ namespace Depersonalizer.Text
 			return source.Replace(key, value);
 		}
 
-		public TextReplacer(IDataReplacer nextReplacer) : base(nextReplacer) { }
-
 		public TextReplacer() : base() { }
 
 		public override string Replace(string source, IDataContext context)

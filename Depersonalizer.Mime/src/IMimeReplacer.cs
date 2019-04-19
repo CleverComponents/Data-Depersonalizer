@@ -38,6 +38,6 @@ namespace Depersonalizer.Mime
 		void ReplaceHtml(IMimePartReplacer replacer, IDataContext context);
 		void ReplaceTextAttachment(IMimePartReplacer replacer, IDataContext context);
 
-		List<IMimePartReplacer> MimePartReplacers { get; }
+		IList<IMimePartReplacer> MimePartReplacers { get; }
 	}
 }

@@ -64,8 +64,6 @@ namespace Depersonalizer.Text
 			return source;
 		}
 
-		public NameValuePairReplacer(IDataReplacer nextReplacer) : base(nextReplacer) { }
-
 		public NameValuePairReplacer() : base() { }
 
 		public override string Replace(string source, IDataContext context)

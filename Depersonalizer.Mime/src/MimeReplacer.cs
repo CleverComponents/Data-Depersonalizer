@@ -28,6 +28,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using CleverComponents.InetSuite;
 using Depersonalizer.Common;
@@ -63,9 +65,29 @@ namespace Depersonalizer.Mime
 			return s.Split(new string[] { "\r\n" }, StringSplitOptions.None);
 		}
 
+		private void ReplacersChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			if (e.Action == NotifyCollectionChangedAction.Add)
+			{
+				foreach (var item in e.NewItems)
+				{
+					((IMimePartReplacer)item).MimeReplacer = this;
+				}
+			}
+			else if (e.Action == NotifyCollectionChangedAction.Remove)
+			{
+				foreach (var item in e.OldItems)
+				{
+					((IMimePartReplacer)item).MimeReplacer = null;
+				}
+			}
+		}
+
 		public MimeReplacer()
 		{
-			MimePartReplacers = new List<IMimePartReplacer>();
+			var collection = new ObservableCollection<IMimePartReplacer>();
+			MimePartReplacers = collection;
+			collection.CollectionChanged += ReplacersChanged;
 		}
 
 		public void ReplaceHeader(IMimePartReplacer replacer, IDataContext context)
@@ -163,6 +185,9 @@ namespace Depersonalizer.Mime
 					replacer.ReplacePart(context);
 				}
 
+				//TODO remove DKIM-Signature: DomainKey-Signature:
+				//TODO put on top Received: Return-Path:
+
 				return string.Join("\r\n", mailMessage.MessageSource);
 			}
 			finally
@@ -173,13 +198,6 @@ namespace Depersonalizer.Mime
 			}
 		}
 
-		public IMimePartReplacer AddMimePartReplacer(IMimePartReplacer replacer)
-		{
-			MimePartReplacers.Add(replacer);
-			replacer.MimeReplacer = this;
-			return replacer;
-		}
-
-		public List<IMimePartReplacer> MimePartReplacers { get; }
+		public IList<IMimePartReplacer> MimePartReplacers { get; }
 	}
 }

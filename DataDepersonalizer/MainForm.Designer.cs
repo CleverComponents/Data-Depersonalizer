@@ -194,6 +194,7 @@
 			this.tabDataTypes.Controls.Add(this.tabNameValuePairs);
 			this.tabDataTypes.Controls.Add(this.tabRegexPatterns);
 			this.tabDataTypes.Location = new System.Drawing.Point(29, 212);
+			this.tabDataTypes.Multiline = true;
 			this.tabDataTypes.Name = "tabDataTypes";
 			this.tabDataTypes.SelectedIndex = 0;
 			this.tabDataTypes.Size = new System.Drawing.Size(516, 208);

@@ -70,8 +70,6 @@ namespace Depersonalizer.Text
 			return source;
 		}
 
-		public HtmlDocumentReplacer(IDataReplacer nextReplacer) : base(nextReplacer) { }
-
 		public HtmlDocumentReplacer() : base() { }
 
 		public override string Replace(string source, IDataContext context)

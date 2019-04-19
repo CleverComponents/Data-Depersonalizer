@@ -88,6 +88,10 @@
       <Project>{f07278c7-205a-4106-8890-2c43d81e82e9}</Project>
       <Name>Depersonalizer.Mime</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Depersonalizer.Profile\src\Depersonalizer.Profile.csproj">
+      <Project>{112e3ee9-a390-4539-ae0b-abeb9a79e0d3}</Project>
+      <Name>Depersonalizer.Profile</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Depersonalizer.Text\src\Depersonalizer.Text.csproj">
       <Project>{8d63e32c-a24f-4871-b819-8cc219339a5e}</Project>
       <Name>Depersonalizer.Text</Name>
