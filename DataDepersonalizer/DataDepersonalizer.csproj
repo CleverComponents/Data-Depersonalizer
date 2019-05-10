@@ -45,6 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editors\BaseEditor.cs" />
+    <Compile Include="Editors\EditController.cs" />
+    <Compile Include="Editors\OrderEditor.cs" />
+    <Compile Include="Editors\SourceEditor.cs" />
+    <Compile Include="Editors\StartEditor.cs" />
+    <Compile Include="Editors\ReplacerFactory.cs" />
+    <Compile Include="Editors\StepEditor.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,5 +104,24 @@
       <Name>Depersonalizer.Text</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-top.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-bottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

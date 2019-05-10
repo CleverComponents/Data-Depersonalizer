@@ -20,11 +20,34 @@
 //along with the Data Depersonalizer application. If not, see<http://www.gnu.org/licenses/>.
 #endregion
 
-namespace Depersonalizer.Common
+using System;
+using System.Collections.Generic;
+using Depersonalizer.Common;
+
+namespace DataDepersonalizer.Editors
 {
-	public interface IDataReplacer
+	public class ReplacerFactory
 	{
-		string Replace(string source, IDataContext context);
-		IDataReplacer NextReplacer { get; set; }
+		public ReplacerFactory()
+		{
+			Replacers = new Dictionary<Type, string>();
+		}
+
+		public void RegisterReplacer(Type replacerType, string replacerName)
+		{
+			Replacers.Add(replacerType, replacerName);
+		}
+
+		public IDataReplacer CreateReplacer(Type replacerType)
+		{
+			return (IDataReplacer)Activator.CreateInstance(replacerType);
+		}
+
+		public string GetReplacerName(Type replacerType)
+		{
+			return Replacers[replacerType];
+		}
+
+		public Dictionary<Type, string> Replacers { get; }
 	}
 }

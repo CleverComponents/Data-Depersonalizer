@@ -53,7 +53,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DepersonalizerProfile.cs" />
+    <Compile Include="FileReplaceProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DataReplaceProfile.cs" />
+    <Compile Include="ReplacerChain.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

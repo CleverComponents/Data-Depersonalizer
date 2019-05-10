@@ -21,22 +21,17 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
 using System.Windows.Forms;
-using Depersonalizer.Common;
 using Depersonalizer.Text;
 using Depersonalizer.Mime;
 using Depersonalizer.Profile;
+using DataDepersonalizer.Editors;
 
 namespace DataDepersonalizer
 {
-	public enum FileType { Text, TextEmail, MultipartEmail }
-
 	public partial class MainForm : Form
 	{
-		bool isInProgress;
+		EditController controller;
 		DepersonalizerProfile profile;
 
 		public MainForm()
@@ -44,45 +39,7 @@ namespace DataDepersonalizer
 			InitializeComponent();
 		}
 
-		private string AddTrailingBackSlash(string path)
-		{
-			if (!string.IsNullOrEmpty(path) && (path[path.Length - 1] != Path.DirectorySeparatorChar) && (path[path.Length - 1] != Path.AltDirectorySeparatorChar))
-			{
-				return path + Path.DirectorySeparatorChar;
-			}
-			return path;
-		}
-
-		private void PutLogMessage(string message)
-		{
-			txtLog.Text += message + "\r\n";
-			txtLog.Select(txtLog.Text.Length, 0);
-			txtLog.ScrollToCaret();
-		}
-
-		private void LoadFileTypes()
-		{
-			Dictionary<FileType, string> fileTypes = new Dictionary<FileType, string>();
-			fileTypes.Add(FileType.Text, "Text");
-			fileTypes.Add(FileType.TextEmail, "Simple text E-mail");
-			fileTypes.Add(FileType.MultipartEmail, "Multipart MIME E-mail");
-
-			cbFileType.DataSource = new BindingSource(fileTypes, null);
-			cbFileType.DisplayMember = "Value";
-			cbFileType.ValueMember = "Key";
-		}
-
-		private FileType GetSelectedFileType()
-		{
-			return ((KeyValuePair<FileType, string>)cbFileType.SelectedItem).Key;
-		}
-
-		private void MainForm_Load(object sender, EventArgs e)
-		{
-			profile = new DepersonalizerProfile();
-			LoadFileTypes();
-		}
-
+		//TODO
 		private void DefineMimeReplacerChain()
 		{
 			var attachHtmlTextReplacer = new HtmlTextReplacer() { };
@@ -107,162 +64,89 @@ namespace DataDepersonalizer
 			mimeReplacer.MimePartReplacers.Add(headerReplacer);
 			mimeReplacer.MimePartReplacers.Add(textBodyReplacer);
 
-			profile.ReplacerChain = mimeReplacer;
+			profile.ReplacerChain.Add(mimeReplacer);
 		}
 
-		private void DepersonalizeChain()
+		private void NewProfile()
 		{
-			if (isInProgress) return;
+			profile = new DepersonalizerProfile();
+			controller.Edit(profile);
+		}
 
-			var dataContext = new DataContext() { StartFrom = Convert.ToInt32(txtStartFrom.Text) };
+		private void LoadProfile()
+		{
+			profile = DepersonalizerProfile.Load(openFileDialog1.FileName);
+			controller.Edit(profile);
+		}
 
-			isInProgress = true;
-			try
+		private void CreateController()
+		{
+			controller = new EditController(tabSteps);
+
+			controller.RegisterEditor(new SourceEditor(txtSourceFolder, btnOpenSourceFolder, cbLinkedData,
+				txtDestinationFolder, btnOpenDestFolder, cbWriteBom, txtEncoding,
+				folderBrowserDialog1), pageSource);
+
+			controller.RegisterEditor(new OrderEditor(txtStartFrom, gridReplacers, cbAddReplacer,
+				btnAddReplacer, btnUp, btnDown, btnDelete, btnCopy, btnPaste), pageOrder);
+
+			controller.RegisterEditor(new StartEditor(txtSaveReportTo, btnSaveReportTo, btnStart, txtLog, saveFileDialog1), pageStart);
+		}
+
+		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			e.Cancel = controller.State == EditorState.Run;
+			if (e.Cancel)
 			{
-				PutLogMessage("Start data depersonalization...");
-
-				var list = Directory.GetFileSystemEntries(AddTrailingBackSlash(txtEmailFolder.Text), "*.*");
-
-				Encoding encoding;
-				if (string.IsNullOrEmpty(txtEncoding.Text))
-				{
-					encoding = Encoding.Default;
-				}
-				if (!cbWriteBom.Checked && (txtEncoding.Text.ToLower() == "utf-8"))
-				{
-					encoding = new UTF8Encoding(false);
-				}
-				else
-				{
-					encoding = Encoding.GetEncoding(txtEncoding.Text);
-				}
-
-				foreach (var fileEntry in list)
-				{
-					if (!cbLinkedData.Checked)
-					{
-						dataContext.DataDictionary.Reset();
-					}
-
-					var source = File.ReadAllText(fileEntry, encoding);
-
-					source = profile.ReplacerChain.Replace(source, dataContext);
-
-					File.WriteAllText(fileEntry, source, encoding);
-
-					PutLogMessage(String.Format("File \"{0}\" depersonalized.", Path.GetFileName(fileEntry)));
-				}
-
-				PutLogMessage("E-mails replaced, IP addresses replaced, sensitive data removed.\r\nDone.");
-			}
-			finally
-			{
-				isInProgress = false;
-				txtStartFrom.Text = dataContext.StartFrom.ToString();
+				MessageBox.Show("The data depersonalization is in progress.");
 			}
 		}
 
-		private void DepersonalizeData(IDataReplacer dataReplacer)
+		private void MainForm_Load(object sender, EventArgs e)
 		{
-			if (isInProgress) return;
+			Text = Application.ProductName + " v." + Application.ProductVersion;
 
-			var ipAddressReplacer = new IpAddressReplacer() { NextReplacer = dataReplacer, ReplaceIpAddr = txtReplaceIpAddr.Text };
-			dataReplacer = new EmailAddressReplacer() { NextReplacer = ipAddressReplacer, ReplaceMask = txtReplaceMask.Text };
+			CreateController();
+			NewProfile();
+		}
 
-			var fileType = GetSelectedFileType();
-			if (fileType == FileType.MultipartEmail)
+		private void btnAbout_Click(object sender, EventArgs e)
+		{
+			MessageBox.Show(Application.ProductName + " version " + Application.ProductVersion + "\r\nCopyright (C) " + Application.CompanyName);
+		}
+
+		private void btnClose_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
+
+		private void btnSaveProfile_Click(object sender, EventArgs e)
+		{
+			if (saveFileDialog1.ShowDialog() == DialogResult.OK)
 			{
-				var mimeReplacer = new MimeReplacer();
-				mimeReplacer.MimePartReplacers.Add(new MimeHeaderReplacer() { NextReplacer = dataReplacer });
-				mimeReplacer.MimePartReplacers.Add(new TextBodyReplacer() { NextReplacer = dataReplacer });
-				mimeReplacer.MimePartReplacers.Add(new HtmlBodyReplacer() { NextReplacer = dataReplacer });
-				mimeReplacer.MimePartReplacers.Add(new TextAttachmentReplacer() { NextReplacer = dataReplacer });
-
-				dataReplacer = mimeReplacer;
-			}
-
-			var dataContext = new DataContext() { StartFrom = Convert.ToInt32(txtStartFrom.Text) };
-
-			isInProgress = true;
-			try
-			{
-				PutLogMessage("Start data depersonalization...");
-
-				var list = Directory.GetFileSystemEntries(AddTrailingBackSlash(txtEmailFolder.Text), "*.*");
-
-				Encoding encoding;
-				if (string.IsNullOrEmpty(txtEncoding.Text))
-				{
-					encoding = Encoding.Default;
-				}
-				if (!cbWriteBom.Checked && (txtEncoding.Text.ToLower() == "utf-8"))
-				{
-					encoding = new UTF8Encoding(false);
-				}
-				else
-				{
-					encoding = Encoding.GetEncoding(txtEncoding.Text);
-				}
-
-				foreach (var fileEntry in list)
-				{
-					if (!cbLinkedData.Checked)
-					{
-						dataContext.DataDictionary.Reset();
-					}
-
-					var source = File.ReadAllText(fileEntry, encoding);
-
-					source = dataReplacer.Replace(source, dataContext);
-
-					File.WriteAllText(fileEntry, source, encoding);
-
-					PutLogMessage(String.Format("File \"{0}\" depersonalized.", Path.GetFileName(fileEntry)));
-				}
-
-				PutLogMessage("E-mails replaced, IP addresses replaced, sensitive data removed.\r\nDone.");
-			}
-			finally
-			{
-				isInProgress = false;
-				txtStartFrom.Text = dataContext.StartFrom.ToString();
+				profile.Save(saveFileDialog1.FileName);
 			}
 		}
 
-		private void btnOpenEmailFolder_Click(object sender, EventArgs e)
+		private void btnLoadProfile_Click(object sender, EventArgs e)
 		{
-			if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+			if (controller.State == EditorState.Run) return;
+
+			if (openFileDialog1.ShowDialog() == DialogResult.OK)
 			{
-				txtEmailFolder.Text = folderBrowserDialog1.SelectedPath;
+				LoadProfile();
 			}
 		}
 
-		private void btnDepersonalizeText_Click(object sender, EventArgs e)
+		private void btnNewProfile_Click(object sender, EventArgs e)
 		{
-			//DefineMimeReplacerChain();
-			//profile.Save("DefineMimeReplacerChain.xml");
-			//profile.Load("DefineMimeReplacerChain.xml");
+			if (controller.State == EditorState.Run) return;
 
-			//DepersonalizeChain();
-
-			//MessageBox.Show("Done");
-
-			DepersonalizeData(null);
-		}
-
-		private void btnDepersonalizeXml_Click(object sender, EventArgs e)
-		{
-			DepersonalizeData(new XmlDocumentReplacer() { XmlNodes = txtXmlNodes.Lines, XmlReplaceWith = txtXmlReplaceWith.Lines });
-		}
-
-		private void btnDepersonalizeNameValues_Click(object sender, EventArgs e)
-		{
-			DepersonalizeData(new NameValuePairReplacer() { PairNames = txtPairNames.Lines, PairReplaceWith = txtPairReplaceWith.Lines });
-		}
-
-		private void btnDepersonalizeRegex_Click(object sender, EventArgs e)
-		{
-			DepersonalizeData(new RegexReplacer() { RegexPatterns = txtRegexPatterns.Lines, RegexReplaceWith = txtRegexReplaceWith.Lines });
+			if (MessageBox.Show("Do you want to drop changes and make a new profile?", "New profile confirmation",
+				MessageBoxButtons.YesNo) == DialogResult.Yes)
+			{
+				NewProfile();
+			}
 		}
 	}
 }

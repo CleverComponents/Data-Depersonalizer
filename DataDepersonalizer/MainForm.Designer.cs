@@ -23,520 +23,949 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			this.label1 = new System.Windows.Forms.Label();
-			this.txtEmailFolder = new System.Windows.Forms.TextBox();
-			this.btnOpenEmailFolder = new System.Windows.Forms.Button();
 			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-			this.label2 = new System.Windows.Forms.Label();
-			this.txtReplaceMask = new System.Windows.Forms.TextBox();
-			this.txtLog = new System.Windows.Forms.TextBox();
-			this.label3 = new System.Windows.Forms.Label();
-			this.txtStartFrom = new System.Windows.Forms.TextBox();
-			this.label4 = new System.Windows.Forms.Label();
-			this.txtReplaceIpAddr = new System.Windows.Forms.TextBox();
-			this.label5 = new System.Windows.Forms.Label();
-			this.txtEncoding = new System.Windows.Forms.TextBox();
-			this.cbWriteBom = new System.Windows.Forms.CheckBox();
-			this.tabDataTypes = new System.Windows.Forms.TabControl();
-			this.tabSimpleText = new System.Windows.Forms.TabPage();
-			this.btnDepersonalizeText = new System.Windows.Forms.Button();
-			this.tabXmlDocument = new System.Windows.Forms.TabPage();
-			this.btnDepersonalizeXml = new System.Windows.Forms.Button();
-			this.txtXmlReplaceWith = new System.Windows.Forms.TextBox();
-			this.label7 = new System.Windows.Forms.Label();
-			this.txtXmlNodes = new System.Windows.Forms.TextBox();
-			this.label6 = new System.Windows.Forms.Label();
-			this.tabNameValuePairs = new System.Windows.Forms.TabPage();
-			this.btnDepersonalizeNameValues = new System.Windows.Forms.Button();
-			this.txtPairReplaceWith = new System.Windows.Forms.TextBox();
-			this.label9 = new System.Windows.Forms.Label();
-			this.txtPairNames = new System.Windows.Forms.TextBox();
-			this.label10 = new System.Windows.Forms.Label();
-			this.tabRegexPatterns = new System.Windows.Forms.TabPage();
-			this.btnDepersonalizeRegex = new System.Windows.Forms.Button();
-			this.txtRegexReplaceWith = new System.Windows.Forms.TextBox();
-			this.label11 = new System.Windows.Forms.Label();
-			this.txtRegexPatterns = new System.Windows.Forms.TextBox();
-			this.label12 = new System.Windows.Forms.Label();
-			this.label8 = new System.Windows.Forms.Label();
-			this.cbFileType = new System.Windows.Forms.ComboBox();
-			this.label13 = new System.Windows.Forms.Label();
+			this.tabSteps = new System.Windows.Forms.TabControl();
+			this.pageSource = new System.Windows.Forms.TabPage();
+			this.btnOpenDestFolder = new System.Windows.Forms.Button();
+			this.txtDestinationFolder = new System.Windows.Forms.TextBox();
+			this.label18 = new System.Windows.Forms.Label();
 			this.cbLinkedData = new System.Windows.Forms.CheckBox();
-			this.tabDataTypes.SuspendLayout();
-			this.tabSimpleText.SuspendLayout();
-			this.tabXmlDocument.SuspendLayout();
-			this.tabNameValuePairs.SuspendLayout();
-			this.tabRegexPatterns.SuspendLayout();
+			this.cbWriteBom = new System.Windows.Forms.CheckBox();
+			this.txtEncoding = new System.Windows.Forms.TextBox();
+			this.label5 = new System.Windows.Forms.Label();
+			this.btnOpenSourceFolder = new System.Windows.Forms.Button();
+			this.txtSourceFolder = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.pageOrder = new System.Windows.Forms.TabPage();
+			this.txtStartFrom = new System.Windows.Forms.NumericUpDown();
+			this.btnPaste = new System.Windows.Forms.Button();
+			this.btnCopy = new System.Windows.Forms.Button();
+			this.btnDelete = new System.Windows.Forms.Button();
+			this.btnDown = new System.Windows.Forms.Button();
+			this.label19 = new System.Windows.Forms.Label();
+			this.btnUp = new System.Windows.Forms.Button();
+			this.tabReplacers = new System.Windows.Forms.TabControl();
+			this.pageTextData = new System.Windows.Forms.TabPage();
+			this.gridReplacers = new System.Windows.Forms.DataGridView();
+			this.colReplacerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.pageMimeData = new System.Windows.Forms.TabPage();
+			this.gridMimeReplacers = new System.Windows.Forms.DataGridView();
+			this.colMimeReplacers = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.gridMimeParts = new System.Windows.Forms.DataGridView();
+			this.colMimeParts = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnAddReplacer = new System.Windows.Forms.Button();
+			this.tabEditors = new System.Windows.Forms.TabControl();
+			this.pageEmailReplacer = new System.Windows.Forms.TabPage();
+			this.txtEmailReplaceMask = new System.Windows.Forms.TextBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.pageIpAddrReplacer = new System.Windows.Forms.TabPage();
+			this.txtIpAddrReplaceMask = new System.Windows.Forms.TextBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.pageXmlDocument = new System.Windows.Forms.TabPage();
+			this.gridXmlReplaceMask = new System.Windows.Forms.DataGridView();
+			this.colXmlNodeNames = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colReplaceXmlMask = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.pageNameValuePairs = new System.Windows.Forms.TabPage();
+			this.gridNameValueReplaceMask = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.pageRegexPatterns = new System.Windows.Forms.TabPage();
+			this.gridRegexPatternReplaceMask = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.cbAddReplacer = new System.Windows.Forms.ComboBox();
+			this.label13 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.pageStart = new System.Windows.Forms.TabPage();
+			this.label17 = new System.Windows.Forms.Label();
+			this.label16 = new System.Windows.Forms.Label();
+			this.label15 = new System.Windows.Forms.Label();
+			this.label14 = new System.Windows.Forms.Label();
+			this.btnSaveReportTo = new System.Windows.Forms.Button();
+			this.txtSaveReportTo = new System.Windows.Forms.TextBox();
+			this.label8 = new System.Windows.Forms.Label();
+			this.btnStart = new System.Windows.Forms.Button();
+			this.txtLog = new System.Windows.Forms.TextBox();
+			this.btnSaveProfile = new System.Windows.Forms.Button();
+			this.btnLoadProfile = new System.Windows.Forms.Button();
+			this.btnNewProfile = new System.Windows.Forms.Button();
+			this.btnClose = new System.Windows.Forms.Button();
+			this.btnAbout = new System.Windows.Forms.Button();
+			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+			this.tabSteps.SuspendLayout();
+			this.pageSource.SuspendLayout();
+			this.pageOrder.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.txtStartFrom)).BeginInit();
+			this.tabReplacers.SuspendLayout();
+			this.pageTextData.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gridReplacers)).BeginInit();
+			this.pageMimeData.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gridMimeReplacers)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridMimeParts)).BeginInit();
+			this.tabEditors.SuspendLayout();
+			this.pageEmailReplacer.SuspendLayout();
+			this.pageIpAddrReplacer.SuspendLayout();
+			this.pageXmlDocument.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gridXmlReplaceMask)).BeginInit();
+			this.pageNameValuePairs.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gridNameValueReplaceMask)).BeginInit();
+			this.pageRegexPatterns.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gridRegexPatternReplaceMask)).BeginInit();
+			this.pageStart.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// label1
+			// tabSteps
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(26, 25);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(73, 13);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Source Folder";
+			this.tabSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.tabSteps.Controls.Add(this.pageSource);
+			this.tabSteps.Controls.Add(this.pageOrder);
+			this.tabSteps.Controls.Add(this.pageStart);
+			this.tabSteps.Location = new System.Drawing.Point(2, 2);
+			this.tabSteps.Name = "tabSteps";
+			this.tabSteps.SelectedIndex = 0;
+			this.tabSteps.Size = new System.Drawing.Size(738, 476);
+			this.tabSteps.TabIndex = 36;
 			// 
-			// txtEmailFolder
+			// pageSource
 			// 
-			this.txtEmailFolder.Location = new System.Drawing.Point(136, 22);
-			this.txtEmailFolder.Name = "txtEmailFolder";
-			this.txtEmailFolder.Size = new System.Drawing.Size(379, 20);
-			this.txtEmailFolder.TabIndex = 1;
-			this.txtEmailFolder.Text = ".\\data";
+			this.pageSource.BackColor = System.Drawing.SystemColors.Control;
+			this.pageSource.Controls.Add(this.btnOpenDestFolder);
+			this.pageSource.Controls.Add(this.txtDestinationFolder);
+			this.pageSource.Controls.Add(this.label18);
+			this.pageSource.Controls.Add(this.cbLinkedData);
+			this.pageSource.Controls.Add(this.cbWriteBom);
+			this.pageSource.Controls.Add(this.txtEncoding);
+			this.pageSource.Controls.Add(this.label5);
+			this.pageSource.Controls.Add(this.btnOpenSourceFolder);
+			this.pageSource.Controls.Add(this.txtSourceFolder);
+			this.pageSource.Controls.Add(this.label1);
+			this.pageSource.Location = new System.Drawing.Point(4, 22);
+			this.pageSource.Name = "pageSource";
+			this.pageSource.Padding = new System.Windows.Forms.Padding(3);
+			this.pageSource.Size = new System.Drawing.Size(730, 450);
+			this.pageSource.TabIndex = 0;
+			this.pageSource.Text = "Step 1 - Data";
 			// 
-			// btnOpenEmailFolder
+			// btnOpenDestFolder
 			// 
-			this.btnOpenEmailFolder.Location = new System.Drawing.Point(521, 20);
-			this.btnOpenEmailFolder.Name = "btnOpenEmailFolder";
-			this.btnOpenEmailFolder.Size = new System.Drawing.Size(24, 23);
-			this.btnOpenEmailFolder.TabIndex = 2;
-			this.btnOpenEmailFolder.Text = "...";
-			this.btnOpenEmailFolder.UseVisualStyleBackColor = true;
-			this.btnOpenEmailFolder.Click += new System.EventHandler(this.btnOpenEmailFolder_Click);
+			this.btnOpenDestFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOpenDestFolder.Location = new System.Drawing.Point(684, 167);
+			this.btnOpenDestFolder.Name = "btnOpenDestFolder";
+			this.btnOpenDestFolder.Size = new System.Drawing.Size(24, 23);
+			this.btnOpenDestFolder.TabIndex = 21;
+			this.btnOpenDestFolder.Text = "...";
+			this.btnOpenDestFolder.UseVisualStyleBackColor = true;
 			// 
-			// label2
+			// txtDestinationFolder
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(26, 92);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(104, 13);
-			this.label2.TabIndex = 3;
-			this.label2.Text = "Email Replace Mask";
+			this.txtDestinationFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.txtDestinationFolder.Location = new System.Drawing.Point(127, 169);
+			this.txtDestinationFolder.Name = "txtDestinationFolder";
+			this.txtDestinationFolder.Size = new System.Drawing.Size(551, 20);
+			this.txtDestinationFolder.TabIndex = 20;
+			this.txtDestinationFolder.Text = ".\\data";
 			// 
-			// txtReplaceMask
+			// label18
 			// 
-			this.txtReplaceMask.Location = new System.Drawing.Point(136, 89);
-			this.txtReplaceMask.Name = "txtReplaceMask";
-			this.txtReplaceMask.Size = new System.Drawing.Size(379, 20);
-			this.txtReplaceMask.TabIndex = 4;
-			this.txtReplaceMask.Text = "recipient{0}@example.com";
+			this.label18.AutoSize = true;
+			this.label18.Location = new System.Drawing.Point(17, 172);
+			this.label18.Name = "label18";
+			this.label18.Size = new System.Drawing.Size(92, 13);
+			this.label18.TabIndex = 19;
+			this.label18.Text = "Destination Folder";
 			// 
-			// txtLog
+			// cbLinkedData
 			// 
-			this.txtLog.Location = new System.Drawing.Point(29, 426);
-			this.txtLog.Multiline = true;
-			this.txtLog.Name = "txtLog";
-			this.txtLog.ReadOnly = true;
-			this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.txtLog.Size = new System.Drawing.Size(516, 113);
-			this.txtLog.TabIndex = 31;
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(26, 58);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(92, 13);
-			this.label3.TabIndex = 7;
-			this.label3.Text = "Start from Number";
-			// 
-			// txtStartFrom
-			// 
-			this.txtStartFrom.Location = new System.Drawing.Point(136, 55);
-			this.txtStartFrom.Name = "txtStartFrom";
-			this.txtStartFrom.Size = new System.Drawing.Size(100, 20);
-			this.txtStartFrom.TabIndex = 3;
-			this.txtStartFrom.Text = "1";
-			// 
-			// label4
-			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(26, 127);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(89, 13);
-			this.label4.TabIndex = 8;
-			this.label4.Text = "IP Replace Mask";
-			// 
-			// txtReplaceIpAddr
-			// 
-			this.txtReplaceIpAddr.Location = new System.Drawing.Point(136, 124);
-			this.txtReplaceIpAddr.Name = "txtReplaceIpAddr";
-			this.txtReplaceIpAddr.Size = new System.Drawing.Size(379, 20);
-			this.txtReplaceIpAddr.TabIndex = 9;
-			this.txtReplaceIpAddr.Text = "127.0.0.{0}";
-			// 
-			// label5
-			// 
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(26, 157);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(52, 13);
-			this.label5.TabIndex = 10;
-			this.label5.Text = "Encoding";
-			// 
-			// txtEncoding
-			// 
-			this.txtEncoding.Location = new System.Drawing.Point(136, 154);
-			this.txtEncoding.Name = "txtEncoding";
-			this.txtEncoding.Size = new System.Drawing.Size(100, 20);
-			this.txtEncoding.TabIndex = 10;
-			this.txtEncoding.Text = "ASCII";
+			this.cbLinkedData.AutoSize = true;
+			this.cbLinkedData.Location = new System.Drawing.Point(127, 58);
+			this.cbLinkedData.Name = "cbLinkedData";
+			this.cbLinkedData.Size = new System.Drawing.Size(119, 17);
+			this.cbLinkedData.TabIndex = 18;
+			this.cbLinkedData.Text = "Linked Data in Files";
+			this.cbLinkedData.UseVisualStyleBackColor = true;
 			// 
 			// cbWriteBom
 			// 
 			this.cbWriteBom.AutoSize = true;
 			this.cbWriteBom.Checked = true;
 			this.cbWriteBom.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cbWriteBom.Location = new System.Drawing.Point(275, 156);
+			this.cbWriteBom.Location = new System.Drawing.Point(274, 136);
 			this.cbWriteBom.Name = "cbWriteBom";
 			this.cbWriteBom.Size = new System.Drawing.Size(78, 17);
-			this.cbWriteBom.TabIndex = 13;
+			this.cbWriteBom.TabIndex = 17;
 			this.cbWriteBom.Text = "Write BOM";
 			this.cbWriteBom.UseVisualStyleBackColor = true;
 			// 
-			// tabDataTypes
+			// txtEncoding
 			// 
-			this.tabDataTypes.Controls.Add(this.tabSimpleText);
-			this.tabDataTypes.Controls.Add(this.tabXmlDocument);
-			this.tabDataTypes.Controls.Add(this.tabNameValuePairs);
-			this.tabDataTypes.Controls.Add(this.tabRegexPatterns);
-			this.tabDataTypes.Location = new System.Drawing.Point(29, 212);
-			this.tabDataTypes.Multiline = true;
-			this.tabDataTypes.Name = "tabDataTypes";
-			this.tabDataTypes.SelectedIndex = 0;
-			this.tabDataTypes.Size = new System.Drawing.Size(516, 208);
-			this.tabDataTypes.TabIndex = 35;
+			this.txtEncoding.Location = new System.Drawing.Point(127, 134);
+			this.txtEncoding.Name = "txtEncoding";
+			this.txtEncoding.Size = new System.Drawing.Size(100, 20);
+			this.txtEncoding.TabIndex = 15;
+			this.txtEncoding.Text = "ASCII";
 			// 
-			// tabSimpleText
+			// label5
 			// 
-			this.tabSimpleText.Controls.Add(this.btnDepersonalizeText);
-			this.tabSimpleText.Location = new System.Drawing.Point(4, 22);
-			this.tabSimpleText.Name = "tabSimpleText";
-			this.tabSimpleText.Padding = new System.Windows.Forms.Padding(3);
-			this.tabSimpleText.Size = new System.Drawing.Size(508, 182);
-			this.tabSimpleText.TabIndex = 3;
-			this.tabSimpleText.Text = "Simple Text";
-			this.tabSimpleText.UseVisualStyleBackColor = true;
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(17, 137);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(52, 13);
+			this.label5.TabIndex = 16;
+			this.label5.Text = "Encoding";
 			// 
-			// btnDepersonalizeText
+			// btnOpenSourceFolder
 			// 
-			this.btnDepersonalizeText.Location = new System.Drawing.Point(15, 140);
-			this.btnDepersonalizeText.Name = "btnDepersonalizeText";
-			this.btnDepersonalizeText.Size = new System.Drawing.Size(127, 23);
-			this.btnDepersonalizeText.TabIndex = 33;
-			this.btnDepersonalizeText.Text = "Depersonalize Text";
-			this.btnDepersonalizeText.UseVisualStyleBackColor = true;
-			this.btnDepersonalizeText.Click += new System.EventHandler(this.btnDepersonalizeText_Click);
+			this.btnOpenSourceFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOpenSourceFolder.Location = new System.Drawing.Point(684, 19);
+			this.btnOpenSourceFolder.Name = "btnOpenSourceFolder";
+			this.btnOpenSourceFolder.Size = new System.Drawing.Size(24, 23);
+			this.btnOpenSourceFolder.TabIndex = 5;
+			this.btnOpenSourceFolder.Text = "...";
+			this.btnOpenSourceFolder.UseVisualStyleBackColor = true;
 			// 
-			// tabXmlDocument
+			// txtSourceFolder
 			// 
-			this.tabXmlDocument.Controls.Add(this.btnDepersonalizeXml);
-			this.tabXmlDocument.Controls.Add(this.txtXmlReplaceWith);
-			this.tabXmlDocument.Controls.Add(this.label7);
-			this.tabXmlDocument.Controls.Add(this.txtXmlNodes);
-			this.tabXmlDocument.Controls.Add(this.label6);
-			this.tabXmlDocument.Location = new System.Drawing.Point(4, 22);
-			this.tabXmlDocument.Name = "tabXmlDocument";
-			this.tabXmlDocument.Padding = new System.Windows.Forms.Padding(3);
-			this.tabXmlDocument.Size = new System.Drawing.Size(508, 182);
-			this.tabXmlDocument.TabIndex = 0;
-			this.tabXmlDocument.Text = "XML Document";
-			this.tabXmlDocument.UseVisualStyleBackColor = true;
+			this.txtSourceFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.txtSourceFolder.Location = new System.Drawing.Point(127, 21);
+			this.txtSourceFolder.Name = "txtSourceFolder";
+			this.txtSourceFolder.Size = new System.Drawing.Size(551, 20);
+			this.txtSourceFolder.TabIndex = 4;
+			this.txtSourceFolder.Text = ".\\data";
 			// 
-			// btnDepersonalizeXml
+			// label1
 			// 
-			this.btnDepersonalizeXml.Location = new System.Drawing.Point(15, 140);
-			this.btnDepersonalizeXml.Name = "btnDepersonalizeXml";
-			this.btnDepersonalizeXml.Size = new System.Drawing.Size(127, 23);
-			this.btnDepersonalizeXml.TabIndex = 24;
-			this.btnDepersonalizeXml.Text = "Depersonalize Xml";
-			this.btnDepersonalizeXml.UseVisualStyleBackColor = true;
-			this.btnDepersonalizeXml.Click += new System.EventHandler(this.btnDepersonalizeXml_Click);
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(17, 24);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(73, 13);
+			this.label1.TabIndex = 3;
+			this.label1.Text = "Source Folder";
 			// 
-			// txtXmlReplaceWith
+			// pageOrder
 			// 
-			this.txtXmlReplaceWith.Location = new System.Drawing.Point(242, 41);
-			this.txtXmlReplaceWith.Multiline = true;
-			this.txtXmlReplaceWith.Name = "txtXmlReplaceWith";
-			this.txtXmlReplaceWith.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.txtXmlReplaceWith.Size = new System.Drawing.Size(248, 84);
-			this.txtXmlReplaceWith.TabIndex = 23;
-			this.txtXmlReplaceWith.Text = "+12345678901\r\n+12345678902\r\n+12345678903\r\nLastname{0}\r\nCompany Name {0} Inc.\r\nLak" +
-    "eside Street {0}\r\nLakeside Street {0}\r\n1234-567\r\nCompany Name {0} Inc.\r\n12345678" +
-    "901";
+			this.pageOrder.BackColor = System.Drawing.SystemColors.Control;
+			this.pageOrder.Controls.Add(this.txtStartFrom);
+			this.pageOrder.Controls.Add(this.btnPaste);
+			this.pageOrder.Controls.Add(this.btnCopy);
+			this.pageOrder.Controls.Add(this.btnDelete);
+			this.pageOrder.Controls.Add(this.btnDown);
+			this.pageOrder.Controls.Add(this.label19);
+			this.pageOrder.Controls.Add(this.btnUp);
+			this.pageOrder.Controls.Add(this.tabReplacers);
+			this.pageOrder.Controls.Add(this.btnAddReplacer);
+			this.pageOrder.Controls.Add(this.tabEditors);
+			this.pageOrder.Controls.Add(this.cbAddReplacer);
+			this.pageOrder.Controls.Add(this.label13);
+			this.pageOrder.Controls.Add(this.label3);
+			this.pageOrder.Location = new System.Drawing.Point(4, 22);
+			this.pageOrder.Name = "pageOrder";
+			this.pageOrder.Padding = new System.Windows.Forms.Padding(3);
+			this.pageOrder.Size = new System.Drawing.Size(730, 450);
+			this.pageOrder.TabIndex = 1;
+			this.pageOrder.Text = "Step 2 - Order";
 			// 
-			// label7
+			// txtStartFrom
 			// 
-			this.label7.AutoSize = true;
-			this.label7.Location = new System.Drawing.Point(239, 11);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(116, 13);
-			this.label7.TabIndex = 22;
-			this.label7.Text = "Replace Content Mask";
+			this.txtStartFrom.Location = new System.Drawing.Point(123, 22);
+			this.txtStartFrom.Name = "txtStartFrom";
+			this.txtStartFrom.Size = new System.Drawing.Size(109, 20);
+			this.txtStartFrom.TabIndex = 49;
 			// 
-			// txtXmlNodes
+			// btnPaste
 			// 
-			this.txtXmlNodes.Location = new System.Drawing.Point(15, 41);
-			this.txtXmlNodes.Multiline = true;
-			this.txtXmlNodes.Name = "txtXmlNodes";
-			this.txtXmlNodes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.txtXmlNodes.Size = new System.Drawing.Size(207, 84);
-			this.txtXmlNodes.TabIndex = 21;
-			this.txtXmlNodes.Text = "Phone\r\nPhone2\r\nFax\r\nLastName\r\nCompany\r\nStreet1\r\nStreet2\r\nPostalCode\r\nRegName\r\nVat" +
-    "Id";
+			this.btnPaste.Image = global::DataDepersonalizer.Properties.Resources.paste;
+			this.btnPaste.Location = new System.Drawing.Point(352, 260);
+			this.btnPaste.Name = "btnPaste";
+			this.btnPaste.Size = new System.Drawing.Size(23, 23);
+			this.btnPaste.TabIndex = 48;
+			this.btnPaste.UseVisualStyleBackColor = true;
 			// 
-			// label6
+			// btnCopy
 			// 
-			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(12, 11);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(94, 13);
-			this.label6.TabIndex = 20;
-			this.label6.Text = "XML Node Names";
+			this.btnCopy.Image = global::DataDepersonalizer.Properties.Resources.copy;
+			this.btnCopy.Location = new System.Drawing.Point(352, 231);
+			this.btnCopy.Name = "btnCopy";
+			this.btnCopy.Size = new System.Drawing.Size(23, 23);
+			this.btnCopy.TabIndex = 47;
+			this.btnCopy.UseVisualStyleBackColor = true;
 			// 
-			// tabNameValuePairs
+			// btnDelete
 			// 
-			this.tabNameValuePairs.Controls.Add(this.btnDepersonalizeNameValues);
-			this.tabNameValuePairs.Controls.Add(this.txtPairReplaceWith);
-			this.tabNameValuePairs.Controls.Add(this.label9);
-			this.tabNameValuePairs.Controls.Add(this.txtPairNames);
-			this.tabNameValuePairs.Controls.Add(this.label10);
-			this.tabNameValuePairs.Location = new System.Drawing.Point(4, 22);
-			this.tabNameValuePairs.Name = "tabNameValuePairs";
-			this.tabNameValuePairs.Padding = new System.Windows.Forms.Padding(3);
-			this.tabNameValuePairs.Size = new System.Drawing.Size(508, 182);
-			this.tabNameValuePairs.TabIndex = 1;
-			this.tabNameValuePairs.Text = "Name : Value Pairs";
-			this.tabNameValuePairs.UseVisualStyleBackColor = true;
+			this.btnDelete.Image = global::DataDepersonalizer.Properties.Resources.x;
+			this.btnDelete.Location = new System.Drawing.Point(352, 202);
+			this.btnDelete.Name = "btnDelete";
+			this.btnDelete.Size = new System.Drawing.Size(23, 23);
+			this.btnDelete.TabIndex = 46;
+			this.btnDelete.UseVisualStyleBackColor = true;
 			// 
-			// btnDepersonalizeNameValues
+			// btnDown
 			// 
-			this.btnDepersonalizeNameValues.Location = new System.Drawing.Point(15, 140);
-			this.btnDepersonalizeNameValues.Name = "btnDepersonalizeNameValues";
-			this.btnDepersonalizeNameValues.Size = new System.Drawing.Size(127, 23);
-			this.btnDepersonalizeNameValues.TabIndex = 28;
-			this.btnDepersonalizeNameValues.Text = "Depersonalize Data";
-			this.btnDepersonalizeNameValues.UseVisualStyleBackColor = true;
-			this.btnDepersonalizeNameValues.Click += new System.EventHandler(this.btnDepersonalizeNameValues_Click);
+			this.btnDown.Image = global::DataDepersonalizer.Properties.Resources.arrow_bottom;
+			this.btnDown.Location = new System.Drawing.Point(352, 149);
+			this.btnDown.Name = "btnDown";
+			this.btnDown.Size = new System.Drawing.Size(23, 23);
+			this.btnDown.TabIndex = 45;
+			this.btnDown.UseVisualStyleBackColor = true;
 			// 
-			// txtPairReplaceWith
+			// label19
 			// 
-			this.txtPairReplaceWith.Location = new System.Drawing.Point(242, 41);
-			this.txtPairReplaceWith.Multiline = true;
-			this.txtPairReplaceWith.Name = "txtPairReplaceWith";
-			this.txtPairReplaceWith.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.txtPairReplaceWith.Size = new System.Drawing.Size(248, 84);
-			this.txtPairReplaceWith.TabIndex = 27;
-			this.txtPairReplaceWith.Text = resources.GetString("txtPairReplaceWith.Text");
+			this.label19.AutoSize = true;
+			this.label19.Location = new System.Drawing.Point(31, 68);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(26, 13);
+			this.label19.TabIndex = 44;
+			this.label19.Text = "Add";
 			// 
-			// label9
+			// btnUp
 			// 
-			this.label9.AutoSize = true;
-			this.label9.Location = new System.Drawing.Point(239, 11);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(116, 13);
-			this.label9.TabIndex = 26;
-			this.label9.Text = "Replace Content Mask";
+			this.btnUp.Image = global::DataDepersonalizer.Properties.Resources.arrow_top;
+			this.btnUp.Location = new System.Drawing.Point(352, 120);
+			this.btnUp.Name = "btnUp";
+			this.btnUp.Size = new System.Drawing.Size(23, 23);
+			this.btnUp.TabIndex = 43;
+			this.btnUp.UseVisualStyleBackColor = true;
 			// 
-			// txtPairNames
+			// tabReplacers
 			// 
-			this.txtPairNames.Location = new System.Drawing.Point(15, 41);
-			this.txtPairNames.Multiline = true;
-			this.txtPairNames.Name = "txtPairNames";
-			this.txtPairNames.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.txtPairNames.Size = new System.Drawing.Size(207, 84);
-			this.txtPairNames.TabIndex = 25;
-			this.txtPairNames.Text = "Tracking ID\r\nName\r\nOrder Name\r\nCompany\r\nAddress1\r\nAddress2\r\nAddress3\r\nZip\r\nPhone\r" +
-    "\nCustomer Name\r\nOrganization\r\nAddress\r\nPostCode\r\nOrder ID\r\nContact Person\r\nCompa" +
-    "ny Name\r\nTel Number\r\nTel";
+			this.tabReplacers.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+			this.tabReplacers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.tabReplacers.Controls.Add(this.pageTextData);
+			this.tabReplacers.Controls.Add(this.pageMimeData);
+			this.tabReplacers.Location = new System.Drawing.Point(0, 92);
+			this.tabReplacers.Name = "tabReplacers";
+			this.tabReplacers.SelectedIndex = 0;
+			this.tabReplacers.Size = new System.Drawing.Size(342, 352);
+			this.tabReplacers.TabIndex = 42;
 			// 
-			// label10
+			// pageTextData
 			// 
-			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(12, 11);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(40, 13);
-			this.label10.TabIndex = 24;
-			this.label10.Text = "Names";
+			this.pageTextData.Controls.Add(this.gridReplacers);
+			this.pageTextData.Location = new System.Drawing.Point(4, 4);
+			this.pageTextData.Name = "pageTextData";
+			this.pageTextData.Padding = new System.Windows.Forms.Padding(3);
+			this.pageTextData.Size = new System.Drawing.Size(334, 326);
+			this.pageTextData.TabIndex = 0;
+			this.pageTextData.Text = "Text Data";
+			this.pageTextData.UseVisualStyleBackColor = true;
 			// 
-			// tabRegexPatterns
+			// gridReplacers
 			// 
-			this.tabRegexPatterns.Controls.Add(this.btnDepersonalizeRegex);
-			this.tabRegexPatterns.Controls.Add(this.txtRegexReplaceWith);
-			this.tabRegexPatterns.Controls.Add(this.label11);
-			this.tabRegexPatterns.Controls.Add(this.txtRegexPatterns);
-			this.tabRegexPatterns.Controls.Add(this.label12);
-			this.tabRegexPatterns.Location = new System.Drawing.Point(4, 22);
-			this.tabRegexPatterns.Name = "tabRegexPatterns";
-			this.tabRegexPatterns.Padding = new System.Windows.Forms.Padding(3);
-			this.tabRegexPatterns.Size = new System.Drawing.Size(508, 182);
-			this.tabRegexPatterns.TabIndex = 2;
-			this.tabRegexPatterns.Text = "Custom Regex Patterns";
-			this.tabRegexPatterns.UseVisualStyleBackColor = true;
+			this.gridReplacers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridReplacers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.gridReplacers.BackgroundColor = System.Drawing.SystemColors.Window;
+			this.gridReplacers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridReplacers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colReplacerName});
+			this.gridReplacers.Location = new System.Drawing.Point(-1, -1);
+			this.gridReplacers.Name = "gridReplacers";
+			this.gridReplacers.ReadOnly = true;
+			this.gridReplacers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.gridReplacers.Size = new System.Drawing.Size(336, 328);
+			this.gridReplacers.TabIndex = 0;
 			// 
-			// btnDepersonalizeRegex
+			// colReplacerName
 			// 
-			this.btnDepersonalizeRegex.Location = new System.Drawing.Point(15, 140);
-			this.btnDepersonalizeRegex.Name = "btnDepersonalizeRegex";
-			this.btnDepersonalizeRegex.Size = new System.Drawing.Size(127, 23);
-			this.btnDepersonalizeRegex.TabIndex = 32;
-			this.btnDepersonalizeRegex.Text = "Depersonalize Regex";
-			this.btnDepersonalizeRegex.UseVisualStyleBackColor = true;
-			this.btnDepersonalizeRegex.Click += new System.EventHandler(this.btnDepersonalizeRegex_Click);
+			this.colReplacerName.HeaderText = "Replacers";
+			this.colReplacerName.Name = "colReplacerName";
+			this.colReplacerName.ReadOnly = true;
 			// 
-			// txtRegexReplaceWith
+			// pageMimeData
 			// 
-			this.txtRegexReplaceWith.Location = new System.Drawing.Point(242, 41);
-			this.txtRegexReplaceWith.Multiline = true;
-			this.txtRegexReplaceWith.Name = "txtRegexReplaceWith";
-			this.txtRegexReplaceWith.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.txtRegexReplaceWith.Size = new System.Drawing.Size(248, 84);
-			this.txtRegexReplaceWith.TabIndex = 31;
-			this.txtRegexReplaceWith.Text = "12345678-12345-{0}\r\ntrackingid=1{0:D6}&sid=2{0:D9}";
+			this.pageMimeData.Controls.Add(this.gridMimeReplacers);
+			this.pageMimeData.Controls.Add(this.gridMimeParts);
+			this.pageMimeData.Location = new System.Drawing.Point(4, 4);
+			this.pageMimeData.Name = "pageMimeData";
+			this.pageMimeData.Padding = new System.Windows.Forms.Padding(3);
+			this.pageMimeData.Size = new System.Drawing.Size(334, 326);
+			this.pageMimeData.TabIndex = 1;
+			this.pageMimeData.Text = "Mime Message";
+			this.pageMimeData.UseVisualStyleBackColor = true;
 			// 
-			// label11
+			// gridMimeReplacers
 			// 
-			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(239, 11);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(116, 13);
-			this.label11.TabIndex = 30;
-			this.label11.Text = "Replace Content Mask";
+			this.gridMimeReplacers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridMimeReplacers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.gridMimeReplacers.BackgroundColor = System.Drawing.SystemColors.Window;
+			this.gridMimeReplacers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridMimeReplacers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colMimeReplacers});
+			this.gridMimeReplacers.Location = new System.Drawing.Point(146, -1);
+			this.gridMimeReplacers.Name = "gridMimeReplacers";
+			this.gridMimeReplacers.ReadOnly = true;
+			this.gridMimeReplacers.Size = new System.Drawing.Size(189, 328);
+			this.gridMimeReplacers.TabIndex = 1;
 			// 
-			// txtRegexPatterns
+			// colMimeReplacers
 			// 
-			this.txtRegexPatterns.Location = new System.Drawing.Point(15, 41);
-			this.txtRegexPatterns.Multiline = true;
-			this.txtRegexPatterns.Name = "txtRegexPatterns";
-			this.txtRegexPatterns.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.txtRegexPatterns.Size = new System.Drawing.Size(207, 84);
-			this.txtRegexPatterns.TabIndex = 29;
-			this.txtRegexPatterns.Text = "[0-9]{8}-[0-9]{5}-[0-9]{1,3}\r\ntrackingid=[0-9]{7}&sid=[0-9]{10}";
+			this.colMimeReplacers.HeaderText = "Replacers";
+			this.colMimeReplacers.Name = "colMimeReplacers";
+			this.colMimeReplacers.ReadOnly = true;
 			// 
-			// label12
+			// gridMimeParts
 			// 
-			this.label12.AutoSize = true;
-			this.label12.Location = new System.Drawing.Point(12, 11);
-			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(80, 13);
-			this.label12.TabIndex = 28;
-			this.label12.Text = "Regex Patterns";
+			this.gridMimeParts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.gridMimeParts.BackgroundColor = System.Drawing.SystemColors.Window;
+			this.gridMimeParts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridMimeParts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colMimeParts});
+			this.gridMimeParts.Location = new System.Drawing.Point(-1, -1);
+			this.gridMimeParts.Name = "gridMimeParts";
+			this.gridMimeParts.ReadOnly = true;
+			this.gridMimeParts.Size = new System.Drawing.Size(148, 328);
+			this.gridMimeParts.TabIndex = 0;
 			// 
-			// label8
+			// colMimeParts
 			// 
-			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(26, 188);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(50, 13);
-			this.label8.TabIndex = 33;
-			this.label8.Text = "File Type";
+			this.colMimeParts.HeaderText = "Mime Parts";
+			this.colMimeParts.Name = "colMimeParts";
+			this.colMimeParts.ReadOnly = true;
+			this.colMimeParts.Width = 104;
 			// 
-			// cbFileType
+			// btnAddReplacer
 			// 
-			this.cbFileType.DisplayMember = "0";
-			this.cbFileType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cbFileType.FormattingEnabled = true;
-			this.cbFileType.Items.AddRange(new object[] {
+			this.btnAddReplacer.Image = global::DataDepersonalizer.Properties.Resources._new;
+			this.btnAddReplacer.Location = new System.Drawing.Point(319, 63);
+			this.btnAddReplacer.Name = "btnAddReplacer";
+			this.btnAddReplacer.Size = new System.Drawing.Size(23, 23);
+			this.btnAddReplacer.TabIndex = 41;
+			this.btnAddReplacer.UseVisualStyleBackColor = true;
+			// 
+			// tabEditors
+			// 
+			this.tabEditors.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+			this.tabEditors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.tabEditors.Controls.Add(this.pageEmailReplacer);
+			this.tabEditors.Controls.Add(this.pageIpAddrReplacer);
+			this.tabEditors.Controls.Add(this.pageXmlDocument);
+			this.tabEditors.Controls.Add(this.pageNameValuePairs);
+			this.tabEditors.Controls.Add(this.pageRegexPatterns);
+			this.tabEditors.Location = new System.Drawing.Point(384, 92);
+			this.tabEditors.Multiline = true;
+			this.tabEditors.Name = "tabEditors";
+			this.tabEditors.SelectedIndex = 0;
+			this.tabEditors.Size = new System.Drawing.Size(344, 352);
+			this.tabEditors.TabIndex = 40;
+			// 
+			// pageEmailReplacer
+			// 
+			this.pageEmailReplacer.BackColor = System.Drawing.Color.Transparent;
+			this.pageEmailReplacer.Controls.Add(this.txtEmailReplaceMask);
+			this.pageEmailReplacer.Controls.Add(this.label2);
+			this.pageEmailReplacer.Location = new System.Drawing.Point(4, 4);
+			this.pageEmailReplacer.Name = "pageEmailReplacer";
+			this.pageEmailReplacer.Padding = new System.Windows.Forms.Padding(3);
+			this.pageEmailReplacer.Size = new System.Drawing.Size(336, 308);
+			this.pageEmailReplacer.TabIndex = 3;
+			this.pageEmailReplacer.Text = "Email Replacer";
+			this.pageEmailReplacer.UseVisualStyleBackColor = true;
+			// 
+			// txtEmailReplaceMask
+			// 
+			this.txtEmailReplaceMask.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.txtEmailReplaceMask.Location = new System.Drawing.Point(126, 20);
+			this.txtEmailReplaceMask.Name = "txtEmailReplaceMask";
+			this.txtEmailReplaceMask.Size = new System.Drawing.Size(190, 20);
+			this.txtEmailReplaceMask.TabIndex = 11;
+			this.txtEmailReplaceMask.Text = "recipient{0}@example.com";
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(16, 23);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(104, 13);
+			this.label2.TabIndex = 10;
+			this.label2.Text = "Email Replace Mask";
+			// 
+			// pageIpAddrReplacer
+			// 
+			this.pageIpAddrReplacer.BackColor = System.Drawing.Color.Transparent;
+			this.pageIpAddrReplacer.Controls.Add(this.txtIpAddrReplaceMask);
+			this.pageIpAddrReplacer.Controls.Add(this.label4);
+			this.pageIpAddrReplacer.Location = new System.Drawing.Point(4, 4);
+			this.pageIpAddrReplacer.Name = "pageIpAddrReplacer";
+			this.pageIpAddrReplacer.Padding = new System.Windows.Forms.Padding(3);
+			this.pageIpAddrReplacer.Size = new System.Drawing.Size(336, 308);
+			this.pageIpAddrReplacer.TabIndex = 4;
+			this.pageIpAddrReplacer.Text = "IP Replacer";
+			this.pageIpAddrReplacer.UseVisualStyleBackColor = true;
+			// 
+			// txtIpAddrReplaceMask
+			// 
+			this.txtIpAddrReplaceMask.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.txtIpAddrReplaceMask.Location = new System.Drawing.Point(126, 20);
+			this.txtIpAddrReplaceMask.Name = "txtIpAddrReplaceMask";
+			this.txtIpAddrReplaceMask.Size = new System.Drawing.Size(190, 20);
+			this.txtIpAddrReplaceMask.TabIndex = 15;
+			this.txtIpAddrReplaceMask.Text = "127.0.0.{0}";
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(16, 23);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(89, 13);
+			this.label4.TabIndex = 14;
+			this.label4.Text = "IP Replace Mask";
+			// 
+			// pageXmlDocument
+			// 
+			this.pageXmlDocument.BackColor = System.Drawing.Color.Transparent;
+			this.pageXmlDocument.Controls.Add(this.gridXmlReplaceMask);
+			this.pageXmlDocument.Location = new System.Drawing.Point(4, 4);
+			this.pageXmlDocument.Name = "pageXmlDocument";
+			this.pageXmlDocument.Padding = new System.Windows.Forms.Padding(3);
+			this.pageXmlDocument.Size = new System.Drawing.Size(336, 308);
+			this.pageXmlDocument.TabIndex = 0;
+			this.pageXmlDocument.Text = "XML Document";
+			this.pageXmlDocument.UseVisualStyleBackColor = true;
+			// 
+			// gridXmlReplaceMask
+			// 
+			this.gridXmlReplaceMask.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridXmlReplaceMask.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.gridXmlReplaceMask.BackgroundColor = System.Drawing.SystemColors.Window;
+			this.gridXmlReplaceMask.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridXmlReplaceMask.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colXmlNodeNames,
+            this.colReplaceXmlMask});
+			this.gridXmlReplaceMask.Location = new System.Drawing.Point(-1, -1);
+			this.gridXmlReplaceMask.Name = "gridXmlReplaceMask";
+			this.gridXmlReplaceMask.Size = new System.Drawing.Size(338, 310);
+			this.gridXmlReplaceMask.TabIndex = 24;
+			// 
+			// colXmlNodeNames
+			// 
+			this.colXmlNodeNames.HeaderText = "XML Node Names";
+			this.colXmlNodeNames.Name = "colXmlNodeNames";
+			// 
+			// colReplaceXmlMask
+			// 
+			this.colReplaceXmlMask.HeaderText = "Replace Mask";
+			this.colReplaceXmlMask.Name = "colReplaceXmlMask";
+			// 
+			// pageNameValuePairs
+			// 
+			this.pageNameValuePairs.Controls.Add(this.gridNameValueReplaceMask);
+			this.pageNameValuePairs.Location = new System.Drawing.Point(4, 4);
+			this.pageNameValuePairs.Name = "pageNameValuePairs";
+			this.pageNameValuePairs.Padding = new System.Windows.Forms.Padding(3);
+			this.pageNameValuePairs.Size = new System.Drawing.Size(336, 308);
+			this.pageNameValuePairs.TabIndex = 1;
+			this.pageNameValuePairs.Text = "Name : Value Pairs";
+			this.pageNameValuePairs.UseVisualStyleBackColor = true;
+			// 
+			// gridNameValueReplaceMask
+			// 
+			this.gridNameValueReplaceMask.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridNameValueReplaceMask.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.gridNameValueReplaceMask.BackgroundColor = System.Drawing.SystemColors.Window;
+			this.gridNameValueReplaceMask.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridNameValueReplaceMask.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2});
+			this.gridNameValueReplaceMask.Location = new System.Drawing.Point(-1, -1);
+			this.gridNameValueReplaceMask.Name = "gridNameValueReplaceMask";
+			this.gridNameValueReplaceMask.Size = new System.Drawing.Size(338, 310);
+			this.gridNameValueReplaceMask.TabIndex = 25;
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.HeaderText = "Pair Names";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this.dataGridViewTextBoxColumn2.HeaderText = "Replace Mask";
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			// 
+			// pageRegexPatterns
+			// 
+			this.pageRegexPatterns.Controls.Add(this.gridRegexPatternReplaceMask);
+			this.pageRegexPatterns.Location = new System.Drawing.Point(4, 4);
+			this.pageRegexPatterns.Name = "pageRegexPatterns";
+			this.pageRegexPatterns.Padding = new System.Windows.Forms.Padding(3);
+			this.pageRegexPatterns.Size = new System.Drawing.Size(336, 308);
+			this.pageRegexPatterns.TabIndex = 2;
+			this.pageRegexPatterns.Text = "Custom Regex Patterns";
+			this.pageRegexPatterns.UseVisualStyleBackColor = true;
+			// 
+			// gridRegexPatternReplaceMask
+			// 
+			this.gridRegexPatternReplaceMask.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridRegexPatternReplaceMask.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.gridRegexPatternReplaceMask.BackgroundColor = System.Drawing.SystemColors.Window;
+			this.gridRegexPatternReplaceMask.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridRegexPatternReplaceMask.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4});
+			this.gridRegexPatternReplaceMask.Location = new System.Drawing.Point(-1, -1);
+			this.gridRegexPatternReplaceMask.Name = "gridRegexPatternReplaceMask";
+			this.gridRegexPatternReplaceMask.Size = new System.Drawing.Size(338, 310);
+			this.gridRegexPatternReplaceMask.TabIndex = 25;
+			// 
+			// dataGridViewTextBoxColumn3
+			// 
+			this.dataGridViewTextBoxColumn3.HeaderText = "Regex Patterns";
+			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+			// 
+			// dataGridViewTextBoxColumn4
+			// 
+			this.dataGridViewTextBoxColumn4.HeaderText = "Replace Mask";
+			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+			// 
+			// cbAddReplacer
+			// 
+			this.cbAddReplacer.BackColor = System.Drawing.SystemColors.Window;
+			this.cbAddReplacer.DisplayMember = "0";
+			this.cbAddReplacer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbAddReplacer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+			this.cbAddReplacer.FormattingEnabled = true;
+			this.cbAddReplacer.Items.AddRange(new object[] {
             "Text",
             "XML Document",
             "Name : Value Pairs"});
-			this.cbFileType.Location = new System.Drawing.Point(136, 185);
-			this.cbFileType.Name = "cbFileType";
-			this.cbFileType.Size = new System.Drawing.Size(153, 21);
-			this.cbFileType.TabIndex = 34;
+			this.cbAddReplacer.Location = new System.Drawing.Point(63, 65);
+			this.cbAddReplacer.Name = "cbAddReplacer";
+			this.cbAddReplacer.Size = new System.Drawing.Size(250, 21);
+			this.cbAddReplacer.TabIndex = 39;
 			// 
 			// label13
 			// 
 			this.label13.AutoSize = true;
-			this.label13.Location = new System.Drawing.Point(248, 58);
+			this.label13.Location = new System.Drawing.Point(238, 24);
 			this.label13.Name = "label13";
 			this.label13.Size = new System.Drawing.Size(177, 13);
-			this.label13.TabIndex = 35;
+			this.label13.TabIndex = 38;
 			this.label13.Text = "- is used as {0} replacement pattern.";
 			// 
-			// cbLinkedData
+			// label3
 			// 
-			this.cbLinkedData.AutoSize = true;
-			this.cbLinkedData.Location = new System.Drawing.Point(386, 156);
-			this.cbLinkedData.Name = "cbLinkedData";
-			this.cbLinkedData.Size = new System.Drawing.Size(119, 17);
-			this.cbLinkedData.TabIndex = 14;
-			this.cbLinkedData.Text = "Linked Data in Files";
-			this.cbLinkedData.UseVisualStyleBackColor = true;
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(16, 24);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(92, 13);
+			this.label3.TabIndex = 37;
+			this.label3.Text = "Start from Number";
+			// 
+			// pageStart
+			// 
+			this.pageStart.BackColor = System.Drawing.SystemColors.Control;
+			this.pageStart.Controls.Add(this.label17);
+			this.pageStart.Controls.Add(this.label16);
+			this.pageStart.Controls.Add(this.label15);
+			this.pageStart.Controls.Add(this.label14);
+			this.pageStart.Controls.Add(this.btnSaveReportTo);
+			this.pageStart.Controls.Add(this.txtSaveReportTo);
+			this.pageStart.Controls.Add(this.label8);
+			this.pageStart.Controls.Add(this.btnStart);
+			this.pageStart.Controls.Add(this.txtLog);
+			this.pageStart.Location = new System.Drawing.Point(4, 22);
+			this.pageStart.Name = "pageStart";
+			this.pageStart.Size = new System.Drawing.Size(730, 450);
+			this.pageStart.TabIndex = 2;
+			this.pageStart.Text = "Step 3 - Depersonalize";
+			// 
+			// label17
+			// 
+			this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label17.AutoSize = true;
+			this.label17.ForeColor = System.Drawing.Color.DarkRed;
+			this.label17.Location = new System.Drawing.Point(657, 92);
+			this.label17.Name = "label17";
+			this.label17.Size = new System.Drawing.Size(31, 13);
+			this.label17.TabIndex = 41;
+			this.label17.Text = "data!";
+			// 
+			// label16
+			// 
+			this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label16.AutoSize = true;
+			this.label16.ForeColor = System.Drawing.Color.DarkRed;
+			this.label16.Location = new System.Drawing.Point(646, 79);
+			this.label16.Name = "label16";
+			this.label16.Size = new System.Drawing.Size(58, 13);
+			this.label16.TabIndex = 40;
+			this.label16.Text = "destination";
+			// 
+			// label15
+			// 
+			this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label15.AutoSize = true;
+			this.label15.ForeColor = System.Drawing.Color.DarkRed;
+			this.label15.Location = new System.Drawing.Point(650, 66);
+			this.label15.Name = "label15";
+			this.label15.Size = new System.Drawing.Size(51, 13);
+			this.label15.TabIndex = 39;
+			this.label15.Text = "a copy of";
+			// 
+			// label14
+			// 
+			this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label14.AutoSize = true;
+			this.label14.ForeColor = System.Drawing.Color.DarkRed;
+			this.label14.Location = new System.Drawing.Point(641, 53);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(67, 13);
+			this.label14.TabIndex = 38;
+			this.label14.Text = "Always have";
+			// 
+			// btnSaveReportTo
+			// 
+			this.btnSaveReportTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnSaveReportTo.Location = new System.Drawing.Point(598, 419);
+			this.btnSaveReportTo.Name = "btnSaveReportTo";
+			this.btnSaveReportTo.Size = new System.Drawing.Size(24, 23);
+			this.btnSaveReportTo.TabIndex = 37;
+			this.btnSaveReportTo.Text = "...";
+			this.btnSaveReportTo.UseVisualStyleBackColor = true;
+			// 
+			// txtSaveReportTo
+			// 
+			this.txtSaveReportTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.txtSaveReportTo.Location = new System.Drawing.Point(96, 421);
+			this.txtSaveReportTo.Name = "txtSaveReportTo";
+			this.txtSaveReportTo.Size = new System.Drawing.Size(496, 20);
+			this.txtSaveReportTo.TabIndex = 36;
+			// 
+			// label8
+			// 
+			this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(5, 424);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(83, 13);
+			this.label8.TabIndex = 35;
+			this.label8.Text = "Save Report To";
+			// 
+			// btnStart
+			// 
+			this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnStart.Location = new System.Drawing.Point(632, 16);
+			this.btnStart.Name = "btnStart";
+			this.btnStart.Size = new System.Drawing.Size(86, 23);
+			this.btnStart.TabIndex = 34;
+			this.btnStart.Text = "Start";
+			this.btnStart.UseVisualStyleBackColor = true;
+			// 
+			// txtLog
+			// 
+			this.txtLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.txtLog.Location = new System.Drawing.Point(1, 1);
+			this.txtLog.Multiline = true;
+			this.txtLog.Name = "txtLog";
+			this.txtLog.ReadOnly = true;
+			this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.txtLog.Size = new System.Drawing.Size(621, 412);
+			this.txtLog.TabIndex = 32;
+			// 
+			// btnSaveProfile
+			// 
+			this.btnSaveProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnSaveProfile.Location = new System.Drawing.Point(6, 486);
+			this.btnSaveProfile.Name = "btnSaveProfile";
+			this.btnSaveProfile.Size = new System.Drawing.Size(98, 23);
+			this.btnSaveProfile.TabIndex = 37;
+			this.btnSaveProfile.Text = "Save Profile";
+			this.btnSaveProfile.UseVisualStyleBackColor = true;
+			this.btnSaveProfile.Click += new System.EventHandler(this.btnSaveProfile_Click);
+			// 
+			// btnLoadProfile
+			// 
+			this.btnLoadProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnLoadProfile.Location = new System.Drawing.Point(110, 486);
+			this.btnLoadProfile.Name = "btnLoadProfile";
+			this.btnLoadProfile.Size = new System.Drawing.Size(98, 23);
+			this.btnLoadProfile.TabIndex = 38;
+			this.btnLoadProfile.Text = "Load Profile";
+			this.btnLoadProfile.UseVisualStyleBackColor = true;
+			this.btnLoadProfile.Click += new System.EventHandler(this.btnLoadProfile_Click);
+			// 
+			// btnNewProfile
+			// 
+			this.btnNewProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnNewProfile.Location = new System.Drawing.Point(214, 486);
+			this.btnNewProfile.Name = "btnNewProfile";
+			this.btnNewProfile.Size = new System.Drawing.Size(98, 23);
+			this.btnNewProfile.TabIndex = 39;
+			this.btnNewProfile.Text = "New Profile";
+			this.btnNewProfile.UseVisualStyleBackColor = true;
+			this.btnNewProfile.Click += new System.EventHandler(this.btnNewProfile_Click);
+			// 
+			// btnClose
+			// 
+			this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnClose.Location = new System.Drawing.Point(638, 486);
+			this.btnClose.Name = "btnClose";
+			this.btnClose.Size = new System.Drawing.Size(98, 23);
+			this.btnClose.TabIndex = 40;
+			this.btnClose.Text = "Close";
+			this.btnClose.UseVisualStyleBackColor = true;
+			this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+			// 
+			// btnAbout
+			// 
+			this.btnAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnAbout.Location = new System.Drawing.Point(534, 486);
+			this.btnAbout.Name = "btnAbout";
+			this.btnAbout.Size = new System.Drawing.Size(98, 23);
+			this.btnAbout.TabIndex = 41;
+			this.btnAbout.Text = "About";
+			this.btnAbout.UseVisualStyleBackColor = true;
+			this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+			// 
+			// openFileDialog1
+			// 
+			this.openFileDialog1.DefaultExt = "*.xml";
+			this.openFileDialog1.FileName = "openFileDialog1";
+			this.openFileDialog1.Filter = "XML files|*.xml|All files|*.*";
+			// 
+			// saveFileDialog1
+			// 
+			this.saveFileDialog1.DefaultExt = "*.xml";
+			this.saveFileDialog1.Filter = "XML files|*.xml|All files|*.*";
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(567, 551);
-			this.Controls.Add(this.cbLinkedData);
-			this.Controls.Add(this.label13);
-			this.Controls.Add(this.cbFileType);
-			this.Controls.Add(this.label8);
-			this.Controls.Add(this.tabDataTypes);
-			this.Controls.Add(this.cbWriteBom);
-			this.Controls.Add(this.txtEncoding);
-			this.Controls.Add(this.label5);
-			this.Controls.Add(this.txtReplaceIpAddr);
-			this.Controls.Add(this.label4);
-			this.Controls.Add(this.txtStartFrom);
-			this.Controls.Add(this.label3);
-			this.Controls.Add(this.txtLog);
-			this.Controls.Add(this.txtReplaceMask);
-			this.Controls.Add(this.label2);
-			this.Controls.Add(this.btnOpenEmailFolder);
-			this.Controls.Add(this.txtEmailFolder);
-			this.Controls.Add(this.label1);
+			this.ClientSize = new System.Drawing.Size(742, 521);
+			this.Controls.Add(this.btnAbout);
+			this.Controls.Add(this.btnClose);
+			this.Controls.Add(this.btnNewProfile);
+			this.Controls.Add(this.btnLoadProfile);
+			this.Controls.Add(this.btnSaveProfile);
+			this.Controls.Add(this.tabSteps);
+			this.MinimumSize = new System.Drawing.Size(758, 500);
 			this.Name = "MainForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Data Depersonalizer";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
 			this.Load += new System.EventHandler(this.MainForm_Load);
-			this.tabDataTypes.ResumeLayout(false);
-			this.tabSimpleText.ResumeLayout(false);
-			this.tabXmlDocument.ResumeLayout(false);
-			this.tabXmlDocument.PerformLayout();
-			this.tabNameValuePairs.ResumeLayout(false);
-			this.tabNameValuePairs.PerformLayout();
-			this.tabRegexPatterns.ResumeLayout(false);
-			this.tabRegexPatterns.PerformLayout();
+			this.tabSteps.ResumeLayout(false);
+			this.pageSource.ResumeLayout(false);
+			this.pageSource.PerformLayout();
+			this.pageOrder.ResumeLayout(false);
+			this.pageOrder.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.txtStartFrom)).EndInit();
+			this.tabReplacers.ResumeLayout(false);
+			this.pageTextData.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.gridReplacers)).EndInit();
+			this.pageMimeData.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.gridMimeReplacers)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridMimeParts)).EndInit();
+			this.tabEditors.ResumeLayout(false);
+			this.pageEmailReplacer.ResumeLayout(false);
+			this.pageEmailReplacer.PerformLayout();
+			this.pageIpAddrReplacer.ResumeLayout(false);
+			this.pageIpAddrReplacer.PerformLayout();
+			this.pageXmlDocument.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.gridXmlReplaceMask)).EndInit();
+			this.pageNameValuePairs.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.gridNameValueReplaceMask)).EndInit();
+			this.pageRegexPatterns.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.gridRegexPatternReplaceMask)).EndInit();
+			this.pageStart.ResumeLayout(false);
+			this.pageStart.PerformLayout();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
 		#endregion
-
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.TextBox txtEmailFolder;
-		private System.Windows.Forms.Button btnOpenEmailFolder;
 		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.TextBox txtReplaceMask;
-		private System.Windows.Forms.TextBox txtLog;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.TextBox txtStartFrom;
-		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.TextBox txtReplaceIpAddr;
-		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.TextBox txtEncoding;
-		private System.Windows.Forms.CheckBox cbWriteBom;
-		private System.Windows.Forms.TabControl tabDataTypes;
-		private System.Windows.Forms.TabPage tabXmlDocument;
-		private System.Windows.Forms.TextBox txtXmlReplaceWith;
-		private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.TextBox txtXmlNodes;
-		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.TabPage tabNameValuePairs;
-		private System.Windows.Forms.Label label8;
-		private System.Windows.Forms.ComboBox cbFileType;
-		private System.Windows.Forms.TextBox txtPairReplaceWith;
-		private System.Windows.Forms.Label label9;
-		private System.Windows.Forms.TextBox txtPairNames;
-		private System.Windows.Forms.Label label10;
-		private System.Windows.Forms.TabPage tabRegexPatterns;
-		private System.Windows.Forms.TextBox txtRegexReplaceWith;
-		private System.Windows.Forms.Label label11;
-		private System.Windows.Forms.TextBox txtRegexPatterns;
-		private System.Windows.Forms.Label label12;
-		private System.Windows.Forms.Label label13;
-		private System.Windows.Forms.Button btnDepersonalizeXml;
-		private System.Windows.Forms.Button btnDepersonalizeNameValues;
-		private System.Windows.Forms.Button btnDepersonalizeRegex;
-		private System.Windows.Forms.TabPage tabSimpleText;
-		private System.Windows.Forms.Button btnDepersonalizeText;
+		private System.Windows.Forms.TabControl tabSteps;
+		private System.Windows.Forms.TabPage pageSource;
+		private System.Windows.Forms.TabPage pageOrder;
+		private System.Windows.Forms.TabPage pageStart;
+		private System.Windows.Forms.Button btnOpenSourceFolder;
+		private System.Windows.Forms.TextBox txtSourceFolder;
+		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.CheckBox cbLinkedData;
+		private System.Windows.Forms.CheckBox cbWriteBom;
+		private System.Windows.Forms.TextBox txtEncoding;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.TextBox txtLog;
+		private System.Windows.Forms.Button btnStart;
+		private System.Windows.Forms.Label label13;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.TabControl tabEditors;
+		private System.Windows.Forms.TabPage pageEmailReplacer;
+		private System.Windows.Forms.TextBox txtEmailReplaceMask;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.TabPage pageXmlDocument;
+		private System.Windows.Forms.TabPage pageNameValuePairs;
+		private System.Windows.Forms.TabPage pageRegexPatterns;
+		private System.Windows.Forms.ComboBox cbAddReplacer;
+		private System.Windows.Forms.Button btnSaveProfile;
+		private System.Windows.Forms.Button btnLoadProfile;
+		private System.Windows.Forms.Button btnNewProfile;
+		private System.Windows.Forms.Button btnClose;
+		private System.Windows.Forms.TextBox txtSaveReportTo;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.Button btnSaveReportTo;
+		private System.Windows.Forms.Label label17;
+		private System.Windows.Forms.Label label16;
+		private System.Windows.Forms.Label label15;
+		private System.Windows.Forms.Label label14;
+		private System.Windows.Forms.Button btnOpenDestFolder;
+		private System.Windows.Forms.TextBox txtDestinationFolder;
+		private System.Windows.Forms.Label label18;
+		private System.Windows.Forms.Button btnAddReplacer;
+		private System.Windows.Forms.TabControl tabReplacers;
+		private System.Windows.Forms.TabPage pageTextData;
+		private System.Windows.Forms.TabPage pageMimeData;
+		private System.Windows.Forms.Button btnAbout;
+		private System.Windows.Forms.DataGridView gridReplacers;
+		private System.Windows.Forms.Button btnUp;
+		private System.Windows.Forms.Label label19;
+		private System.Windows.Forms.Button btnDelete;
+		private System.Windows.Forms.Button btnDown;
+		private System.Windows.Forms.Button btnPaste;
+		private System.Windows.Forms.Button btnCopy;
+		private System.Windows.Forms.DataGridView gridMimeReplacers;
+		private System.Windows.Forms.DataGridView gridMimeParts;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colMimeParts;
+		private System.Windows.Forms.TabPage pageIpAddrReplacer;
+		private System.Windows.Forms.TextBox txtIpAddrReplaceMask;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.DataGridView gridXmlReplaceMask;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colXmlNodeNames;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colReplaceXmlMask;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colReplacerName;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colMimeReplacers;
+		private System.Windows.Forms.DataGridView gridNameValueReplaceMask;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+		private System.Windows.Forms.DataGridView gridRegexPatternReplaceMask;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+		private System.Windows.Forms.OpenFileDialog openFileDialog1;
+		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+		private System.Windows.Forms.NumericUpDown txtStartFrom;
 	}
 }
 

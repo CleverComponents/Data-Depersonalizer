@@ -26,43 +26,11 @@
 //first may free it from dependence on the non-free library.
 #endregion
 
-using System;
-using System.IO;
-using Depersonalizer.Common;
-using ExtendedXmlSerializer.Configuration;
-using ExtendedXmlSerializer.ExtensionModel.Xml;
-
 namespace Depersonalizer.Profile
 {
-    public class DepersonalizerProfile
-    {
-		public DepersonalizerProfile()
-		{
-			ReplacerChain = new ReplacerChain();
-			DataReplaceProfile = new DataReplaceProfile();
-			FileReplaceProfile = new FileReplaceProfile();
-		}
-
-		public static DepersonalizerProfile Load(string fileName)
-		{
-			using (var stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
-			{
-				var serializer = new ConfigurationContainer().Create();
-				return serializer.Deserialize<DepersonalizerProfile>(stream);
-			}
-		}
-
-		public void Save(string fileName)
-		{
-			using (var stream = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite))
-			{
-				var serializer = new ConfigurationContainer().Create();
-				serializer.Serialize(stream, this);
-			}
-		}
-
-		public ReplacerChain ReplacerChain { get; set; }
-		public DataReplaceProfile DataReplaceProfile { get; set; }
-		public FileReplaceProfile FileReplaceProfile { get; set; }
+	public class DataReplaceProfile
+	{
+		public int StartFromNumber { get; set; }
+		public string SaveReportTo { get; set; }
 	}
 }

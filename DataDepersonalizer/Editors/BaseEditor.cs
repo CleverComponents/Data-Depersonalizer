@@ -20,11 +20,56 @@
 //along with the Data Depersonalizer application. If not, see<http://www.gnu.org/licenses/>.
 #endregion
 
-namespace Depersonalizer.Common
+namespace DataDepersonalizer.Editors
 {
-	public interface IDataReplacer
+	public abstract class BaseEditor<T>
 	{
-		string Replace(string source, IDataContext context);
-		IDataReplacer NextReplacer { get; set; }
+		private bool isLoading;
+
+		protected abstract void SaveData();
+		protected abstract void LoadData();
+		protected abstract void UpdateControls();
+
+		public void Save()
+		{
+			if (Data == null) return;
+
+			if (isLoading) return;
+
+			SaveData();
+		}
+
+		public void Load()
+		{
+			if (Data == null) return;
+
+			if (isLoading) return;
+
+			isLoading = true;
+			try
+			{
+				LoadData();
+			}
+			finally
+			{
+				isLoading = false;
+			}
+		}
+
+		public void Update()
+		{
+			UpdateControls();
+		}
+
+		public void Edit(T data)
+		{
+			Data = data;
+			Load();
+			UpdateControls();
+		}
+
+		public T Data { get; private set; }
+
+		public EditController Controller { get; set; }
 	}
 }

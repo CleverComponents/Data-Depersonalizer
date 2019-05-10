@@ -20,11 +20,11 @@
 //along with the Data Depersonalizer application. If not, see<http://www.gnu.org/licenses/>.
 #endregion
 
-namespace Depersonalizer.Common
+using Depersonalizer.Profile;
+
+namespace DataDepersonalizer.Editors
 {
-	public interface IDataReplacer
+	public abstract class StepEditor : BaseEditor<DepersonalizerProfile>
 	{
-		string Replace(string source, IDataContext context);
-		IDataReplacer NextReplacer { get; set; }
 	}
 }

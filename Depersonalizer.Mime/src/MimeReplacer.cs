@@ -199,5 +199,11 @@ namespace Depersonalizer.Mime
 		}
 
 		public IList<IMimePartReplacer> MimePartReplacers { get; }
+
+		public IDataReplacer NextReplacer
+		{
+			get { return null; }
+			set { System.Diagnostics.Debug.Assert(false, "Not supported."); }
+		}
 	}
 }
