@@ -21,6 +21,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Depersonalizer.Common;
 
@@ -30,6 +31,8 @@ namespace Depersonalizer.Text
 	{
 		private string ReplaceNameValuePair(string name, string replaceWithMask, string source, IDataContext context)
 		{
+			if (string.IsNullOrEmpty(name)) return source;
+
 			string matchPattern = @"^\s*" + name + @"\s*:(\s*|.*)(?=\r$)";
 
 			var pairs = ExtractGroupData(source, matchPattern, 1, RegexOptions.IgnoreCase | RegexOptions.Multiline);
@@ -46,25 +49,18 @@ namespace Depersonalizer.Text
 
 		private string ReplaceNameValuePairs(string source, IDataContext context)
 		{
-			if (PairNames == null || PairReplaceWith == null)
+			foreach (var pair in ReplacePairs)
 			{
-				return source;
-			}
-
-			if (PairNames.Length != PairReplaceWith.Length)
-			{
-				throw new Exception("The number of names must be the same as Replace With values");
-			}
-
-			for (int i = 0; i < PairNames.Length; i++)
-			{
-				source = ReplaceNameValuePair(PairNames[i], PairReplaceWith[i], source, context);
+				source = ReplaceNameValuePair(pair.Parameter, pair.ReplaceWith, source, context);
 			}
 
 			return source;
 		}
 
-		public NameValuePairReplacer() : base() { }
+		public NameValuePairReplacer() : base()
+		{
+			ReplacePairs = new List<ReplaceParameter>();
+		}
 
 		public override string Replace(string source, IDataContext context)
 		{
@@ -72,7 +68,6 @@ namespace Depersonalizer.Text
 			return base.Replace(source, context);
 		}
 
-		public string[] PairNames { get; set; }
-		public string[] PairReplaceWith { get; set; }
+		public List<ReplaceParameter> ReplacePairs { get; }
 	}
 }

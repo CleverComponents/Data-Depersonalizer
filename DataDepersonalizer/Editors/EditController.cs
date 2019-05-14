@@ -30,7 +30,7 @@ namespace DataDepersonalizer.Editors
 
 	public class EditController
 	{
-		private TabControl tcSteps;
+		private TabControl tabSteps;
 		private DepersonalizerProfile data;
 		private Dictionary<TabPage, StepEditor> editors;
 		private EditorState state;
@@ -42,27 +42,27 @@ namespace DataDepersonalizer.Editors
 
 		private void TabChanged()
 		{
-			editors[tcSteps.SelectedTab].Edit(data);
+			editors[tabSteps.SelectedTab].Edit(data);
 		}
 
 		private void BindControls()
 		{
-			tcSteps.SelectedIndexChanged += TcSteps_SelectedIndexChanged;
+			tabSteps.SelectedIndexChanged += TcSteps_SelectedIndexChanged;
 		}
 
-		public EditController(TabControl tcSteps)
+		public EditController(TabControl tabSteps)
 		{
 			State = EditorState.Edit;
 			editors = new Dictionary<TabPage, StepEditor>();
 
-			this.tcSteps = tcSteps;
+			this.tabSteps = tabSteps;
 
 			BindControls();
 		}
 
-		public void RegisterEditor(StepEditor editor, TabPage tabPage)
+		public void RegisterEditor(StepEditor editor, TabPage page)
 		{
-			editors.Add(tabPage, editor);
+			editors.Add(page, editor);
 			editor.Controller = this;
 		}
 
@@ -70,7 +70,7 @@ namespace DataDepersonalizer.Editors
 		{
 			this.data = data;
 
-			tcSteps.SelectedIndex = 0;
+			tabSteps.SelectedIndex = 0;
 			TabChanged();
 		}
 
@@ -82,7 +82,7 @@ namespace DataDepersonalizer.Editors
 				if (state != value)
 				{
 					state = value;
-					editors[tcSteps.SelectedTab].Update();
+					editors[tabSteps.SelectedTab].Update();
 				}
 			}
 		}

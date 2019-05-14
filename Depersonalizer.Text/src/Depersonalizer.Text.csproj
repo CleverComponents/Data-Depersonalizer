@@ -49,6 +49,7 @@
     <Compile Include="HtmlDocumentReplacer.cs" />
     <Compile Include="HtmlTextReplacer.cs" />
     <Compile Include="IpAddressReplacer.cs" />
+    <Compile Include="ReplaceParameter.cs" />
     <Compile Include="NameValuePairReplacer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegexReplacer.cs" />

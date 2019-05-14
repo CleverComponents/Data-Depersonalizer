@@ -20,23 +20,11 @@
 //along with the Data Depersonalizer application. If not, see<http://www.gnu.org/licenses/>.
 #endregion
 
-using System;
-using System.Windows.Forms;
+using Depersonalizer.Common;
 
-namespace DataDepersonalizer
+namespace DataDepersonalizer.Editors
 {
-	static class Program
+	public abstract class ReplacerEditor : BaseEditor<IDataReplacer>
 	{
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		static void Main()
-		{
-			Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(new ExceptionHandler().OnThreadException);
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new MainForm());
-		}
 	}
 }

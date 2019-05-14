@@ -22,21 +22,50 @@
 
 using System;
 using System.Windows.Forms;
+using Depersonalizer.Text;
 
-namespace DataDepersonalizer
+namespace DataDepersonalizer.Editors
 {
-	static class Program
+	public class EmailAddressReplacerEditor : ReplacerEditor
 	{
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		static void Main()
+		private TextBox txtEmailReplaceMask;
+
+		private void BindControls()
 		{
-			Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(new ExceptionHandler().OnThreadException);
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new MainForm());
+			txtEmailReplaceMask.TextChanged += TxtEmailReplaceMask_TextChanged;
+		}
+
+		private void TxtEmailReplaceMask_TextChanged(object sender, EventArgs e)
+		{
+			Save();
+		}
+
+		protected override void LoadData()
+		{
+			txtEmailReplaceMask.Text = Data.ReplaceMask;
+		}
+
+		protected override void SaveData()
+		{
+			Data.ReplaceMask = txtEmailReplaceMask.Text;
+		}
+
+		protected override void UpdateControls()
+		{
+			bool disabled = Controller.State == EditorState.Run;
+			txtEmailReplaceMask.ReadOnly = disabled;
+		}
+
+		public EmailAddressReplacerEditor(TextBox txtIpAddrReplaceMask) : base()
+		{
+			this.txtEmailReplaceMask = txtIpAddrReplaceMask;
+
+			BindControls();
+		}
+
+		public new EmailAddressReplacer Data
+		{
+			get { return (EmailAddressReplacer)base.Data; }
 		}
 	}
 }

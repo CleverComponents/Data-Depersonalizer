@@ -20,23 +20,15 @@
 //along with the Data Depersonalizer application. If not, see<http://www.gnu.org/licenses/>.
 #endregion
 
-using System;
 using System.Windows.Forms;
 
 namespace DataDepersonalizer
 {
-	static class Program
+	public class ExceptionHandler
 	{
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		static void Main()
+		public void OnThreadException(object sender, System.Threading.ThreadExceptionEventArgs t)
 		{
-			Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(new ExceptionHandler().OnThreadException);
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new MainForm());
+			MessageBox.Show(t.Exception.Message);
 		}
 	}
 }

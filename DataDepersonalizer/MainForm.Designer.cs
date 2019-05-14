@@ -93,6 +93,15 @@
 			this.btnAbout = new System.Windows.Forms.Button();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+			this.pageHtmlDocument = new System.Windows.Forms.TabPage();
+			this.gridHtmlReplaceMask = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.pageTextReplacer = new System.Windows.Forms.TabPage();
+			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.txtTextReplacerInfo = new System.Windows.Forms.TextBox();
+			this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tabSteps.SuspendLayout();
 			this.pageSource.SuspendLayout();
 			this.pageOrder.SuspendLayout();
@@ -113,6 +122,10 @@
 			this.pageRegexPatterns.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridRegexPatternReplaceMask)).BeginInit();
 			this.pageStart.SuspendLayout();
+			this.pageHtmlDocument.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gridHtmlReplaceMask)).BeginInit();
+			this.pageTextReplacer.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tabSteps
@@ -452,6 +465,8 @@
 			this.tabEditors.Controls.Add(this.pageXmlDocument);
 			this.tabEditors.Controls.Add(this.pageNameValuePairs);
 			this.tabEditors.Controls.Add(this.pageRegexPatterns);
+			this.tabEditors.Controls.Add(this.pageHtmlDocument);
+			this.tabEditors.Controls.Add(this.pageTextReplacer);
 			this.tabEditors.Location = new System.Drawing.Point(384, 92);
 			this.tabEditors.Multiline = true;
 			this.tabEditors.Name = "tabEditors";
@@ -548,6 +563,7 @@
             this.colReplaceXmlMask});
 			this.gridXmlReplaceMask.Location = new System.Drawing.Point(-1, -1);
 			this.gridXmlReplaceMask.Name = "gridXmlReplaceMask";
+			this.gridXmlReplaceMask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridXmlReplaceMask.Size = new System.Drawing.Size(338, 310);
 			this.gridXmlReplaceMask.TabIndex = 24;
 			// 
@@ -585,6 +601,7 @@
             this.dataGridViewTextBoxColumn2});
 			this.gridNameValueReplaceMask.Location = new System.Drawing.Point(-1, -1);
 			this.gridNameValueReplaceMask.Name = "gridNameValueReplaceMask";
+			this.gridNameValueReplaceMask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridNameValueReplaceMask.Size = new System.Drawing.Size(338, 310);
 			this.gridNameValueReplaceMask.TabIndex = 25;
 			// 
@@ -622,6 +639,7 @@
             this.dataGridViewTextBoxColumn4});
 			this.gridRegexPatternReplaceMask.Location = new System.Drawing.Point(-1, -1);
 			this.gridRegexPatternReplaceMask.Name = "gridRegexPatternReplaceMask";
+			this.gridRegexPatternReplaceMask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridRegexPatternReplaceMask.Size = new System.Drawing.Size(338, 310);
 			this.gridRegexPatternReplaceMask.TabIndex = 25;
 			// 
@@ -849,6 +867,96 @@
 			this.saveFileDialog1.DefaultExt = "*.xml";
 			this.saveFileDialog1.Filter = "XML files|*.xml|All files|*.*";
 			// 
+			// pageHtmlDocument
+			// 
+			this.pageHtmlDocument.Controls.Add(this.gridHtmlReplaceMask);
+			this.pageHtmlDocument.Location = new System.Drawing.Point(4, 4);
+			this.pageHtmlDocument.Name = "pageHtmlDocument";
+			this.pageHtmlDocument.Padding = new System.Windows.Forms.Padding(3);
+			this.pageHtmlDocument.Size = new System.Drawing.Size(336, 308);
+			this.pageHtmlDocument.TabIndex = 5;
+			this.pageHtmlDocument.Text = "HTML Document";
+			this.pageHtmlDocument.UseVisualStyleBackColor = true;
+			// 
+			// gridHtmlReplaceMask
+			// 
+			this.gridHtmlReplaceMask.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridHtmlReplaceMask.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.gridHtmlReplaceMask.BackgroundColor = System.Drawing.SystemColors.Window;
+			this.gridHtmlReplaceMask.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridHtmlReplaceMask.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6});
+			this.gridHtmlReplaceMask.Location = new System.Drawing.Point(-1, -1);
+			this.gridHtmlReplaceMask.Name = "gridHtmlReplaceMask";
+			this.gridHtmlReplaceMask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.gridHtmlReplaceMask.Size = new System.Drawing.Size(338, 310);
+			this.gridHtmlReplaceMask.TabIndex = 25;
+			// 
+			// dataGridViewTextBoxColumn5
+			// 
+			this.dataGridViewTextBoxColumn5.HeaderText = "HTML Tag IDs";
+			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+			// 
+			// dataGridViewTextBoxColumn6
+			// 
+			this.dataGridViewTextBoxColumn6.HeaderText = "Replace Mask";
+			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+			// 
+			// pageTextReplacer
+			// 
+			this.pageTextReplacer.Controls.Add(this.txtTextReplacerInfo);
+			this.pageTextReplacer.Controls.Add(this.dataGridView1);
+			this.pageTextReplacer.Location = new System.Drawing.Point(4, 4);
+			this.pageTextReplacer.Name = "pageTextReplacer";
+			this.pageTextReplacer.Padding = new System.Windows.Forms.Padding(3);
+			this.pageTextReplacer.Size = new System.Drawing.Size(336, 308);
+			this.pageTextReplacer.TabIndex = 6;
+			this.pageTextReplacer.Text = "Text Replacer";
+			this.pageTextReplacer.UseVisualStyleBackColor = true;
+			// 
+			// dataGridView1
+			// 
+			this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
+			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8});
+			this.dataGridView1.Location = new System.Drawing.Point(-1, -1);
+			this.dataGridView1.Name = "dataGridView1";
+			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dataGridView1.Size = new System.Drawing.Size(338, 248);
+			this.dataGridView1.TabIndex = 25;
+			// 
+			// txtTextReplacerInfo
+			// 
+			this.txtTextReplacerInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.txtTextReplacerInfo.Enabled = false;
+			this.txtTextReplacerInfo.Location = new System.Drawing.Point(0, 245);
+			this.txtTextReplacerInfo.Multiline = true;
+			this.txtTextReplacerInfo.Name = "txtTextReplacerInfo";
+			this.txtTextReplacerInfo.Size = new System.Drawing.Size(336, 63);
+			this.txtTextReplacerInfo.TabIndex = 26;
+			this.txtTextReplacerInfo.Text = "Fill the Key / Replace Mask parameters, or leave the list empty to replace the sa" +
+    "me data with corresponding values being generated by the previous replacers.";
+			// 
+			// dataGridViewTextBoxColumn7
+			// 
+			this.dataGridViewTextBoxColumn7.HeaderText = "Keys";
+			this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+			// 
+			// dataGridViewTextBoxColumn8
+			// 
+			this.dataGridViewTextBoxColumn8.HeaderText = "Replace Mask";
+			this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -891,6 +999,11 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridRegexPatternReplaceMask)).EndInit();
 			this.pageStart.ResumeLayout(false);
 			this.pageStart.PerformLayout();
+			this.pageHtmlDocument.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.gridHtmlReplaceMask)).EndInit();
+			this.pageTextReplacer.ResumeLayout(false);
+			this.pageTextReplacer.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -966,6 +1079,15 @@
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
 		private System.Windows.Forms.NumericUpDown txtStartFrom;
+		private System.Windows.Forms.TabPage pageHtmlDocument;
+		private System.Windows.Forms.DataGridView gridHtmlReplaceMask;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+		private System.Windows.Forms.TabPage pageTextReplacer;
+		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.TextBox txtTextReplacerInfo;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
 	}
 }
 

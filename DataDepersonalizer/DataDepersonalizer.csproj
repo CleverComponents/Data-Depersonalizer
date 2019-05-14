@@ -47,11 +47,21 @@
   <ItemGroup>
     <Compile Include="Editors\BaseEditor.cs" />
     <Compile Include="Editors\EditController.cs" />
+    <Compile Include="Editors\EmailAddressReplacerEditor.cs" />
+    <Compile Include="Editors\HtmlDocumentReplacerEditor.cs" />
+    <Compile Include="Editors\IpAddressReplacerEditor.cs" />
+    <Compile Include="Editors\ListReplaceEditor.cs" />
+    <Compile Include="Editors\NameValuePairReplacerEditor.cs" />
     <Compile Include="Editors\OrderEditor.cs" />
+    <Compile Include="Editors\RegexReplacerEditor.cs" />
+    <Compile Include="Editors\ReplacerEditor.cs" />
     <Compile Include="Editors\SourceEditor.cs" />
     <Compile Include="Editors\StartEditor.cs" />
     <Compile Include="Editors\ReplacerFactory.cs" />
     <Compile Include="Editors\StepEditor.cs" />
+    <Compile Include="Editors\TextReplacerEditor.cs" />
+    <Compile Include="Editors\XmlDocumentReplacerEditor.cs" />
+    <Compile Include="ExceptionHandler.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

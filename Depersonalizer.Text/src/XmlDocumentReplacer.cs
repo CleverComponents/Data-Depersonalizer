@@ -21,6 +21,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Depersonalizer.Common;
 
@@ -30,6 +31,8 @@ namespace Depersonalizer.Text
 	{
 		private string ReplaceXmlNode(string nodeName, string replaceWithMask, string source, IDataContext context)
 		{
+			if (string.IsNullOrEmpty(nodeName)) return source;
+
 			string matchPattern = @"<" + nodeName + ">(.*?)</" + nodeName + ">";
 
 			var xmlNodes = ExtractGroupData(source, matchPattern, 1, RegexOptions.IgnoreCase);
@@ -46,25 +49,18 @@ namespace Depersonalizer.Text
 
 		private string ReplaceXmlNodes(string source, IDataContext context)
 		{
-			if (XmlNodes == null || XmlReplaceWith == null)
+			foreach (var node in XmlReplaceNodes)
 			{
-				return source;
-			}
-
-			if (XmlNodes.Length != XmlReplaceWith.Length)
-			{
-				throw new Exception("The number of XML nodes must be the same as Replace With values");
-			}
-
-			for (int i = 0; i < XmlNodes.Length; i++)
-			{
-				source = ReplaceXmlNode(XmlNodes[i], XmlReplaceWith[i], source, context);
+				source = ReplaceXmlNode(node.Parameter, node.ReplaceWith, source, context);
 			}
 
 			return source;
 		}
 
-		public XmlDocumentReplacer() : base() { }
+		public XmlDocumentReplacer() : base()
+		{
+			XmlReplaceNodes = new List<ReplaceParameter>();
+		}
 
 		public override string Replace(string source, IDataContext context)
 		{
@@ -72,7 +68,6 @@ namespace Depersonalizer.Text
 			return base.Replace(source, context);
 		}
 
-		public string[] XmlNodes { get; set; }
-		public string[] XmlReplaceWith { get; set; }
+		public List<ReplaceParameter> XmlReplaceNodes { get; }
 	}
 }

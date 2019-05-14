@@ -14,8 +14,8 @@ namespace Depersonalizer.Text.Tests
 			var replacer = new HtmlDocumentReplacer();
 			var context = new DataContext();
 
-			replacer.TagIds = new string[] { "a1" };
-			replacer.TagReplaceWith = new string[] { "1{0:D6}" };
+			replacer.ReplaceTagIds.Add(new ReplaceParameter("a1", "1{0:D6}"));
+
 			context.StartFrom = 10;
 
 			source = replacer.Replace(source, context);
@@ -30,8 +30,7 @@ namespace Depersonalizer.Text.Tests
 
 			context.DataDictionary.AddValue("台北市", "dictionary");
 
-			replacer.TagIds = new string[] { "a1" };
-			replacer.TagReplaceWith = new string[] { "ignore" };
+			replacer.ReplaceTagIds.Add(new ReplaceParameter("a1", "ignore"));
 
 			var source = "<p id=\"a1\">&#21488;&#21271;&#24066;</p>";
 			var expected = "<p id=\"a1\">dictionary</p>";

@@ -20,23 +20,24 @@
 //along with the Data Depersonalizer application. If not, see<http://www.gnu.org/licenses/>.
 #endregion
 
-using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using Depersonalizer.Text;
 
-namespace DataDepersonalizer
+namespace DataDepersonalizer.Editors
 {
-	static class Program
+	public class XmlDocumentReplacerEditor : ListReplaceEditor
 	{
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		static void Main()
+		protected override List<ReplaceParameter> GetParameters()
 		{
-			Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(new ExceptionHandler().OnThreadException);
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new MainForm());
+			return Data.XmlReplaceNodes;
+		}
+
+		public XmlDocumentReplacerEditor(DataGridView gridView) : base(gridView) { }
+
+		public new XmlDocumentReplacer Data
+		{
+			get { return (XmlDocumentReplacer)base.Data; }
 		}
 	}
 }

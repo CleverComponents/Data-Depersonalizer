@@ -38,6 +38,13 @@ namespace DataDepersonalizer.Editors
 			public string Name { get; set; }
 		}
 
+		public class ReplacerEditorItem
+		{
+			public ReplacerEditor Editor { get; set; }
+			public TabPage Page { get; set; }
+		}
+
+		private Dictionary<Type, ReplacerEditorItem> replacerEditors;
 		private ReplacerFactory factory;
 
 		private NumericUpDown txtStartFrom;
@@ -49,6 +56,10 @@ namespace DataDepersonalizer.Editors
 		private Button btnDelete;
 		private Button btnCopy;
 		private Button btnPaste;
+		private TabPage pageTextData;
+		private TabPage pageMimeData;
+		private TabControl tabEditors;
+		private TabControl tabReplacers;
 
 		private void BtnAddReplacer_Click(object sender, System.EventArgs e)
 		{
@@ -107,6 +118,23 @@ namespace DataDepersonalizer.Editors
 			Save();
 		}
 
+		private void GridReplacers_SelectionChanged(object sender, EventArgs e)
+		{
+			tabEditors.TabPages.Clear();
+
+			var replacer = GetSelectedReplacer();
+			var type = replacer?.GetType() ?? null;
+
+			if (type != null && replacerEditors.ContainsKey(type))
+			{
+				var editorInfo = replacerEditors[type];
+
+				editorInfo.Editor.Edit(replacer);
+
+				tabEditors.TabPages.Add(editorInfo.Page);
+			}
+		}
+
 		private void RegisterTextReplacers(ReplacerFactory factory)
 		{
 			factory.RegisterReplacer(typeof(EmailAddressReplacer), "E-mail address replacer");
@@ -162,6 +190,9 @@ namespace DataDepersonalizer.Editors
 
 		private void BindControls()
 		{
+			tabReplacers.TabPages.Clear();
+			tabReplacers.TabPages.Add(pageTextData);
+
 			gridReplacers.AutoGenerateColumns = false;
 			gridReplacers.Columns[0].DataPropertyName = "Name";
 
@@ -173,6 +204,10 @@ namespace DataDepersonalizer.Editors
 			btnDelete.Click += BtnDelete_Click;
 			btnCopy.Click += BtnCopy_Click;
 			btnPaste.Click += BtnPaste_Click;
+
+			gridReplacers.SelectionChanged += GridReplacers_SelectionChanged;
+
+			tabEditors.TabPages.Clear();
 		}
 
 		protected override void SaveData()
@@ -198,8 +233,11 @@ namespace DataDepersonalizer.Editors
 		}
 
 		public OrderEditor(NumericUpDown txtStartFrom, DataGridView gridReplacers, ComboBox cbAddReplacer,
-			Button btnAddReplacer, Button btnUp, Button btnDown, Button btnDelete, Button btnCopy, Button btnPaste) : base()
+			Button btnAddReplacer, Button btnUp, Button btnDown, Button btnDelete, Button btnCopy, Button btnPaste,
+			TabPage pageTextData, TabPage pageMimeData, TabControl tabEditors, TabControl tabReplacers) : base()
 		{
+			replacerEditors = new Dictionary<Type, ReplacerEditorItem>();
+
 			factory = new ReplacerFactory();
 			RegisterTextReplacers(factory);
 
@@ -212,8 +250,18 @@ namespace DataDepersonalizer.Editors
 			this.btnDelete = btnDelete;
 			this.btnCopy = btnCopy;
 			this.btnPaste = btnPaste;
+			this.pageTextData = pageTextData;
+			this.pageMimeData = pageMimeData;
+			this.tabEditors = tabEditors;
+			this.tabReplacers = tabReplacers;
 
 			BindControls();
+		}
+
+		public void RegisterReplacerEditor(ReplacerEditor editor, Type replacer, TabPage page)
+		{
+			replacerEditors.Add(replacer, new ReplacerEditorItem() { Editor = editor, Page = page });
+			editor.Controller = Controller;
 		}
 	}
 }

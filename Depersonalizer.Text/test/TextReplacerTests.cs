@@ -8,8 +8,8 @@ namespace Depersonalizer.Text.Tests
 		public void TestReplace_ByParameters()
 		{
 			var replacer = new TextReplacer();
-			replacer.Keys = new string[] { "key" };
-			replacer.ReplaceWith = new string[] { "val" };
+
+			replacer.ReplaceKeys.Add(new ReplaceParameter("key", "val"));
 
 			var context = new DataContext();
 			context.DataDictionary.AddValue("key", "dictionary");

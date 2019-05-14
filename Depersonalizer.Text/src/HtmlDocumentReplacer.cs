@@ -21,6 +21,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Depersonalizer.Common;
 
@@ -30,6 +31,8 @@ namespace Depersonalizer.Text
 	{
 		private string ReplaceTag(string id, string replaceWithMask, string source, IDataContext context)
 		{
+			if (string.IsNullOrEmpty(id)) return source;
+
 			string matchPattern = "<(\\w+)([^>]*id[\\s]?=[\\s]?['\"]" + id + "['\"][\\s\\S]*?)>([\\s\\S]*?)<\\/\\1>";
 
 			var tags = ExtractGroupData(source, matchPattern, 3, RegexOptions.IgnoreCase);
@@ -52,25 +55,18 @@ namespace Depersonalizer.Text
 
 		private string ReplaceTags(string source, IDataContext context)
 		{
-			if (TagIds == null || TagReplaceWith == null)
+			foreach (var tag in ReplaceTagIds)
 			{
-				return source;
-			}
-
-			if (TagIds.Length != TagReplaceWith.Length)
-			{
-				throw new Exception("The number of HTML tags must be the same as Replace With values");
-			}
-
-			for (int i = 0; i < TagIds.Length; i++)
-			{
-				source = ReplaceTag(TagIds[i], TagReplaceWith[i], source, context);
+				source = ReplaceTag(tag.Parameter, tag.ReplaceWith, source, context);
 			}
 
 			return source;
 		}
 
-		public HtmlDocumentReplacer() : base() { }
+		public HtmlDocumentReplacer() : base()
+		{
+			ReplaceTagIds = new List<ReplaceParameter>();
+		}
 
 		public override string Replace(string source, IDataContext context)
 		{
@@ -78,7 +74,6 @@ namespace Depersonalizer.Text
 			return base.Replace(source, context);
 		}
 
-		public string[] TagIds { get; set; }
-		public string[] TagReplaceWith { get; set; }
+		public List<ReplaceParameter> ReplaceTagIds { get; }
 	}
 }

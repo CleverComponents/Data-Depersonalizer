@@ -20,23 +20,23 @@
 //along with the Data Depersonalizer application. If not, see<http://www.gnu.org/licenses/>.
 #endregion
 
-using System;
-using System.Windows.Forms;
-
-namespace DataDepersonalizer
+namespace Depersonalizer.Text
 {
-	static class Program
+	public sealed class ReplaceParameter
 	{
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		static void Main()
+		public ReplaceParameter()
 		{
-			Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(new ExceptionHandler().OnThreadException);
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new MainForm());
+			Parameter = "";
+			ReplaceWith = "";
 		}
+
+		public ReplaceParameter(string parameter, string replaceWith)
+		{
+			Parameter = parameter;
+			ReplaceWith = replaceWith;
+		}
+
+		public string Parameter { get; set; }
+		public string ReplaceWith { get; set; }
 	}
 }

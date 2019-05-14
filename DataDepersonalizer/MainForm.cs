@@ -46,9 +46,10 @@ namespace DataDepersonalizer
 			var attachXmlReplacer = new XmlDocumentReplacer()
 			{
 				NextReplacer = attachHtmlTextReplacer,
-				XmlNodes = new string[] { "CUSTOMERNAME", "CUSTOMERADDRESS1" },
-				XmlReplaceWith = new string[] { "John Smith{0}", "Lake City {0}" }
 			};
+			attachXmlReplacer.XmlReplaceNodes.Add(new ReplaceParameter("CUSTOMERNAME", "John Smith{0}"));
+			attachXmlReplacer.XmlReplaceNodes.Add(new ReplaceParameter("CUSTOMERADDRESS1", "Lake City {0}"));
+
 			var attachReplacer = new TextAttachmentReplacer() { NextReplacer = attachXmlReplacer };
 
 			var emailReplacer = new EmailAddressReplacer() { ReplaceMask = "recipient{0}@example.com" };
@@ -87,10 +88,22 @@ namespace DataDepersonalizer
 				txtDestinationFolder, btnOpenDestFolder, cbWriteBom, txtEncoding,
 				folderBrowserDialog1), pageSource);
 
-			controller.RegisterEditor(new OrderEditor(txtStartFrom, gridReplacers, cbAddReplacer,
-				btnAddReplacer, btnUp, btnDown, btnDelete, btnCopy, btnPaste), pageOrder);
+			var orderEditor = new OrderEditor(txtStartFrom, gridReplacers, cbAddReplacer,
+				btnAddReplacer, btnUp, btnDown, btnDelete, btnCopy, btnPaste,
+				pageTextData, pageMimeData, tabEditors, tabReplacers);
+
+			controller.RegisterEditor(orderEditor, pageOrder);
 
 			controller.RegisterEditor(new StartEditor(txtSaveReportTo, btnSaveReportTo, btnStart, txtLog, saveFileDialog1), pageStart);
+
+			orderEditor.RegisterReplacerEditor(new EmailAddressReplacerEditor(txtEmailReplaceMask), typeof(EmailAddressReplacer), pageEmailReplacer);
+			orderEditor.RegisterReplacerEditor(new IpAddressReplacerEditor(txtIpAddrReplaceMask), typeof(IpAddressReplacer), pageIpAddrReplacer);
+			orderEditor.RegisterReplacerEditor(new XmlDocumentReplacerEditor(gridXmlReplaceMask), typeof(XmlDocumentReplacer), pageXmlDocument);
+			orderEditor.RegisterReplacerEditor(new RegexReplacerEditor(gridRegexPatternReplaceMask), typeof(RegexReplacer), pageRegexPatterns);
+			orderEditor.RegisterReplacerEditor(new NameValuePairReplacerEditor(gridNameValueReplaceMask), typeof(NameValuePairReplacer), pageNameValuePairs);
+			//TODO orderEditor.RegisterReplacerEditor(new HtmlDocumentReplacerEditor(gridhtml), typeof(RegexReplacer), pageRegexPatterns);
+			//TextReplacer
+			//HtmlTextReplacer
 		}
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

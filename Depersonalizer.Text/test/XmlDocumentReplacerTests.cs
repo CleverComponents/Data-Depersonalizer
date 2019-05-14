@@ -10,8 +10,8 @@ namespace Depersonalizer.Text.Tests
 			var replacer = new XmlDocumentReplacer();
 			var context = new DataContext();
 
-			replacer.XmlNodes = new string[] { "tracking id", "order name" };
-			replacer.XmlReplaceWith = new string[] { "1{0:D6}", "name {0}" };
+			replacer.XmlReplaceNodes.Add(new ReplaceParameter("tracking id", "1{0:D6}"));
+			replacer.XmlReplaceNodes.Add(new ReplaceParameter("order name", "name {0}"));
 			context.StartFrom = 10;
 
 			var source = "<qwe>asd</qwe>\r\n<tracking id>1234567</tracking id>\r\n<order name>john smith</order name>\r\n <tracking id>1234567</tracking id> \r\n";
@@ -30,8 +30,7 @@ namespace Depersonalizer.Text.Tests
 
 			context.DataDictionary.AddValue("qwe", "dictionary");
 
-			replacer.XmlNodes = new string[] { "node" };
-			replacer.XmlReplaceWith = new string[] { "ignore" };
+			replacer.XmlReplaceNodes.Add(new ReplaceParameter("node", "ignore"));
 
 			var source = "<node>qwe</node>";
 			var expected = "<node>dictionary</node>";

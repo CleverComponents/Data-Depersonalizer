@@ -26,9 +26,7 @@
 //first may free it from dependence on the non-free library.
 #endregion
 
-using System;
 using System.IO;
-using Depersonalizer.Common;
 using ExtendedXmlSerializer.Configuration;
 using ExtendedXmlSerializer.ExtensionModel.Xml;
 

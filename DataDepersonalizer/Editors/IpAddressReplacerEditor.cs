@@ -22,21 +22,50 @@
 
 using System;
 using System.Windows.Forms;
+using Depersonalizer.Text;
 
-namespace DataDepersonalizer
+namespace DataDepersonalizer.Editors
 {
-	static class Program
+	public class IpAddressReplacerEditor : ReplacerEditor
 	{
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		static void Main()
+		private TextBox txtIpAddrReplaceMask;
+
+		private void BindControls()
 		{
-			Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(new ExceptionHandler().OnThreadException);
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new MainForm());
+			txtIpAddrReplaceMask.TextChanged += TxtIpAddrReplaceMask_TextChanged;
+		}
+
+		private void TxtIpAddrReplaceMask_TextChanged(object sender, EventArgs e)
+		{
+			Save();
+		}
+
+		protected override void LoadData()
+		{
+			txtIpAddrReplaceMask.Text = Data.ReplaceIpAddr;
+		}
+
+		protected override void SaveData()
+		{
+			Data.ReplaceIpAddr = txtIpAddrReplaceMask.Text;
+		}
+
+		protected override void UpdateControls()
+		{
+			bool disabled = Controller.State == EditorState.Run;
+			txtIpAddrReplaceMask.ReadOnly = disabled;
+		}
+
+		public IpAddressReplacerEditor(TextBox txtIpAddrReplaceMask) : base()
+		{
+			this.txtIpAddrReplaceMask = txtIpAddrReplaceMask;
+
+			BindControls();
+		}
+
+		public new IpAddressReplacer Data
+		{
+			get { return (IpAddressReplacer)base.Data; }
 		}
 	}
 }

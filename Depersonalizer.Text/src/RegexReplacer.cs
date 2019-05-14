@@ -21,6 +21,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Depersonalizer.Common;
 
@@ -30,6 +31,8 @@ namespace Depersonalizer.Text
 	{
 		private string ReplaceCustomPattern(string matchPattern, string replaceWithMask, string source, IDataContext context)
 		{
+			if (string.IsNullOrEmpty(matchPattern)) return source;
+
 			var dataArray = ExtractSimpleData(source, matchPattern, RegexOptions.IgnoreCase);
 
 			foreach (var data in dataArray)
@@ -43,25 +46,18 @@ namespace Depersonalizer.Text
 
 		private string ReplaceCustomPatterns(string source, IDataContext context)
 		{
-			if (RegexPatterns == null || RegexReplaceWith == null)
+			foreach (var pattern in RegexReplacePatterns)
 			{
-				return source;
-			}
-
-			if (RegexPatterns.Length != RegexReplaceWith.Length)
-			{
-				throw new Exception("The number of Regex patterns must be the same as Replace With values");
-			}
-
-			for (int i = 0; i < RegexPatterns.Length; i++)
-			{
-				source = ReplaceCustomPattern(RegexPatterns[i], RegexReplaceWith[i], source, context);
+				source = ReplaceCustomPattern(pattern.Parameter, pattern.ReplaceWith, source, context);
 			}
 
 			return source;
 		}
 
-		public RegexReplacer() : base() { }
+		public RegexReplacer() : base()
+		{
+			RegexReplacePatterns = new List<ReplaceParameter>();
+		}
 
 		public override string Replace(string source, IDataContext context)
 		{
@@ -69,7 +65,6 @@ namespace Depersonalizer.Text
 			return base.Replace(source, context);
 		}
 
-		public string[] RegexPatterns { get; set; }
-		public string[] RegexReplaceWith { get; set; }
+		public List<ReplaceParameter> RegexReplacePatterns { get; }
 	}
 }

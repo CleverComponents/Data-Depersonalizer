@@ -10,8 +10,9 @@ namespace Depersonalizer.Text.Tests
 			var replacer = new NameValuePairReplacer();
 			var context = new DataContext();
 
-			replacer.PairNames = new string[] { "tracking id", "order name" };
-			replacer.PairReplaceWith = new string[] { "1{0:D6}", "name {0}" };
+			replacer.ReplacePairs.Add(new ReplaceParameter("tracking id", "1{0:D6}"));
+			replacer.ReplacePairs.Add(new ReplaceParameter("order name", "name {0}"));
+
 			context.StartFrom = 10;
 
 			var source = "qwe : asd \r\ntracking id : 1234567 \r\n order name: john smith \r\n tracking id : 1234567\r\n";
@@ -30,8 +31,7 @@ namespace Depersonalizer.Text.Tests
 
 			context.DataDictionary.AddValue("qwe", "dictionary");
 
-			replacer.PairNames = new string[] { "pair" };
-			replacer.PairReplaceWith = new string[] { "ignore" };
+			replacer.ReplacePairs.Add(new ReplaceParameter("pair", "ignore"));
 
 			var source = "pair : qwe\r\n";
 			var expected = "pair : dictionary\r\n";
