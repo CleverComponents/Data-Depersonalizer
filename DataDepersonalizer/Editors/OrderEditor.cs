@@ -196,7 +196,10 @@ namespace DataDepersonalizer.Editors
 			gridReplacers.AutoGenerateColumns = false;
 			gridReplacers.Columns[0].DataPropertyName = "Name";
 
+			txtStartFrom.Minimum = 0;
+			txtStartFrom.Maximum = Decimal.MaxValue;
 			txtStartFrom.ValueChanged += TxtStartFrom_ValueChanged;
+
 			btnAddReplacer.Click += BtnAddReplacer_Click;
 
 			btnUp.Click += BtnUp_Click;

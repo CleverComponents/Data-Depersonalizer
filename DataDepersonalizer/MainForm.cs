@@ -39,35 +39,6 @@ namespace DataDepersonalizer
 			InitializeComponent();
 		}
 
-		//TODO
-		private void DefineMimeReplacerChain()
-		{
-			var attachHtmlTextReplacer = new HtmlTextReplacer() { };
-			var attachXmlReplacer = new XmlDocumentReplacer()
-			{
-				NextReplacer = attachHtmlTextReplacer,
-			};
-			attachXmlReplacer.XmlReplaceNodes.Add(new ReplaceParameter("CUSTOMERNAME", "John Smith{0}"));
-			attachXmlReplacer.XmlReplaceNodes.Add(new ReplaceParameter("CUSTOMERADDRESS1", "Lake City {0}"));
-
-			var attachReplacer = new TextAttachmentReplacer() { NextReplacer = attachXmlReplacer };
-
-			var emailReplacer = new EmailAddressReplacer() { ReplaceMask = "recipient{0}@example.com" };
-			var ipReplacer = new IpAddressReplacer() { ReplaceIpAddr = "127.0.0.{0}", NextReplacer = emailReplacer };
-			var headerReplacer = new MimeHeaderReplacer() { NextReplacer = ipReplacer };
-
-			var textReplacer = new TextReplacer() { };
-			var textBodyReplacer = new TextBodyReplacer() { NextReplacer = textReplacer };
-
-			var mimeReplacer = new MimeReplacer();
-
-			mimeReplacer.MimePartReplacers.Add(attachReplacer);
-			mimeReplacer.MimePartReplacers.Add(headerReplacer);
-			mimeReplacer.MimePartReplacers.Add(textBodyReplacer);
-
-			profile.ReplacerChain.Add(mimeReplacer);
-		}
-
 		private void NewProfile()
 		{
 			profile = new DepersonalizerProfile();
@@ -101,9 +72,9 @@ namespace DataDepersonalizer
 			orderEditor.RegisterReplacerEditor(new XmlDocumentReplacerEditor(gridXmlReplaceMask), typeof(XmlDocumentReplacer), pageXmlDocument);
 			orderEditor.RegisterReplacerEditor(new RegexReplacerEditor(gridRegexPatternReplaceMask), typeof(RegexReplacer), pageRegexPatterns);
 			orderEditor.RegisterReplacerEditor(new NameValuePairReplacerEditor(gridNameValueReplaceMask), typeof(NameValuePairReplacer), pageNameValuePairs);
-			//TODO orderEditor.RegisterReplacerEditor(new HtmlDocumentReplacerEditor(gridhtml), typeof(RegexReplacer), pageRegexPatterns);
-			//TextReplacer
-			//HtmlTextReplacer
+			orderEditor.RegisterReplacerEditor(new HtmlDocumentReplacerEditor(gridHtmlReplaceMask), typeof(HtmlDocumentReplacer), pageHtmlDocument);
+			orderEditor.RegisterReplacerEditor(new TextReplacerEditor(gridTextReplaceMask), typeof(TextReplacer), pageTextReplacer);
+			orderEditor.RegisterReplacerEditor(new TextReplacerEditor(gridTextReplaceMask), typeof(HtmlTextReplacer), pageTextReplacer);
 		}
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

@@ -31,6 +31,5 @@ namespace Depersonalizer.Profile
 	public class DataReplaceProfile
 	{
 		public int StartFromNumber { get; set; }
-		public string SaveReportTo { get; set; }
 	}
 }

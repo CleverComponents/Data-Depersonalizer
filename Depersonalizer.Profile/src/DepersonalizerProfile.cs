@@ -62,5 +62,6 @@ namespace Depersonalizer.Profile
 		public ReplacerChain ReplacerChain { get; set; }
 		public DataReplaceProfile DataReplaceProfile { get; set; }
 		public FileReplaceProfile FileReplaceProfile { get; set; }
+		public string SaveReportTo { get; set; }
 	}
 }

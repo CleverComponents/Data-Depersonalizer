@@ -73,6 +73,15 @@
 			this.gridRegexPatternReplaceMask = new System.Windows.Forms.DataGridView();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.pageHtmlDocument = new System.Windows.Forms.TabPage();
+			this.gridHtmlReplaceMask = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.pageTextReplacer = new System.Windows.Forms.TabPage();
+			this.txtTextReplacerInfo = new System.Windows.Forms.TextBox();
+			this.gridTextReplaceMask = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.cbAddReplacer = new System.Windows.Forms.ComboBox();
 			this.label13 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
@@ -93,15 +102,6 @@
 			this.btnAbout = new System.Windows.Forms.Button();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-			this.pageHtmlDocument = new System.Windows.Forms.TabPage();
-			this.gridHtmlReplaceMask = new System.Windows.Forms.DataGridView();
-			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.pageTextReplacer = new System.Windows.Forms.TabPage();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
-			this.txtTextReplacerInfo = new System.Windows.Forms.TextBox();
-			this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tabSteps.SuspendLayout();
 			this.pageSource.SuspendLayout();
 			this.pageOrder.SuspendLayout();
@@ -121,11 +121,11 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridNameValueReplaceMask)).BeginInit();
 			this.pageRegexPatterns.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridRegexPatternReplaceMask)).BeginInit();
-			this.pageStart.SuspendLayout();
 			this.pageHtmlDocument.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridHtmlReplaceMask)).BeginInit();
 			this.pageTextReplacer.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridTextReplaceMask)).BeginInit();
+			this.pageStart.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabSteps
@@ -140,7 +140,7 @@
 			this.tabSteps.Name = "tabSteps";
 			this.tabSteps.SelectedIndex = 0;
 			this.tabSteps.Size = new System.Drawing.Size(738, 476);
-			this.tabSteps.TabIndex = 36;
+			this.tabSteps.TabIndex = 1;
 			// 
 			// pageSource
 			// 
@@ -168,7 +168,7 @@
 			this.btnOpenDestFolder.Location = new System.Drawing.Point(684, 167);
 			this.btnOpenDestFolder.Name = "btnOpenDestFolder";
 			this.btnOpenDestFolder.Size = new System.Drawing.Size(24, 23);
-			this.btnOpenDestFolder.TabIndex = 21;
+			this.btnOpenDestFolder.TabIndex = 16;
 			this.btnOpenDestFolder.Text = "...";
 			this.btnOpenDestFolder.UseVisualStyleBackColor = true;
 			// 
@@ -179,7 +179,7 @@
 			this.txtDestinationFolder.Location = new System.Drawing.Point(127, 169);
 			this.txtDestinationFolder.Name = "txtDestinationFolder";
 			this.txtDestinationFolder.Size = new System.Drawing.Size(551, 20);
-			this.txtDestinationFolder.TabIndex = 20;
+			this.txtDestinationFolder.TabIndex = 15;
 			this.txtDestinationFolder.Text = ".\\data";
 			// 
 			// label18
@@ -197,7 +197,7 @@
 			this.cbLinkedData.Location = new System.Drawing.Point(127, 58);
 			this.cbLinkedData.Name = "cbLinkedData";
 			this.cbLinkedData.Size = new System.Drawing.Size(119, 17);
-			this.cbLinkedData.TabIndex = 18;
+			this.cbLinkedData.TabIndex = 12;
 			this.cbLinkedData.Text = "Linked Data in Files";
 			this.cbLinkedData.UseVisualStyleBackColor = true;
 			// 
@@ -209,7 +209,7 @@
 			this.cbWriteBom.Location = new System.Drawing.Point(274, 136);
 			this.cbWriteBom.Name = "cbWriteBom";
 			this.cbWriteBom.Size = new System.Drawing.Size(78, 17);
-			this.cbWriteBom.TabIndex = 17;
+			this.cbWriteBom.TabIndex = 14;
 			this.cbWriteBom.Text = "Write BOM";
 			this.cbWriteBom.UseVisualStyleBackColor = true;
 			// 
@@ -218,7 +218,7 @@
 			this.txtEncoding.Location = new System.Drawing.Point(127, 134);
 			this.txtEncoding.Name = "txtEncoding";
 			this.txtEncoding.Size = new System.Drawing.Size(100, 20);
-			this.txtEncoding.TabIndex = 15;
+			this.txtEncoding.TabIndex = 13;
 			this.txtEncoding.Text = "ASCII";
 			// 
 			// label5
@@ -236,7 +236,7 @@
 			this.btnOpenSourceFolder.Location = new System.Drawing.Point(684, 19);
 			this.btnOpenSourceFolder.Name = "btnOpenSourceFolder";
 			this.btnOpenSourceFolder.Size = new System.Drawing.Size(24, 23);
-			this.btnOpenSourceFolder.TabIndex = 5;
+			this.btnOpenSourceFolder.TabIndex = 11;
 			this.btnOpenSourceFolder.Text = "...";
 			this.btnOpenSourceFolder.UseVisualStyleBackColor = true;
 			// 
@@ -247,7 +247,7 @@
 			this.txtSourceFolder.Location = new System.Drawing.Point(127, 21);
 			this.txtSourceFolder.Name = "txtSourceFolder";
 			this.txtSourceFolder.Size = new System.Drawing.Size(551, 20);
-			this.txtSourceFolder.TabIndex = 4;
+			this.txtSourceFolder.TabIndex = 10;
 			this.txtSourceFolder.Text = ".\\data";
 			// 
 			// label1
@@ -285,9 +285,14 @@
 			// txtStartFrom
 			// 
 			this.txtStartFrom.Location = new System.Drawing.Point(123, 22);
+			this.txtStartFrom.Maximum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
 			this.txtStartFrom.Name = "txtStartFrom";
 			this.txtStartFrom.Size = new System.Drawing.Size(109, 20);
-			this.txtStartFrom.TabIndex = 49;
+			this.txtStartFrom.TabIndex = 20;
 			// 
 			// btnPaste
 			// 
@@ -295,8 +300,9 @@
 			this.btnPaste.Location = new System.Drawing.Point(352, 260);
 			this.btnPaste.Name = "btnPaste";
 			this.btnPaste.Size = new System.Drawing.Size(23, 23);
-			this.btnPaste.TabIndex = 48;
+			this.btnPaste.TabIndex = 28;
 			this.btnPaste.UseVisualStyleBackColor = true;
+			this.btnPaste.Visible = false;
 			// 
 			// btnCopy
 			// 
@@ -304,8 +310,9 @@
 			this.btnCopy.Location = new System.Drawing.Point(352, 231);
 			this.btnCopy.Name = "btnCopy";
 			this.btnCopy.Size = new System.Drawing.Size(23, 23);
-			this.btnCopy.TabIndex = 47;
+			this.btnCopy.TabIndex = 27;
 			this.btnCopy.UseVisualStyleBackColor = true;
+			this.btnCopy.Visible = false;
 			// 
 			// btnDelete
 			// 
@@ -313,7 +320,7 @@
 			this.btnDelete.Location = new System.Drawing.Point(352, 202);
 			this.btnDelete.Name = "btnDelete";
 			this.btnDelete.Size = new System.Drawing.Size(23, 23);
-			this.btnDelete.TabIndex = 46;
+			this.btnDelete.TabIndex = 26;
 			this.btnDelete.UseVisualStyleBackColor = true;
 			// 
 			// btnDown
@@ -322,7 +329,7 @@
 			this.btnDown.Location = new System.Drawing.Point(352, 149);
 			this.btnDown.Name = "btnDown";
 			this.btnDown.Size = new System.Drawing.Size(23, 23);
-			this.btnDown.TabIndex = 45;
+			this.btnDown.TabIndex = 25;
 			this.btnDown.UseVisualStyleBackColor = true;
 			// 
 			// label19
@@ -340,7 +347,7 @@
 			this.btnUp.Location = new System.Drawing.Point(352, 120);
 			this.btnUp.Name = "btnUp";
 			this.btnUp.Size = new System.Drawing.Size(23, 23);
-			this.btnUp.TabIndex = 43;
+			this.btnUp.TabIndex = 24;
 			this.btnUp.UseVisualStyleBackColor = true;
 			// 
 			// tabReplacers
@@ -354,7 +361,7 @@
 			this.tabReplacers.Name = "tabReplacers";
 			this.tabReplacers.SelectedIndex = 0;
 			this.tabReplacers.Size = new System.Drawing.Size(342, 352);
-			this.tabReplacers.TabIndex = 42;
+			this.tabReplacers.TabIndex = 23;
 			// 
 			// pageTextData
 			// 
@@ -451,7 +458,7 @@
 			this.btnAddReplacer.Location = new System.Drawing.Point(319, 63);
 			this.btnAddReplacer.Name = "btnAddReplacer";
 			this.btnAddReplacer.Size = new System.Drawing.Size(23, 23);
-			this.btnAddReplacer.TabIndex = 41;
+			this.btnAddReplacer.TabIndex = 22;
 			this.btnAddReplacer.UseVisualStyleBackColor = true;
 			// 
 			// tabEditors
@@ -472,7 +479,7 @@
 			this.tabEditors.Name = "tabEditors";
 			this.tabEditors.SelectedIndex = 0;
 			this.tabEditors.Size = new System.Drawing.Size(344, 352);
-			this.tabEditors.TabIndex = 40;
+			this.tabEditors.TabIndex = 29;
 			// 
 			// pageEmailReplacer
 			// 
@@ -494,7 +501,7 @@
 			this.txtEmailReplaceMask.Location = new System.Drawing.Point(126, 20);
 			this.txtEmailReplaceMask.Name = "txtEmailReplaceMask";
 			this.txtEmailReplaceMask.Size = new System.Drawing.Size(190, 20);
-			this.txtEmailReplaceMask.TabIndex = 11;
+			this.txtEmailReplaceMask.TabIndex = 50;
 			this.txtEmailReplaceMask.Text = "recipient{0}@example.com";
 			// 
 			// label2
@@ -526,7 +533,7 @@
 			this.txtIpAddrReplaceMask.Location = new System.Drawing.Point(126, 20);
 			this.txtIpAddrReplaceMask.Name = "txtIpAddrReplaceMask";
 			this.txtIpAddrReplaceMask.Size = new System.Drawing.Size(190, 20);
-			this.txtIpAddrReplaceMask.TabIndex = 15;
+			this.txtIpAddrReplaceMask.TabIndex = 50;
 			this.txtIpAddrReplaceMask.Text = "127.0.0.{0}";
 			// 
 			// label4
@@ -565,7 +572,7 @@
 			this.gridXmlReplaceMask.Name = "gridXmlReplaceMask";
 			this.gridXmlReplaceMask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridXmlReplaceMask.Size = new System.Drawing.Size(338, 310);
-			this.gridXmlReplaceMask.TabIndex = 24;
+			this.gridXmlReplaceMask.TabIndex = 50;
 			// 
 			// colXmlNodeNames
 			// 
@@ -603,7 +610,7 @@
 			this.gridNameValueReplaceMask.Name = "gridNameValueReplaceMask";
 			this.gridNameValueReplaceMask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridNameValueReplaceMask.Size = new System.Drawing.Size(338, 310);
-			this.gridNameValueReplaceMask.TabIndex = 25;
+			this.gridNameValueReplaceMask.TabIndex = 50;
 			// 
 			// dataGridViewTextBoxColumn1
 			// 
@@ -641,7 +648,7 @@
 			this.gridRegexPatternReplaceMask.Name = "gridRegexPatternReplaceMask";
 			this.gridRegexPatternReplaceMask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridRegexPatternReplaceMask.Size = new System.Drawing.Size(338, 310);
-			this.gridRegexPatternReplaceMask.TabIndex = 25;
+			this.gridRegexPatternReplaceMask.TabIndex = 50;
 			// 
 			// dataGridViewTextBoxColumn3
 			// 
@@ -652,6 +659,96 @@
 			// 
 			this.dataGridViewTextBoxColumn4.HeaderText = "Replace Mask";
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+			// 
+			// pageHtmlDocument
+			// 
+			this.pageHtmlDocument.Controls.Add(this.gridHtmlReplaceMask);
+			this.pageHtmlDocument.Location = new System.Drawing.Point(4, 4);
+			this.pageHtmlDocument.Name = "pageHtmlDocument";
+			this.pageHtmlDocument.Padding = new System.Windows.Forms.Padding(3);
+			this.pageHtmlDocument.Size = new System.Drawing.Size(336, 308);
+			this.pageHtmlDocument.TabIndex = 5;
+			this.pageHtmlDocument.Text = "HTML Document";
+			this.pageHtmlDocument.UseVisualStyleBackColor = true;
+			// 
+			// gridHtmlReplaceMask
+			// 
+			this.gridHtmlReplaceMask.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridHtmlReplaceMask.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.gridHtmlReplaceMask.BackgroundColor = System.Drawing.SystemColors.Window;
+			this.gridHtmlReplaceMask.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridHtmlReplaceMask.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6});
+			this.gridHtmlReplaceMask.Location = new System.Drawing.Point(-1, -1);
+			this.gridHtmlReplaceMask.Name = "gridHtmlReplaceMask";
+			this.gridHtmlReplaceMask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.gridHtmlReplaceMask.Size = new System.Drawing.Size(338, 310);
+			this.gridHtmlReplaceMask.TabIndex = 50;
+			// 
+			// dataGridViewTextBoxColumn5
+			// 
+			this.dataGridViewTextBoxColumn5.HeaderText = "HTML Tag IDs";
+			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+			// 
+			// dataGridViewTextBoxColumn6
+			// 
+			this.dataGridViewTextBoxColumn6.HeaderText = "Replace Mask";
+			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+			// 
+			// pageTextReplacer
+			// 
+			this.pageTextReplacer.Controls.Add(this.txtTextReplacerInfo);
+			this.pageTextReplacer.Controls.Add(this.gridTextReplaceMask);
+			this.pageTextReplacer.Location = new System.Drawing.Point(4, 4);
+			this.pageTextReplacer.Name = "pageTextReplacer";
+			this.pageTextReplacer.Padding = new System.Windows.Forms.Padding(3);
+			this.pageTextReplacer.Size = new System.Drawing.Size(336, 308);
+			this.pageTextReplacer.TabIndex = 6;
+			this.pageTextReplacer.Text = "Text Replacer";
+			this.pageTextReplacer.UseVisualStyleBackColor = true;
+			// 
+			// txtTextReplacerInfo
+			// 
+			this.txtTextReplacerInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.txtTextReplacerInfo.Enabled = false;
+			this.txtTextReplacerInfo.Location = new System.Drawing.Point(0, 245);
+			this.txtTextReplacerInfo.Multiline = true;
+			this.txtTextReplacerInfo.Name = "txtTextReplacerInfo";
+			this.txtTextReplacerInfo.Size = new System.Drawing.Size(336, 63);
+			this.txtTextReplacerInfo.TabIndex = 26;
+			this.txtTextReplacerInfo.Text = "Fill the Key / Replace Mask parameters, or leave the list empty to replace the sa" +
+    "me data with corresponding values being generated by the previous replacers.";
+			// 
+			// gridTextReplaceMask
+			// 
+			this.gridTextReplaceMask.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridTextReplaceMask.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.gridTextReplaceMask.BackgroundColor = System.Drawing.SystemColors.Window;
+			this.gridTextReplaceMask.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridTextReplaceMask.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8});
+			this.gridTextReplaceMask.Location = new System.Drawing.Point(-1, -1);
+			this.gridTextReplaceMask.Name = "gridTextReplaceMask";
+			this.gridTextReplaceMask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.gridTextReplaceMask.Size = new System.Drawing.Size(338, 248);
+			this.gridTextReplaceMask.TabIndex = 50;
+			// 
+			// dataGridViewTextBoxColumn7
+			// 
+			this.dataGridViewTextBoxColumn7.HeaderText = "Keys";
+			this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+			// 
+			// dataGridViewTextBoxColumn8
+			// 
+			this.dataGridViewTextBoxColumn8.HeaderText = "Replace Mask";
+			this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
 			// 
 			// cbAddReplacer
 			// 
@@ -667,7 +764,7 @@
 			this.cbAddReplacer.Location = new System.Drawing.Point(63, 65);
 			this.cbAddReplacer.Name = "cbAddReplacer";
 			this.cbAddReplacer.Size = new System.Drawing.Size(250, 21);
-			this.cbAddReplacer.TabIndex = 39;
+			this.cbAddReplacer.TabIndex = 21;
 			// 
 			// label13
 			// 
@@ -755,7 +852,7 @@
 			this.btnSaveReportTo.Location = new System.Drawing.Point(598, 419);
 			this.btnSaveReportTo.Name = "btnSaveReportTo";
 			this.btnSaveReportTo.Size = new System.Drawing.Size(24, 23);
-			this.btnSaveReportTo.TabIndex = 37;
+			this.btnSaveReportTo.TabIndex = 72;
 			this.btnSaveReportTo.Text = "...";
 			this.btnSaveReportTo.UseVisualStyleBackColor = true;
 			// 
@@ -766,7 +863,7 @@
 			this.txtSaveReportTo.Location = new System.Drawing.Point(96, 421);
 			this.txtSaveReportTo.Name = "txtSaveReportTo";
 			this.txtSaveReportTo.Size = new System.Drawing.Size(496, 20);
-			this.txtSaveReportTo.TabIndex = 36;
+			this.txtSaveReportTo.TabIndex = 71;
 			// 
 			// label8
 			// 
@@ -784,7 +881,7 @@
 			this.btnStart.Location = new System.Drawing.Point(632, 16);
 			this.btnStart.Name = "btnStart";
 			this.btnStart.Size = new System.Drawing.Size(86, 23);
-			this.btnStart.TabIndex = 34;
+			this.btnStart.TabIndex = 73;
 			this.btnStart.Text = "Start";
 			this.btnStart.UseVisualStyleBackColor = true;
 			// 
@@ -799,7 +896,7 @@
 			this.txtLog.ReadOnly = true;
 			this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.txtLog.Size = new System.Drawing.Size(621, 412);
-			this.txtLog.TabIndex = 32;
+			this.txtLog.TabIndex = 70;
 			// 
 			// btnSaveProfile
 			// 
@@ -807,7 +904,7 @@
 			this.btnSaveProfile.Location = new System.Drawing.Point(6, 486);
 			this.btnSaveProfile.Name = "btnSaveProfile";
 			this.btnSaveProfile.Size = new System.Drawing.Size(98, 23);
-			this.btnSaveProfile.TabIndex = 37;
+			this.btnSaveProfile.TabIndex = 2;
 			this.btnSaveProfile.Text = "Save Profile";
 			this.btnSaveProfile.UseVisualStyleBackColor = true;
 			this.btnSaveProfile.Click += new System.EventHandler(this.btnSaveProfile_Click);
@@ -818,7 +915,7 @@
 			this.btnLoadProfile.Location = new System.Drawing.Point(110, 486);
 			this.btnLoadProfile.Name = "btnLoadProfile";
 			this.btnLoadProfile.Size = new System.Drawing.Size(98, 23);
-			this.btnLoadProfile.TabIndex = 38;
+			this.btnLoadProfile.TabIndex = 3;
 			this.btnLoadProfile.Text = "Load Profile";
 			this.btnLoadProfile.UseVisualStyleBackColor = true;
 			this.btnLoadProfile.Click += new System.EventHandler(this.btnLoadProfile_Click);
@@ -829,7 +926,7 @@
 			this.btnNewProfile.Location = new System.Drawing.Point(214, 486);
 			this.btnNewProfile.Name = "btnNewProfile";
 			this.btnNewProfile.Size = new System.Drawing.Size(98, 23);
-			this.btnNewProfile.TabIndex = 39;
+			this.btnNewProfile.TabIndex = 4;
 			this.btnNewProfile.Text = "New Profile";
 			this.btnNewProfile.UseVisualStyleBackColor = true;
 			this.btnNewProfile.Click += new System.EventHandler(this.btnNewProfile_Click);
@@ -840,7 +937,7 @@
 			this.btnClose.Location = new System.Drawing.Point(638, 486);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(98, 23);
-			this.btnClose.TabIndex = 40;
+			this.btnClose.TabIndex = 6;
 			this.btnClose.Text = "Close";
 			this.btnClose.UseVisualStyleBackColor = true;
 			this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -851,7 +948,7 @@
 			this.btnAbout.Location = new System.Drawing.Point(534, 486);
 			this.btnAbout.Name = "btnAbout";
 			this.btnAbout.Size = new System.Drawing.Size(98, 23);
-			this.btnAbout.TabIndex = 41;
+			this.btnAbout.TabIndex = 5;
 			this.btnAbout.Text = "About";
 			this.btnAbout.UseVisualStyleBackColor = true;
 			this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
@@ -866,96 +963,6 @@
 			// 
 			this.saveFileDialog1.DefaultExt = "*.xml";
 			this.saveFileDialog1.Filter = "XML files|*.xml|All files|*.*";
-			// 
-			// pageHtmlDocument
-			// 
-			this.pageHtmlDocument.Controls.Add(this.gridHtmlReplaceMask);
-			this.pageHtmlDocument.Location = new System.Drawing.Point(4, 4);
-			this.pageHtmlDocument.Name = "pageHtmlDocument";
-			this.pageHtmlDocument.Padding = new System.Windows.Forms.Padding(3);
-			this.pageHtmlDocument.Size = new System.Drawing.Size(336, 308);
-			this.pageHtmlDocument.TabIndex = 5;
-			this.pageHtmlDocument.Text = "HTML Document";
-			this.pageHtmlDocument.UseVisualStyleBackColor = true;
-			// 
-			// gridHtmlReplaceMask
-			// 
-			this.gridHtmlReplaceMask.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.gridHtmlReplaceMask.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			this.gridHtmlReplaceMask.BackgroundColor = System.Drawing.SystemColors.Window;
-			this.gridHtmlReplaceMask.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.gridHtmlReplaceMask.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6});
-			this.gridHtmlReplaceMask.Location = new System.Drawing.Point(-1, -1);
-			this.gridHtmlReplaceMask.Name = "gridHtmlReplaceMask";
-			this.gridHtmlReplaceMask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.gridHtmlReplaceMask.Size = new System.Drawing.Size(338, 310);
-			this.gridHtmlReplaceMask.TabIndex = 25;
-			// 
-			// dataGridViewTextBoxColumn5
-			// 
-			this.dataGridViewTextBoxColumn5.HeaderText = "HTML Tag IDs";
-			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-			// 
-			// dataGridViewTextBoxColumn6
-			// 
-			this.dataGridViewTextBoxColumn6.HeaderText = "Replace Mask";
-			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-			// 
-			// pageTextReplacer
-			// 
-			this.pageTextReplacer.Controls.Add(this.txtTextReplacerInfo);
-			this.pageTextReplacer.Controls.Add(this.dataGridView1);
-			this.pageTextReplacer.Location = new System.Drawing.Point(4, 4);
-			this.pageTextReplacer.Name = "pageTextReplacer";
-			this.pageTextReplacer.Padding = new System.Windows.Forms.Padding(3);
-			this.pageTextReplacer.Size = new System.Drawing.Size(336, 308);
-			this.pageTextReplacer.TabIndex = 6;
-			this.pageTextReplacer.Text = "Text Replacer";
-			this.pageTextReplacer.UseVisualStyleBackColor = true;
-			// 
-			// dataGridView1
-			// 
-			this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8});
-			this.dataGridView1.Location = new System.Drawing.Point(-1, -1);
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dataGridView1.Size = new System.Drawing.Size(338, 248);
-			this.dataGridView1.TabIndex = 25;
-			// 
-			// txtTextReplacerInfo
-			// 
-			this.txtTextReplacerInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.txtTextReplacerInfo.Enabled = false;
-			this.txtTextReplacerInfo.Location = new System.Drawing.Point(0, 245);
-			this.txtTextReplacerInfo.Multiline = true;
-			this.txtTextReplacerInfo.Name = "txtTextReplacerInfo";
-			this.txtTextReplacerInfo.Size = new System.Drawing.Size(336, 63);
-			this.txtTextReplacerInfo.TabIndex = 26;
-			this.txtTextReplacerInfo.Text = "Fill the Key / Replace Mask parameters, or leave the list empty to replace the sa" +
-    "me data with corresponding values being generated by the previous replacers.";
-			// 
-			// dataGridViewTextBoxColumn7
-			// 
-			this.dataGridViewTextBoxColumn7.HeaderText = "Keys";
-			this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-			// 
-			// dataGridViewTextBoxColumn8
-			// 
-			this.dataGridViewTextBoxColumn8.HeaderText = "Replace Mask";
-			this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
 			// 
 			// MainForm
 			// 
@@ -997,13 +1004,13 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridNameValueReplaceMask)).EndInit();
 			this.pageRegexPatterns.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.gridRegexPatternReplaceMask)).EndInit();
-			this.pageStart.ResumeLayout(false);
-			this.pageStart.PerformLayout();
 			this.pageHtmlDocument.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.gridHtmlReplaceMask)).EndInit();
 			this.pageTextReplacer.ResumeLayout(false);
 			this.pageTextReplacer.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridTextReplaceMask)).EndInit();
+			this.pageStart.ResumeLayout(false);
+			this.pageStart.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -1084,7 +1091,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
 		private System.Windows.Forms.TabPage pageTextReplacer;
-		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.DataGridView gridTextReplaceMask;
 		private System.Windows.Forms.TextBox txtTextReplacerInfo;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;

@@ -58,7 +58,7 @@ namespace DataDepersonalizer.Editors
 				Controller.State = EditorState.Edit;
 			}
 
-			MessageBox.Show("Done");
+			MessageBox.Show("The depersonalization process completed successfully.");
 		}
 
 		private void BtnSaveReportTo_Click(object sender, EventArgs e)
@@ -77,15 +77,28 @@ namespace DataDepersonalizer.Editors
 			Save();
 		}
 
-		private void PutLogMessage(string message)
+		private void PutLogMessageToTextBox(string message)
 		{
-			message += "\r\n";
-
 			txtLog.Text += message;
 			txtLog.Select(txtLog.Text.Length, 0);
 			txtLog.ScrollToCaret();
+		}
 
-			//TODO save to file
+		private void PutLogMessageToFile(string message)
+		{
+			if (string.IsNullOrEmpty(Data.SaveReportTo)) return;
+
+			var path = AddTrailingBackSlash(Path.GetDirectoryName(Data.SaveReportTo));
+			Directory.CreateDirectory(path);
+
+			File.AppendAllText(Data.SaveReportTo, message, Encoding.UTF8);
+		}
+
+		private void PutLogMessage(string message)
+		{
+			message += "\r\n";
+			PutLogMessageToTextBox(message);
+			PutLogMessageToFile(message);
 		}
 
 		private string AddTrailingBackSlash(string path)
@@ -104,7 +117,7 @@ namespace DataDepersonalizer.Editors
 			{
 				PutLogMessage("Start data depersonalization...");
 
-				var list = Directory.GetFileSystemEntries(AddTrailingBackSlash(Data.FileReplaceProfile.SourceFolder), "*.*");
+				var sourceList = Directory.GetFileSystemEntries(AddTrailingBackSlash(Data.FileReplaceProfile.SourceFolder), "*.*");
 
 				Encoding encoding;
 				if (string.IsNullOrEmpty(Data.FileReplaceProfile.Encoding))
@@ -120,20 +133,27 @@ namespace DataDepersonalizer.Editors
 					encoding = Encoding.GetEncoding(Data.FileReplaceProfile.Encoding);
 				}
 
-				foreach (var fileEntry in list)
+				foreach (var sourceFile in sourceList)
 				{
 					if (!Data.FileReplaceProfile.LinkedDataInFiles)
 					{
 						dataContext.DataDictionary.Reset();
 					}
 
-					var source = File.ReadAllText(fileEntry, encoding);
+					var source = File.ReadAllText(sourceFile, encoding);
 
 					source = Data.ReplacerChain.Replace(source, dataContext);
 
-					File.WriteAllText(fileEntry, source, encoding);
+					var destFile = AddTrailingBackSlash(Data.FileReplaceProfile.DestinationFolder);
+					Directory.CreateDirectory(destFile);
 
-					PutLogMessage(String.Format("File \"{0}\" depersonalized.", Path.GetFileName(fileEntry)));
+					destFile += Path.GetFileName(sourceFile);
+
+					File.WriteAllText(destFile, source, encoding);
+
+					PutLogMessage(String.Format("File \"{0}\" depersonalized.", Path.GetFileName(sourceFile)));
+
+					Application.DoEvents();
 				}
 
 				PutLogMessage("E-mails replaced, IP addresses replaced, sensitive data removed.\r\nDone.");
@@ -153,12 +173,12 @@ namespace DataDepersonalizer.Editors
 
 		protected override void SaveData()
 		{
-			Data.DataReplaceProfile.SaveReportTo = txtSaveReportTo.Text;
+			Data.SaveReportTo = txtSaveReportTo.Text;
 		}
 
 		protected override void LoadData()
 		{
-			txtSaveReportTo.Text = Data.DataReplaceProfile.SaveReportTo;
+			txtSaveReportTo.Text = Data.SaveReportTo;
 		}
 
 		protected override void UpdateControls()
