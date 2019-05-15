@@ -48,8 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MimeHeaderReplacer.cs" />
+    <Compile Include="HtmlBodyReplacer.cs" />
+    <Compile Include="IMimePartReplacer.cs" />
+    <Compile Include="IMimeReplacer.cs" />
+    <Compile Include="MimePartReplacer.cs" />
     <Compile Include="MimeReplacer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextAttachmentReplacer.cs" />
+    <Compile Include="TextBodyReplacer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Depersonalizer.Common\src\Depersonalizer.Common.csproj">

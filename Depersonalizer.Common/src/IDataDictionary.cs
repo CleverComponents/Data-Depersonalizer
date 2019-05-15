@@ -21,12 +21,14 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 
 namespace Depersonalizer.Common
 {
-	public interface IDataDictionary
+	public interface IDataDictionary : IEnumerable<KeyValuePair<string, string>>
 	{
 		void Reset();
 		string GetValue(string key, Func<string> getNewValue);
+		void AddValue(string key, string value);
 	}
 }

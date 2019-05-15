@@ -45,6 +45,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editors\BaseEditor.cs" />
+    <Compile Include="Editors\EditController.cs" />
+    <Compile Include="Editors\EmailAddressReplacerEditor.cs" />
+    <Compile Include="Editors\HtmlDocumentReplacerEditor.cs" />
+    <Compile Include="Editors\IpAddressReplacerEditor.cs" />
+    <Compile Include="Editors\ListReplaceEditor.cs" />
+    <Compile Include="Editors\NameValuePairReplacerEditor.cs" />
+    <Compile Include="Editors\OrderEditor.cs" />
+    <Compile Include="Editors\RegexReplacerEditor.cs" />
+    <Compile Include="Editors\ReplacerEditor.cs" />
+    <Compile Include="Editors\SourceEditor.cs" />
+    <Compile Include="Editors\StartEditor.cs" />
+    <Compile Include="Editors\ReplacerFactory.cs" />
+    <Compile Include="Editors\StepEditor.cs" />
+    <Compile Include="Editors\TextReplacerEditor.cs" />
+    <Compile Include="Editors\XmlDocumentReplacerEditor.cs" />
+    <Compile Include="ExceptionHandler.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,10 +105,33 @@
       <Project>{f07278c7-205a-4106-8890-2c43d81e82e9}</Project>
       <Name>Depersonalizer.Mime</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Depersonalizer.Profile\src\Depersonalizer.Profile.csproj">
+      <Project>{112e3ee9-a390-4539-ae0b-abeb9a79e0d3}</Project>
+      <Name>Depersonalizer.Profile</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Depersonalizer.Text\src\Depersonalizer.Text.csproj">
       <Project>{8d63e32c-a24f-4871-b819-8cc219339a5e}</Project>
       <Name>Depersonalizer.Text</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-top.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-bottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

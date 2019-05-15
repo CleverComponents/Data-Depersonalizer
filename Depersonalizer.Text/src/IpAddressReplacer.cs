@@ -32,7 +32,7 @@ namespace Depersonalizer.Text
 		{
 			const string matchPattern = @"([0-9]{1,3}[\.]){3}[0-9]{1,3}";
 
-			return ExtractData(text, matchPattern, RegexOptions.IgnoreCase);
+			return ExtractSimpleData(text, matchPattern, RegexOptions.IgnoreCase);
 		}
 
 		private int NormalizeIpPart(int part)
@@ -56,8 +56,6 @@ namespace Depersonalizer.Text
 
 			return source;
 		}
-
-		public IpAddressReplacer(IDataReplacer nextReplacer) : base(nextReplacer) { }
 
 		public IpAddressReplacer() : base() { }
 

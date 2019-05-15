@@ -21,6 +21,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Depersonalizer.Common;
 
@@ -28,25 +29,19 @@ namespace Depersonalizer.Text
 {
 	public class XmlDocumentReplacer : DataReplacer
 	{
-		private string[] ExtractXmlNodes(string nodeName, string text)
-		{
-			string matchPattern = @"<" + nodeName + ">(.*?)</" + nodeName + ">";
-
-			return ExtractData(text, matchPattern, RegexOptions.IgnoreCase);
-		}
-
 		private string ReplaceXmlNode(string nodeName, string replaceWithMask, string source, IDataContext context)
 		{
-			var xmlNodes = ExtractXmlNodes(nodeName, source);
+			if (string.IsNullOrEmpty(nodeName)) return source;
+
+			string matchPattern = @"<" + nodeName + ">(.*?)</" + nodeName + ">";
+
+			var xmlNodes = ExtractGroupData(source, matchPattern, 1, RegexOptions.IgnoreCase);
 
 			foreach (var node in xmlNodes)
 			{
-				var depersonalizedNode = context.DataDictionary.GetValue(node, () =>
-				{
-					var replaceWith = String.Format(replaceWithMask, context.StartFrom++);
-					return String.Format("<{0}>{1}</{0}>", nodeName, replaceWith);
-				});
-				source = source.Replace(node, depersonalizedNode);
+				var depersonalized = context.DataDictionary.GetValue(node.GroupValue, () => { return String.Format(replaceWithMask, context.StartFrom++); });
+				var depersonalizedTag = node.DataValue.Replace(node.GroupValue.Trim(), depersonalized);
+				source = source.Replace(node.DataValue, depersonalizedTag);
 			}
 
 			return source;
@@ -54,27 +49,18 @@ namespace Depersonalizer.Text
 
 		private string ReplaceXmlNodes(string source, IDataContext context)
 		{
-			if (XmlNodes == null || XmlReplaceWith == null)
+			foreach (var node in XmlReplaceNodes)
 			{
-				return source;
-			}
-
-			if (XmlNodes.Length != XmlReplaceWith.Length)
-			{
-				throw new Exception("The number of XML nodes must be the same as Replace With values");
-			}
-
-			for (int i = 0; i < XmlNodes.Length; i++)
-			{
-				source = ReplaceXmlNode(XmlNodes[i], XmlReplaceWith[i], source, context);
+				source = ReplaceXmlNode(node.Parameter, node.ReplaceWith, source, context);
 			}
 
 			return source;
 		}
 
-		public XmlDocumentReplacer(IDataReplacer nextReplacer) : base(nextReplacer) { }
-
-		public XmlDocumentReplacer() : base() { }
+		public XmlDocumentReplacer() : base()
+		{
+			XmlReplaceNodes = new List<ReplaceParameter>();
+		}
 
 		public override string Replace(string source, IDataContext context)
 		{
@@ -82,7 +68,6 @@ namespace Depersonalizer.Text
 			return base.Replace(source, context);
 		}
 
-		public string[] XmlNodes { get; set; }
-		public string[] XmlReplaceWith { get; set; }
+		public List<ReplaceParameter> XmlReplaceNodes { get; }
 	}
 }

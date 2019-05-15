@@ -21,6 +21,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Depersonalizer.Common;
 
@@ -28,25 +29,19 @@ namespace Depersonalizer.Text
 {
 	public class NameValuePairReplacer : DataReplacer
 	{
-		private string[] ExtractNameValuePairs(string name, string text)
-		{
-			string matchPattern = @"^\s*" + name + @"\s*:(\s*|.*)(?=\r$)";
-
-			return ExtractData(text, matchPattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
-		}
-
 		private string ReplaceNameValuePair(string name, string replaceWithMask, string source, IDataContext context)
 		{
-			var pairs = ExtractNameValuePairs(name, source);
+			if (string.IsNullOrEmpty(name)) return source;
+
+			string matchPattern = @"^\s*" + name + @"\s*:(\s*|.*)(?=\r$)";
+
+			var pairs = ExtractGroupData(source, matchPattern, 1, RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
 			foreach (var pair in pairs)
 			{
-				var depersonalizedPair = context.DataDictionary.GetValue(pair, () =>
-				{
-					var replaceWith = String.Format(replaceWithMask, context.StartFrom++);
-					return String.Format("{0} : {1}", name, replaceWith);
-				});
-				source = source.Replace(pair, depersonalizedPair);
+				var depersonalized = context.DataDictionary.GetValue(pair.GroupValue, () => { return String.Format(replaceWithMask, context.StartFrom++); });
+				var depersonalizedTag = pair.DataValue.Replace(pair.GroupValue.Trim(), depersonalized);
+				source = source.Replace(pair.DataValue, depersonalizedTag);
 			}
 
 			return source;
@@ -54,27 +49,18 @@ namespace Depersonalizer.Text
 
 		private string ReplaceNameValuePairs(string source, IDataContext context)
 		{
-			if (PairNames == null || PairReplaceWith == null)
+			foreach (var pair in ReplacePairs)
 			{
-				return source;
-			}
-
-			if (PairNames.Length != PairReplaceWith.Length)
-			{
-				throw new Exception("The number of names must be the same as Replace With values");
-			}
-
-			for (int i = 0; i < PairNames.Length; i++)
-			{
-				source = ReplaceNameValuePair(PairNames[i], PairReplaceWith[i], source, context);
+				source = ReplaceNameValuePair(pair.Parameter, pair.ReplaceWith, source, context);
 			}
 
 			return source;
 		}
 
-		public NameValuePairReplacer(IDataReplacer nextReplacer) : base(nextReplacer) { }
-
-		public NameValuePairReplacer() : base() { }
+		public NameValuePairReplacer() : base()
+		{
+			ReplacePairs = new List<ReplaceParameter>();
+		}
 
 		public override string Replace(string source, IDataContext context)
 		{
@@ -82,7 +68,6 @@ namespace Depersonalizer.Text
 			return base.Replace(source, context);
 		}
 
-		public string[] PairNames { get; set; }
-		public string[] PairReplaceWith { get; set; }
+		public List<ReplaceParameter> ReplacePairs { get; }
 	}
 }
