@@ -39,6 +39,7 @@ namespace Depersonalizer.Profile
 			ReplacerChain = new ReplacerChain();
 			DataReplaceProfile = new DataReplaceProfile();
 			FileReplaceProfile = new FileReplaceProfile();
+			Version = 1;
 		}
 
 		public static DepersonalizerProfile Load(string fileName)
@@ -63,5 +64,6 @@ namespace Depersonalizer.Profile
 		public DataReplaceProfile DataReplaceProfile { get; set; }
 		public FileReplaceProfile FileReplaceProfile { get; set; }
 		public string SaveReportTo { get; set; }
+		public int Version { get; set; }
 	}
 }
