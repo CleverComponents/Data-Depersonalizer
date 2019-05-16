@@ -132,6 +132,8 @@
   <ItemGroup>
     <None Include="Resources\new.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\DataDepersonalizer-145.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

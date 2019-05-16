@@ -23,6 +23,7 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
 			this.tabSteps = new System.Windows.Forms.TabControl();
 			this.pageSource = new System.Windows.Forms.TabPage();
@@ -38,12 +39,7 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.pageOrder = new System.Windows.Forms.TabPage();
 			this.txtStartFrom = new System.Windows.Forms.NumericUpDown();
-			this.btnPaste = new System.Windows.Forms.Button();
-			this.btnCopy = new System.Windows.Forms.Button();
-			this.btnDelete = new System.Windows.Forms.Button();
-			this.btnDown = new System.Windows.Forms.Button();
 			this.label19 = new System.Windows.Forms.Label();
-			this.btnUp = new System.Windows.Forms.Button();
 			this.tabReplacers = new System.Windows.Forms.TabControl();
 			this.pageTextData = new System.Windows.Forms.TabPage();
 			this.gridReplacers = new System.Windows.Forms.DataGridView();
@@ -53,7 +49,6 @@
 			this.colMimeReplacers = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.gridMimeParts = new System.Windows.Forms.DataGridView();
 			this.colMimeParts = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.btnAddReplacer = new System.Windows.Forms.Button();
 			this.tabEditors = new System.Windows.Forms.TabControl();
 			this.pageEmailReplacer = new System.Windows.Forms.TabPage();
 			this.txtEmailReplaceMask = new System.Windows.Forms.TextBox();
@@ -102,6 +97,20 @@
 			this.btnAbout = new System.Windows.Forms.Button();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+			this.linkAskQuestion = new System.Windows.Forms.LinkLabel();
+			this.linkDownload = new System.Windows.Forms.LinkLabel();
+			this.linkArticle47 = new System.Windows.Forms.LinkLabel();
+			this.label6 = new System.Windows.Forms.Label();
+			this.linkArticle48 = new System.Windows.Forms.LinkLabel();
+			this.txtProgramInfo = new System.Windows.Forms.TextBox();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.btnPaste = new System.Windows.Forms.Button();
+			this.btnCopy = new System.Windows.Forms.Button();
+			this.btnDelete = new System.Windows.Forms.Button();
+			this.btnDown = new System.Windows.Forms.Button();
+			this.btnUp = new System.Windows.Forms.Button();
+			this.btnAddReplacer = new System.Windows.Forms.Button();
 			this.tabSteps.SuspendLayout();
 			this.pageSource.SuspendLayout();
 			this.pageOrder.SuspendLayout();
@@ -126,6 +135,7 @@
 			this.pageTextReplacer.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridTextReplaceMask)).BeginInit();
 			this.pageStart.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tabSteps
@@ -145,6 +155,13 @@
 			// pageSource
 			// 
 			this.pageSource.BackColor = System.Drawing.SystemColors.Control;
+			this.pageSource.Controls.Add(this.pictureBox1);
+			this.pageSource.Controls.Add(this.linkAskQuestion);
+			this.pageSource.Controls.Add(this.linkDownload);
+			this.pageSource.Controls.Add(this.linkArticle47);
+			this.pageSource.Controls.Add(this.label6);
+			this.pageSource.Controls.Add(this.linkArticle48);
+			this.pageSource.Controls.Add(this.txtProgramInfo);
 			this.pageSource.Controls.Add(this.btnOpenDestFolder);
 			this.pageSource.Controls.Add(this.txtDestinationFolder);
 			this.pageSource.Controls.Add(this.label18);
@@ -160,12 +177,12 @@
 			this.pageSource.Padding = new System.Windows.Forms.Padding(3);
 			this.pageSource.Size = new System.Drawing.Size(730, 450);
 			this.pageSource.TabIndex = 0;
-			this.pageSource.Text = "Step 1 - Data";
+			this.pageSource.Text = "Step 1 - Define Data Source";
 			// 
 			// btnOpenDestFolder
 			// 
 			this.btnOpenDestFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOpenDestFolder.Location = new System.Drawing.Point(684, 167);
+			this.btnOpenDestFolder.Location = new System.Drawing.Point(684, 146);
 			this.btnOpenDestFolder.Name = "btnOpenDestFolder";
 			this.btnOpenDestFolder.Size = new System.Drawing.Size(24, 23);
 			this.btnOpenDestFolder.TabIndex = 16;
@@ -176,7 +193,7 @@
 			// 
 			this.txtDestinationFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.txtDestinationFolder.Location = new System.Drawing.Point(127, 169);
+			this.txtDestinationFolder.Location = new System.Drawing.Point(127, 148);
 			this.txtDestinationFolder.Name = "txtDestinationFolder";
 			this.txtDestinationFolder.Size = new System.Drawing.Size(551, 20);
 			this.txtDestinationFolder.TabIndex = 15;
@@ -185,7 +202,7 @@
 			// label18
 			// 
 			this.label18.AutoSize = true;
-			this.label18.Location = new System.Drawing.Point(17, 172);
+			this.label18.Location = new System.Drawing.Point(17, 151);
 			this.label18.Name = "label18";
 			this.label18.Size = new System.Drawing.Size(92, 13);
 			this.label18.TabIndex = 19;
@@ -206,7 +223,7 @@
 			this.cbWriteBom.AutoSize = true;
 			this.cbWriteBom.Checked = true;
 			this.cbWriteBom.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cbWriteBom.Location = new System.Drawing.Point(274, 136);
+			this.cbWriteBom.Location = new System.Drawing.Point(274, 115);
 			this.cbWriteBom.Name = "cbWriteBom";
 			this.cbWriteBom.Size = new System.Drawing.Size(78, 17);
 			this.cbWriteBom.TabIndex = 14;
@@ -215,7 +232,7 @@
 			// 
 			// txtEncoding
 			// 
-			this.txtEncoding.Location = new System.Drawing.Point(127, 134);
+			this.txtEncoding.Location = new System.Drawing.Point(127, 113);
 			this.txtEncoding.Name = "txtEncoding";
 			this.txtEncoding.Size = new System.Drawing.Size(100, 20);
 			this.txtEncoding.TabIndex = 13;
@@ -224,7 +241,7 @@
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(17, 137);
+			this.label5.Location = new System.Drawing.Point(17, 116);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(52, 13);
 			this.label5.TabIndex = 16;
@@ -263,24 +280,24 @@
 			// 
 			this.pageOrder.BackColor = System.Drawing.SystemColors.Control;
 			this.pageOrder.Controls.Add(this.txtStartFrom);
-			this.pageOrder.Controls.Add(this.btnPaste);
-			this.pageOrder.Controls.Add(this.btnCopy);
-			this.pageOrder.Controls.Add(this.btnDelete);
-			this.pageOrder.Controls.Add(this.btnDown);
 			this.pageOrder.Controls.Add(this.label19);
-			this.pageOrder.Controls.Add(this.btnUp);
 			this.pageOrder.Controls.Add(this.tabReplacers);
-			this.pageOrder.Controls.Add(this.btnAddReplacer);
 			this.pageOrder.Controls.Add(this.tabEditors);
 			this.pageOrder.Controls.Add(this.cbAddReplacer);
 			this.pageOrder.Controls.Add(this.label13);
 			this.pageOrder.Controls.Add(this.label3);
+			this.pageOrder.Controls.Add(this.btnPaste);
+			this.pageOrder.Controls.Add(this.btnCopy);
+			this.pageOrder.Controls.Add(this.btnDelete);
+			this.pageOrder.Controls.Add(this.btnDown);
+			this.pageOrder.Controls.Add(this.btnUp);
+			this.pageOrder.Controls.Add(this.btnAddReplacer);
 			this.pageOrder.Location = new System.Drawing.Point(4, 22);
 			this.pageOrder.Name = "pageOrder";
 			this.pageOrder.Padding = new System.Windows.Forms.Padding(3);
 			this.pageOrder.Size = new System.Drawing.Size(730, 450);
 			this.pageOrder.TabIndex = 1;
-			this.pageOrder.Text = "Step 2 - Order";
+			this.pageOrder.Text = "Step 2 - Define Replacement Rules";
 			// 
 			// txtStartFrom
 			// 
@@ -294,44 +311,6 @@
 			this.txtStartFrom.Size = new System.Drawing.Size(109, 20);
 			this.txtStartFrom.TabIndex = 20;
 			// 
-			// btnPaste
-			// 
-			this.btnPaste.Image = global::DataDepersonalizer.Properties.Resources.paste;
-			this.btnPaste.Location = new System.Drawing.Point(352, 260);
-			this.btnPaste.Name = "btnPaste";
-			this.btnPaste.Size = new System.Drawing.Size(23, 23);
-			this.btnPaste.TabIndex = 28;
-			this.btnPaste.UseVisualStyleBackColor = true;
-			this.btnPaste.Visible = false;
-			// 
-			// btnCopy
-			// 
-			this.btnCopy.Image = global::DataDepersonalizer.Properties.Resources.copy;
-			this.btnCopy.Location = new System.Drawing.Point(352, 231);
-			this.btnCopy.Name = "btnCopy";
-			this.btnCopy.Size = new System.Drawing.Size(23, 23);
-			this.btnCopy.TabIndex = 27;
-			this.btnCopy.UseVisualStyleBackColor = true;
-			this.btnCopy.Visible = false;
-			// 
-			// btnDelete
-			// 
-			this.btnDelete.Image = global::DataDepersonalizer.Properties.Resources.x;
-			this.btnDelete.Location = new System.Drawing.Point(352, 202);
-			this.btnDelete.Name = "btnDelete";
-			this.btnDelete.Size = new System.Drawing.Size(23, 23);
-			this.btnDelete.TabIndex = 26;
-			this.btnDelete.UseVisualStyleBackColor = true;
-			// 
-			// btnDown
-			// 
-			this.btnDown.Image = global::DataDepersonalizer.Properties.Resources.arrow_bottom;
-			this.btnDown.Location = new System.Drawing.Point(352, 149);
-			this.btnDown.Name = "btnDown";
-			this.btnDown.Size = new System.Drawing.Size(23, 23);
-			this.btnDown.TabIndex = 25;
-			this.btnDown.UseVisualStyleBackColor = true;
-			// 
 			// label19
 			// 
 			this.label19.AutoSize = true;
@@ -340,15 +319,6 @@
 			this.label19.Size = new System.Drawing.Size(26, 13);
 			this.label19.TabIndex = 44;
 			this.label19.Text = "Add";
-			// 
-			// btnUp
-			// 
-			this.btnUp.Image = global::DataDepersonalizer.Properties.Resources.arrow_top;
-			this.btnUp.Location = new System.Drawing.Point(352, 120);
-			this.btnUp.Name = "btnUp";
-			this.btnUp.Size = new System.Drawing.Size(23, 23);
-			this.btnUp.TabIndex = 24;
-			this.btnUp.UseVisualStyleBackColor = true;
 			// 
 			// tabReplacers
 			// 
@@ -451,15 +421,6 @@
 			this.colMimeParts.Name = "colMimeParts";
 			this.colMimeParts.ReadOnly = true;
 			this.colMimeParts.Width = 104;
-			// 
-			// btnAddReplacer
-			// 
-			this.btnAddReplacer.Image = global::DataDepersonalizer.Properties.Resources._new;
-			this.btnAddReplacer.Location = new System.Drawing.Point(319, 63);
-			this.btnAddReplacer.Name = "btnAddReplacer";
-			this.btnAddReplacer.Size = new System.Drawing.Size(23, 23);
-			this.btnAddReplacer.TabIndex = 22;
-			this.btnAddReplacer.UseVisualStyleBackColor = true;
 			// 
 			// tabEditors
 			// 
@@ -571,7 +532,7 @@
 			this.gridXmlReplaceMask.Location = new System.Drawing.Point(-1, -1);
 			this.gridXmlReplaceMask.Name = "gridXmlReplaceMask";
 			this.gridXmlReplaceMask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.gridXmlReplaceMask.Size = new System.Drawing.Size(338, 310);
+			this.gridXmlReplaceMask.Size = new System.Drawing.Size(338, 328);
 			this.gridXmlReplaceMask.TabIndex = 50;
 			// 
 			// colXmlNodeNames
@@ -609,7 +570,7 @@
 			this.gridNameValueReplaceMask.Location = new System.Drawing.Point(-1, -1);
 			this.gridNameValueReplaceMask.Name = "gridNameValueReplaceMask";
 			this.gridNameValueReplaceMask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.gridNameValueReplaceMask.Size = new System.Drawing.Size(338, 310);
+			this.gridNameValueReplaceMask.Size = new System.Drawing.Size(338, 328);
 			this.gridNameValueReplaceMask.TabIndex = 50;
 			// 
 			// dataGridViewTextBoxColumn1
@@ -800,7 +761,7 @@
 			this.pageStart.Name = "pageStart";
 			this.pageStart.Size = new System.Drawing.Size(730, 450);
 			this.pageStart.TabIndex = 2;
-			this.pageStart.Text = "Step 3 - Depersonalize";
+			this.pageStart.Text = "Step 3 - Start Depersonalization";
 			// 
 			// label17
 			// 
@@ -964,6 +925,139 @@
 			this.saveFileDialog1.DefaultExt = "*.xml";
 			this.saveFileDialog1.Filter = "XML files|*.xml|All files|*.*";
 			// 
+			// linkAskQuestion
+			// 
+			this.linkAskQuestion.AutoSize = true;
+			this.linkAskQuestion.Location = new System.Drawing.Point(271, 392);
+			this.linkAskQuestion.Name = "linkAskQuestion";
+			this.linkAskQuestion.Size = new System.Drawing.Size(79, 13);
+			this.linkAskQuestion.TabIndex = 37;
+			this.linkAskQuestion.TabStop = true;
+			this.linkAskQuestion.Text = "Ask a Question";
+			this.linkAskQuestion.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkAskQuestion_LinkClicked);
+			// 
+			// linkDownload
+			// 
+			this.linkDownload.AutoSize = true;
+			this.linkDownload.Location = new System.Drawing.Point(271, 372);
+			this.linkDownload.Name = "linkDownload";
+			this.linkDownload.Size = new System.Drawing.Size(120, 13);
+			this.linkDownload.TabIndex = 36;
+			this.linkDownload.TabStop = true;
+			this.linkDownload.Text = "Download Source Code";
+			this.linkDownload.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkDownload_LinkClicked);
+			// 
+			// linkArticle47
+			// 
+			this.linkArticle47.AutoSize = true;
+			this.linkArticle47.Location = new System.Drawing.Point(17, 394);
+			this.linkArticle47.Name = "linkArticle47";
+			this.linkArticle47.Size = new System.Drawing.Size(195, 13);
+			this.linkArticle47.TabIndex = 35;
+			this.linkArticle47.TabStop = true;
+			this.linkArticle47.Text = "Article - Depersonalizing Your Test Data";
+			this.linkArticle47.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkArticle47_LinkClicked);
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(17, 355);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(51, 13);
+			this.label6.TabIndex = 34;
+			this.label6.Text = "See also:";
+			// 
+			// linkArticle48
+			// 
+			this.linkArticle48.AutoSize = true;
+			this.linkArticle48.Location = new System.Drawing.Point(17, 372);
+			this.linkArticle48.Name = "linkArticle48";
+			this.linkArticle48.Size = new System.Drawing.Size(204, 13);
+			this.linkArticle48.TabIndex = 33;
+			this.linkArticle48.TabStop = true;
+			this.linkArticle48.Text = "Article - Making Test Data from Real Data";
+			this.linkArticle48.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkArticle48_LinkClicked);
+			// 
+			// txtProgramInfo
+			// 
+			this.txtProgramInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.txtProgramInfo.Location = new System.Drawing.Point(20, 195);
+			this.txtProgramInfo.Multiline = true;
+			this.txtProgramInfo.Name = "txtProgramInfo";
+			this.txtProgramInfo.ReadOnly = true;
+			this.txtProgramInfo.Size = new System.Drawing.Size(541, 147);
+			this.txtProgramInfo.TabIndex = 32;
+			this.txtProgramInfo.Text = resources.GetString("txtProgramInfo.Text");
+			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pictureBox1.Image = global::DataDepersonalizer.Properties.Resources.DataDepersonalizer_145_resize;
+			this.pictureBox1.Location = new System.Drawing.Point(559, 195);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(147, 147);
+			this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			this.pictureBox1.TabIndex = 38;
+			this.pictureBox1.TabStop = false;
+			// 
+			// btnPaste
+			// 
+			this.btnPaste.Image = global::DataDepersonalizer.Properties.Resources.paste;
+			this.btnPaste.Location = new System.Drawing.Point(352, 260);
+			this.btnPaste.Name = "btnPaste";
+			this.btnPaste.Size = new System.Drawing.Size(23, 23);
+			this.btnPaste.TabIndex = 28;
+			this.btnPaste.UseVisualStyleBackColor = true;
+			this.btnPaste.Visible = false;
+			// 
+			// btnCopy
+			// 
+			this.btnCopy.Image = global::DataDepersonalizer.Properties.Resources.copy;
+			this.btnCopy.Location = new System.Drawing.Point(352, 231);
+			this.btnCopy.Name = "btnCopy";
+			this.btnCopy.Size = new System.Drawing.Size(23, 23);
+			this.btnCopy.TabIndex = 27;
+			this.btnCopy.UseVisualStyleBackColor = true;
+			this.btnCopy.Visible = false;
+			// 
+			// btnDelete
+			// 
+			this.btnDelete.Image = global::DataDepersonalizer.Properties.Resources.x;
+			this.btnDelete.Location = new System.Drawing.Point(352, 202);
+			this.btnDelete.Name = "btnDelete";
+			this.btnDelete.Size = new System.Drawing.Size(23, 23);
+			this.btnDelete.TabIndex = 26;
+			this.btnDelete.UseVisualStyleBackColor = true;
+			// 
+			// btnDown
+			// 
+			this.btnDown.Image = global::DataDepersonalizer.Properties.Resources.arrow_bottom;
+			this.btnDown.Location = new System.Drawing.Point(352, 149);
+			this.btnDown.Name = "btnDown";
+			this.btnDown.Size = new System.Drawing.Size(23, 23);
+			this.btnDown.TabIndex = 25;
+			this.btnDown.UseVisualStyleBackColor = true;
+			// 
+			// btnUp
+			// 
+			this.btnUp.Image = global::DataDepersonalizer.Properties.Resources.arrow_top;
+			this.btnUp.Location = new System.Drawing.Point(352, 120);
+			this.btnUp.Name = "btnUp";
+			this.btnUp.Size = new System.Drawing.Size(23, 23);
+			this.btnUp.TabIndex = 24;
+			this.btnUp.UseVisualStyleBackColor = true;
+			// 
+			// btnAddReplacer
+			// 
+			this.btnAddReplacer.Image = global::DataDepersonalizer.Properties.Resources._new;
+			this.btnAddReplacer.Location = new System.Drawing.Point(319, 63);
+			this.btnAddReplacer.Name = "btnAddReplacer";
+			this.btnAddReplacer.Size = new System.Drawing.Size(23, 23);
+			this.btnAddReplacer.TabIndex = 22;
+			this.btnAddReplacer.UseVisualStyleBackColor = true;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -975,7 +1069,7 @@
 			this.Controls.Add(this.btnLoadProfile);
 			this.Controls.Add(this.btnSaveProfile);
 			this.Controls.Add(this.tabSteps);
-			this.MinimumSize = new System.Drawing.Size(758, 500);
+			this.MinimumSize = new System.Drawing.Size(750, 530);
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Data Depersonalizer";
@@ -1011,6 +1105,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridTextReplaceMask)).EndInit();
 			this.pageStart.ResumeLayout(false);
 			this.pageStart.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -1095,6 +1190,14 @@
 		private System.Windows.Forms.TextBox txtTextReplacerInfo;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+		private System.ComponentModel.BackgroundWorker backgroundWorker1;
+		private System.Windows.Forms.LinkLabel linkAskQuestion;
+		private System.Windows.Forms.LinkLabel linkDownload;
+		private System.Windows.Forms.LinkLabel linkArticle47;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.LinkLabel linkArticle48;
+		private System.Windows.Forms.TextBox txtProgramInfo;
+		private System.Windows.Forms.PictureBox pictureBox1;
 	}
 }
 
