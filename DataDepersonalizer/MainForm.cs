@@ -26,6 +26,7 @@ using Depersonalizer.Text;
 using Depersonalizer.Mime;
 using Depersonalizer.Profile;
 using DataDepersonalizer.Editors;
+using System.Diagnostics;
 
 namespace DataDepersonalizer
 {
@@ -131,6 +132,26 @@ namespace DataDepersonalizer
 			{
 				NewProfile();
 			}
+		}
+
+		private void linkArticle48_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			Process.Start("https://www.clevercomponents.com/articles/article048/");
+		}
+
+		private void linkArticle47_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			Process.Start("https://www.clevercomponents.com/articles/article047/");
+		}
+
+		private void linkDownload_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			Process.Start("https://github.com/CleverComponents/Data-Depersonalizer");
+		}
+
+		private void linkAskQuestion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			Process.Start("https://www.clevercomponents.com/portal/");
 		}
 	}
 }
